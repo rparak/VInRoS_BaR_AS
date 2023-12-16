@@ -1,1 +1,1 @@
-# I4C_BaR_AS_Project
+# Versatile Intelligent Robotic Workstation (VInRoS)
