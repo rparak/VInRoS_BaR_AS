@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="GraphPageContent" height="2130" width="3200" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.Rectangle" id="Rectangle3" top="665" left="0" height="800" zIndex="10" borderStyle="solid" borderWidth="4px" cornerRadius="0px 20px 20px 0px" lineColor="rgba(211, 211, 211, 1)" backColor="rgba(255, 255, 255, 1)" />
+    <Widget xsi:type="widgets.brease.Label" id="Label9" top="1010" left="-350" width="800" height="100" zIndex="11" text="Graph Panel" textColor="rgba(211, 211, 211, 1)" textAlign="center" rotation="270deg" fontSize="50px" bold="false" />
+    <Widget xsi:type="widgets.brease.Image" id="Image4" top="720" left="15" width="70" height="70" zIndex="12" image="Media/Icon/Graph_Gray.svg" useSVGStyling="false" rotation="270deg" />
+    <Widget xsi:type="widgets.brease.OnlineChart" id="OnlineChart2" top="180" left="200" width="660" height="420" zIndex="13" chartBorderColor="rgba(211, 211, 211, 1)" borderColor="rgba(255, 255, 255, 0)">
+      <Widgets>
+        <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis1" zIndex="0" axisColor="rgba(211, 211, 211, 1)">
+          <Widgets />
+        </Widget>
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis2" zIndex="1" axisColor="rgba(211, 211, 211, 1)">
+          <Widgets>
+            <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph2" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis1" lineColor="rgba(211, 211, 211, 1)" />
+          </Widgets>
+        </Widget>
+      </Widgets>
+    </Widget>
+    <Widget xsi:type="widgets.brease.Line" id="Line2" zIndex="14" x1="920" x2="920" y1="20" y2="2060" lineColor="rgba(211, 211, 211, 1)" lineWidth="2px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label10" top="40" left="200" width="660" height="100" zIndex="15" text="ABB IRB 14000 (L)" borderWidth="2px" cornerRadius="10px" borderColor="rgba(211, 211, 211, 1)" borderStyle="solid" textColor="rgba(211, 211, 211, 1)" textAlign="center" rotation="0deg" fontSize="40px" bold="false" />
+  </Widgets>
+</Content>

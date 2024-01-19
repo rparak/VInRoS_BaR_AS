@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <vdef:Visualization id="axis_control" xmlns:vdef="http://www.br-automation.com/iat2015/visualizationDefinition/v2">
-  <StartPage pageRefId="HomePage" />
+  <StartPage pageRefId="ControlPage" />
   <Pages>
-    <Page refId="HomePage"/>
+	<Page refId="ControlPage"/>
+	<Page refId="GraphPage"/>
+	<Page refId="SwitchboardPage"/>
+	<Page refId="InformationPage"/>
   </Pages>
   <Navigations>
     <!--<Navigation refId="" />-->
   </Navigations>  
   <BindingsSets>
-    <BindingsSet refId="HomePageContent_binding" />
+     <!--<BindingsSet refId="HomePageContent_binding" />>-->
   </BindingsSets>
   <EventBindingsSets>
     <!--<EventBindingsSet refId="" />-->
