@@ -6,6 +6,7 @@
 	<Page refId="GraphPage"/>
 	<Page refId="SwitchboardPage"/>
 	<Page refId="InformationPage"/>
+	<Page refId="InformationAuxPage"/>
   </Pages>
   <Navigations>
     <!--<Navigation refId="" />-->

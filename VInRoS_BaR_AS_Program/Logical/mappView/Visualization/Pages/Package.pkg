@@ -7,5 +7,6 @@
     <Object Type="Package">GraphPage</Object>
     <Object Type="Package">SwitchboardPage</Object>
     <Object Type="Package">InformationPage</Object>
+    <Object Type="Package">InformationAuxPage</Object>
   </Objects>
 </Package>

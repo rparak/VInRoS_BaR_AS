@@ -10,5 +10,8 @@
     <Object Type="File">Graph_Gray.svg</Object>
     <Object Type="File">Control_Gray.svg</Object>
     <Object Type="File">Switchboard_Gray.svg</Object>
+    <Object Type="File">Right.svg</Object>
+    <Object Type="File">Left.svg</Object>
+    <Object Type="File">Device.svg</Object>
   </Objects>
 </Package>
