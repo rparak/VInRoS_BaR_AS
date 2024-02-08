@@ -4,5 +4,6 @@
   <Objects>
     <Object Type="File">VInRoS.png</Object>
     <Object Type="File">Electric_Switchboard.png</Object>
+    <Object Type="File">SMC_Part_ElSwitch.png</Object>
   </Objects>
 </Package>
