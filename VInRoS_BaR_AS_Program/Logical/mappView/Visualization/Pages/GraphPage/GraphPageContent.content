@@ -9,7 +9,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis1" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis2" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis2" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph2" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis1" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -24,7 +24,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis2" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis3" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis3" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph3" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis2" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -36,7 +36,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis3" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis4" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis4" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph4" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis3" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -48,7 +48,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis4" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis5" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis5" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph5" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis4" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -60,7 +60,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis5" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis6" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis6" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph6" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis5" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -72,7 +72,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis6" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis7" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis7" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph7" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis6" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -84,7 +84,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis7" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis8" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis8" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph8" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis7" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -115,7 +115,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis8" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis9" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis9" zIndex="1" axisLabel="Actual Position [mm]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph9" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis8" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -130,7 +130,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis9" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis10" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis10" zIndex="1" axisLabel="Actual Position [mm]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph10" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis9" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -144,7 +144,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis10" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis11" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis11" zIndex="1" axisLabel="Actual Position [mm]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph11" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis10" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -158,7 +158,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis11" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis12" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis12" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph12" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis11" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -171,7 +171,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis12" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis13" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis13" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph13" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis12" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -183,7 +183,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis13" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis14" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis14" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph14" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis13" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -195,7 +195,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis14" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis15" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis15" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph15" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis14" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -207,7 +207,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis15" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis16" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis16" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph16" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis15" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -219,7 +219,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis16" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis17" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis17" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph17" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis16" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -231,7 +231,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis17" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis18" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis18" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph18" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis17" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -256,7 +256,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis18" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis19" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis19" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph19" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis18" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -269,7 +269,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis19" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis20" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis20" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph20" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis19" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -281,7 +281,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis20" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis21" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis21" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph21" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis20" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -293,7 +293,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis21" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis22" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis22" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph22" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis21" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -305,7 +305,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis22" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis23" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis23" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph23" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis22" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
@@ -317,7 +317,7 @@
         <Widget xsi:type="widgets.brease.OnlineChartTimeAxis" id="OnlineChartTimeAxis23" zIndex="0" axisLabel="Time [s]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets />
         </Widget>
-        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis24" zIndex="1" axisLabel="Actual Position [rad]" axisColor="rgba(211, 211, 211, 1)">
+        <Widget xsi:type="widgets.brease.OnlineChartYAxis" id="OnlineChartYAxis24" zIndex="1" axisLabel="Actual Position [deg]" axisColor="rgba(211, 211, 211, 1)">
           <Widgets>
             <Widget xsi:type="widgets.brease.OnlineChartGraph" id="OnlineChartGraph24" zIndex="0" minValue="-100" xAxisRefId="OnlineChartTimeAxis23" lineColor="rgba(211, 211, 211, 1)" />
           </Widgets>
