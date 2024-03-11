@@ -2,4 +2,5 @@ VAR
 	GLOBAL_POS : LREAL;
 	GLOBAL_VEL : REAL;
 	GLOBAL_START : BOOL;
+	Global_MappView_Str : MV_Str;
 END_VAR

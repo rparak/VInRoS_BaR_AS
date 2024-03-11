@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<vdef:Visualization id="axis_control" xmlns:vdef="http://www.br-automation.com/iat2015/visualizationDefinition/v2">
+<vdef:Visualization id="VInRoS" xmlns:vdef="http://www.br-automation.com/iat2015/visualizationDefinition/v2">
   <StartPage pageRefId="ControlPage" />
   <Pages>
 	<Page refId="ControlPage"/>
@@ -12,7 +12,9 @@
     <!--<Navigation refId="" />-->
   </Navigations>  
   <BindingsSets>
-     <!--<BindingsSet refId="HomePageContent_binding" />>-->
+	<BindingsSet refId="ControlPageContent_binding" />
+	<BindingsSet refId="GraphPageContent_binding" />
+	<BindingsSet refId="SwitchboardPageContent_binding" />
   </BindingsSets>
   <EventBindingsSets>
     <!--<EventBindingsSet refId="" />-->

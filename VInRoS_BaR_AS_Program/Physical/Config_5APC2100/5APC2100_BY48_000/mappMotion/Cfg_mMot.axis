@@ -71,7 +71,7 @@
     </Selector>
     <Selector ID="Alarms" Value="None" />
   </Element>
-  <Element ID="gAxis_ROB_01" Type="axis">
+  <Element ID="gAxis_Mech_03" Type="axis">
     <Property ID="BaseTypeIsReadOnly" Value="0" />
     <Selector ID="BaseType" Value="LinearBounded">
       <Property ID="MeasurementUnit" Value="5066068" />

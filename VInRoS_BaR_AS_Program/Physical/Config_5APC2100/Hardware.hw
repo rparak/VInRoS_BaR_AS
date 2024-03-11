@@ -199,7 +199,7 @@
     <Parameter ID="McAcpModuleTypeID" Value="AcoposP3SafeMotion" />
     <Parameter ID="McAcoposTypeID" Location="DriveConfiguration/Module" Value="AcoposP3SConfig" />
     <Parameter ID="ActivateACOPOSSimulationOnPLC" Location="DriveConfiguration/Module" Value="0" />
-    <Parameter ID="AxisReference" Location="DriveConfiguration/Channel[1]/RealAxis" Value="gAxis_ROB_01" />
+    <Parameter ID="AxisReference" Location="DriveConfiguration/Channel[1]/RealAxis" Value="gAxis_Mech_03" />
     <Parameter ID="MechanicalElementsIsInvisible" Location="DriveConfiguration/Channel[1]/RealAxis" Value="0" />
     <Parameter ID="InputIsReadOnly" Location="DriveConfiguration/Channel[1]/RealAxis/MechanicalElements/Gearbox" Value="0" />
     <Parameter ID="Input" Location="DriveConfiguration/Channel[1]/RealAxis/MechanicalElements/Gearbox" Value="1" />

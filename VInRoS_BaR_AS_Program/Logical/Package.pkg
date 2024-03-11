@@ -5,8 +5,9 @@
     <Object Type="File" Description="Global data types">Global.typ</Object>
     <Object Type="File" Description="Global variables">Global.var</Object>
     <Object Type="Package" Description="Global libraries">Libraries</Object>
-    <Object Type="Program" Language="ANSIC">axCtrl_T</Object>
-    <Object Type="Program" Language="ANSIC">axStream_T</Object>
+    <Object Type="Program" Language="ANSIC">T_MECH_ID_1</Object>
+    <Object Type="Program" Language="ANSIC">T_MECH_ID_2</Object>
+    <Object Type="Program" Language="ANSIC">T_MECH_ID_3</Object>
     <Object Type="Package">mappView</Object>
   </Objects>
 </Package>

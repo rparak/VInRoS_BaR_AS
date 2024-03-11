@@ -4,5 +4,8 @@
   <Objects>
     <Object Type="File">Config.mappviewcfg</Object>
     <Object Type="File">Visualizat.vis</Object>
+    <Object Type="File">GraphPageContent.binding</Object>
+    <Object Type="File">SwitchboardPageContent.binding</Object>
+    <Object Type="File">ControlPageContent.binding</Object>
   </Objects>
 </Package>
