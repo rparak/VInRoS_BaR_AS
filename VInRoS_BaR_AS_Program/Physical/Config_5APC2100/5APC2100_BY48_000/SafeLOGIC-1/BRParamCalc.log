@@ -1,4 +1,4 @@
-LOGStart created on Tuesday 2023/08/22  UTC 07:56:28:918
+LOGStart created on Tuesday 2024/03/12  UTC 09:37:06:978
 
 Reading "OSDD Data"...
 Reading Content "Start"
@@ -118,9 +118,9 @@ Content "name1" successfully read from "name2"
 
 
 
-LOGAppend on Tuesday 2023/08/22  UTC 07:56:28:918
+LOGAppend on Tuesday 2024/03/12  UTC 09:37:06:978
 
-Reading "C:\projects\BR_AS_I4C_Program\Physical\Config_5APC2100\5APC2100_BY48_000\SafeLOGIC-1\BusNavigator.iom"...
+Reading "C:\projects\VInRoS_BaR_AS_Program\Physical\Config_5APC2100\5APC2100_BY48_000\SafeLOGIC-1\BusNavigator.iom"...
 Reading Content "IOOffsets"
 IO reservations (MAX number of bytes): SI=2048  SO=2048  NSI=1024  NSO=1024   ConValid = 24  BITEMOsOffset=0  BITEMOsSize=0
 Reading properties for module "SL1.SM1". Beginning at line 3
@@ -130,4 +130,4 @@ Reading properties for channel "BOOL101". Beginning at line 6
 Module "SL1.SM1.SL1.SM1" has 3 items.
 Reading properties for module "SL1.SM2". Beginning at line 8
 Module "SL1.SM2.SL1.SM2" has 0 items.
-Content "IOOffsets" successfully read from "C:\projects\BR_AS_I4C_Program\Physical\Config_5APC2100\5APC2100_BY48_000\SafeLOGIC-1\BusNavigator.iom"
+Content "IOOffsets" successfully read from "C:\projects\VInRoS_BaR_AS_Program\Physical\Config_5APC2100\5APC2100_BY48_000\SafeLOGIC-1\BusNavigator.iom"

@@ -2,11 +2,13 @@
 <?AutomationStudio FileVersion="4.9"?>
 <SwConfiguration CpuAddress="SL1" xmlns="http://br-automation.co.at/AS/SwConfiguration">
   <TaskClass Name="Cyclic#1">
-    <Task Name="T_MECH_ID_" Source="T_MECH_ID_1.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
-    <Task Name="T_MECH_ID1" Source="T_MECH_ID_2.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
-    <Task Name="T_MECH_ID2" Source="T_MECH_ID_3.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
+    <Task Name="T_MECH_1" Source="T_MECH_1.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
+    <Task Name="T_MECH_2" Source="T_MECH_2.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
+    <Task Name="T_MECH_3" Source="T_MECH_3.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
   </TaskClass>
-  <TaskClass Name="Cyclic#2" />
+  <TaskClass Name="Cyclic#2">
+    <Task Name="T_EX600" Source="T_EX600.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
+  </TaskClass>
   <TaskClass Name="Cyclic#3" />
   <TaskClass Name="Cyclic#4" />
   <TaskClass Name="Cyclic#5" />
@@ -61,9 +63,9 @@
     <LibraryObject Name="McAxGroup" Source="Libraries.McAxGroup.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="MpAxis" Source="Libraries.MpAxis.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="MpBase" Source="Libraries.MpBase.lby" Memory="UserROM" Language="Binary" Debugging="true" />
-    <LibraryObject Name="sys_lib" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="arssl" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="powerlnk" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="asepl" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
+    <LibraryObject Name="sys_lib" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
   </Libraries>
 </SwConfiguration>

@@ -35,6 +35,9 @@
         <Info Name="ProjectSL" Value="1" />
         <Info Name="Description-de" Value="X20 SafeLOGIC Compact, 8xE 24V, 4xA 24V 3.0A, 2xA 24V 0.05A" />
         <Info Name="Description-en" Value="X20 SafeLOGIC Compact, 8xI 24V, 4xO 24V 3.0A, 2xO 24V 0.05A" />
+        <Info Name="AsVariable" Value="BOOL101,RESET_SAFETY" />
+        <Info Name="AsVariable" Value="SafeDigitalInput03,SAFETY_ACTIVE" />
+        <Info Name="AsVariable" Value="BOOL001,SAFETY_STATUS" />
       </NodeDescription>
       <ChannelConfiguration>
         <DataTransport>
