@@ -14,6 +14,9 @@ void _INIT ProgramInit(void)
 {
 	memset(&Global_VInRoS_Str.Mech_Id_2, 0, sizeof(Global_VInRoS_Str.Mech_Id_2));
 	
+	AxisParameters.Homing.Mode = mcHOMING_ABSOLUTE;
+	AxisParameters.Homing.Position = 2219977;
+	
 	MpAxisBasic_0.Enable     = 1;
 	MpAxisBasic_0.MpLink     = &gAxis_Mech_02;
 	MpAxisBasic_0.Parameters = &AxisParameters;
