@@ -10,6 +10,3 @@
 #include "Converter.h"
 
 _LOCAL struct ABB_Library ABB_Library_Rob_1;
-
-_LOCAL USINT PROFINET_Mapping_IN[256];
-_LOCAL USINT PROFINET_Mapping_OUT[256];
