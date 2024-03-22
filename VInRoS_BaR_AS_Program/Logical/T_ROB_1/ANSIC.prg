@@ -6,5 +6,7 @@
     <File Description="Init, cyclic, exit code">Main.h</File>
     <File>Converter.h</File>
     <File Description="Init, cyclic, exit code">ABB_Library.h</File>
+    <File Private="true">Variables.var</File>
+    <File Private="true">Types.typ</File>
   </Files>
 </Program>

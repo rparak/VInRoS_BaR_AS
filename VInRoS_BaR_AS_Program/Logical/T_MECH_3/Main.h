@@ -4,6 +4,10 @@
 #include <AsDefault.h>
 #endif
 
+#define TRUE 1
+#define FALSE (!TRUE)
+#define NULL 0
+
 typedef enum Mechanism_State_ID_enum{
 	MECH_STATE_ACTIVE,
 	MECH_STATE_POWER,
