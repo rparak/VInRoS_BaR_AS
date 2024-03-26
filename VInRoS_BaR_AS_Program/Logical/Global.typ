@@ -83,7 +83,6 @@ TYPE
 		Move_Active : BOOL;
 	END_STRUCT;
 	Robot_Position_Str : 	STRUCT 
-		Q : ARRAY[0..5]OF REAL;
-		Q_Ex : ARRAY[0..5]OF REAL;
+		Q : ARRAY[0..6]OF REAL;
 	END_STRUCT;
 END_TYPE

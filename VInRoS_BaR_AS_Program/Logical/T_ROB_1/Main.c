@@ -231,8 +231,6 @@ void _CYCLIC ProgramCyclic(void)
 		
 	memcpy(Global_VInRoS_Str.Rob_Id_1.Position.Q, ABB_Library_Rob_1.RT_Data.Q, 
 		(sizeof(ABB_Library_Rob_1.RT_Data.Q) / sizeof(ABB_Library_Rob_1.RT_Data.Q[0])) * sizeof(REAL));
-	memcpy(Global_VInRoS_Str.Rob_Id_1.Position.Q_Ex, ABB_Library_Rob_1.RT_Data.Q_Ex, 
-		(sizeof(ABB_Library_Rob_1.RT_Data.Q_Ex) / sizeof(ABB_Library_Rob_1.RT_Data.Q_Ex[0])) * sizeof(REAL));
 	
 	if(Global_VInRoS_Str.Rob_Id_1.Info.Error == TRUE){
 		state_id = ROB_STATE_ERROR;	

@@ -110,6 +110,7 @@
           </Variable>
         </Variable>
       </GlobalVariables>
+      <Task Name="T_MECH_1" />
     </Module>
   </DefaultView>
 </OpcUaSource>

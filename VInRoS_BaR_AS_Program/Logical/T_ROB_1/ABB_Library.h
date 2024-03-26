@@ -142,10 +142,8 @@ typedef struct ABB_Library_profinet_in_str{
 	struct Convert_USINT_To_BOOL_Array SYSTEM;
 	USINT STATE_uID;
 	struct Convert_USINT_Array_To_UINT MOTION_TRAJECTORY_ID;
-	struct Convert_USINT_Array_To_UINT JOINT_POS[6];
+	struct Convert_USINT_Array_To_UINT JOINT_POS[7];
 	struct Convert_USINT_To_BOOL_Array JOINT_POS_SIGN;
-	struct Convert_USINT_Array_To_UINT JOINT_POS_EX[6];
-	struct Convert_USINT_To_BOOL_Array JOINT_POS_EX_SIGN;
 }ABB_Library_profinet_in_str;
 
 typedef struct ABB_Library_profinet_out_str{
@@ -157,10 +155,8 @@ typedef struct ABB_Library_profinet_out_str{
 	struct Convert_UINT_To_USINT_Array TRAJECTORY_SIZE;
 	USINT SPEED;
 	USINT ZONE;
-	struct Convert_UINT_To_USINT_Array JOINT_POS[6];
+	struct Convert_UINT_To_USINT_Array JOINT_POS[7];
 	struct Convert_BOOL_Array_To_USINT JOINT_POS_SIGN;
-	struct Convert_UINT_To_USINT_Array JOINT_POS_EX[6];
-	struct Convert_BOOL_Array_To_USINT JOINT_POS_EX_SIGN;
 	struct Convert_BOOL_Array_To_USINT RTOOL_RH;
 	struct Convert_UDINT_To_USINT_Array RTOOL_POS[3];
 	struct Convert_BOOL_Array_To_USINT RTOOL_POS_SIGN;
@@ -196,13 +192,11 @@ typedef struct ABB_Library_command_str{
 }ABB_Library_command_str;
 
 typedef struct ABB_Library_profinet_rtData_str{
-	REAL Q[6];
-	REAL Q_Ex[6];
+	REAL Q[7];
 }ABB_Library_profinet_rtData_str;
 
 typedef struct ABB_Library_profinet_Jw_str{
-	REAL Q[6];
-	REAL Q_Ex[6];
+	REAL Q[7];
 }ABB_Library_profinet_Jw_str;
 
 typedef struct ABB_Library_parameter_str{
@@ -213,21 +207,30 @@ typedef struct ABB_Library_parameter_str{
 }ABB_Library_parameter_str;
 
 typedef struct ABB_Library_rTool_tf_str{
-	REAL Position[3]; // Translation position.
-	REAL Rotation[4]; // Rotation Position (Quaternion). 
+	// Translation part.
+	REAL Position[3];
+	// Rotation part (Quaternion). 
+	REAL Rotation[4];
 }ABB_Library_rTool_tf_str;
 
 typedef struct ABB_Library_rTool_tl_str{
-	REAL mass;			       // Tool Mass.
-	REAL center_of_gravity[3]; // Center of Gravity.
-	REAL intertial_axes[4];    // Inertial axes of tool load.
-	REAL moment_of_inertia[3]; // Momets of inertia.
+	// Tool Mass.
+	REAL mass;
+	// Center of Gravity.
+	REAL center_of_gravity[3];
+	// Inertial axes of tool load.
+	REAL intertial_axes[4];
+	// Momets of inertia.
+	REAL moment_of_inertia[3];
 }ABB_Library_rTool_tl_str;
 
 typedef struct ABB_Library_robTool_str{
-	BOOL robHold;					 // The robot is holding the tool (TRUE / FALSE).
-	ABB_Library_rTool_tf_str tFrame; // Tool Frame.
-	ABB_Library_rTool_tl_str tLoad;  // Tool Load.
+	// The robot is holding the tool (TRUE / FALSE).
+	BOOL robHold;	
+	// Tool Frame.			 
+	ABB_Library_rTool_tf_str tFrame;
+	// Tool Load.
+	ABB_Library_rTool_tl_str tLoad;
 }ABB_Library_robTool_str;
 
 typedef struct ABB_Library_statusPLC_str{
@@ -586,20 +589,9 @@ void Update_Parameters(struct ABB_Library* inst){
 					}
 					
 					Convert_UINT_To_USINT_Array(&inst->PROFINET_Mapping_OUT.JOINT_POS[i_j]);
-					
-					if(inst->Parameter.Position[inst->Internal.Update.ID - 1].Q_Ex[i_j] >= 0.0){
-						inst->PROFINET_Mapping_OUT.JOINT_POS_EX_SIGN.INPUT[i_j] = TRUE;
-						inst->PROFINET_Mapping_OUT.JOINT_POS_EX[i_j].INPUT      = (UINT)(ceil((inst->Parameter.Position[inst->Internal.Update.ID - 1].Q_Ex[i_j] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR);
-					}else{
-						inst->PROFINET_Mapping_OUT.JOINT_POS_EX_SIGN.INPUT[i_j] = FALSE;
-						inst->PROFINET_Mapping_OUT.JOINT_POS_EX[i_j].INPUT      = (-1) * ((UINT)(ceil((inst->Parameter.Position[inst->Internal.Update.ID - 1].Q_Ex[i_j] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR));
-					}
-					
-					Convert_UINT_To_USINT_Array(&inst->PROFINET_Mapping_OUT.JOINT_POS_EX[i_j]);
 				}
 				
 				Convert_BOOL_Array_To_USINT(&inst->PROFINET_Mapping_OUT.JOINT_POS_SIGN);
-				Convert_BOOL_Array_To_USINT(&inst->PROFINET_Mapping_OUT.JOINT_POS_EX_SIGN);
 				
 				inst->Status.PLC.Update_Done = TRUE;
 				
@@ -753,18 +745,6 @@ void Read_Data_ROB_to_PLC(struct ABB_Library* inst){
 			inst->RT_Data.Q[i_j] = (REAL)(inst->PROFINET_Mapping_IN.JOINT_POS[i_j].OUTPUT) / inst->Internal.ACCURACY_FACTOR;
 		}else{
 			inst->RT_Data.Q[i_j] = (-1) * ((REAL)(inst->PROFINET_Mapping_IN.JOINT_POS[i_j].OUTPUT) / inst->Internal.ACCURACY_FACTOR);
-		}
-	}
-	
-	Convert_USINT_To_BOOL_Array(&inst->PROFINET_Mapping_IN.JOINT_POS_EX_SIGN);
-	unsigned char i_jx;
-	for(i_jx = 0; i_jx < (unsigned char)(sizeof(inst->RT_Data.Q_Ex)/sizeof(inst->RT_Data.Q_Ex[0])); i_jx++){
-		Convert_USINT_Array_To_UINT(&inst->PROFINET_Mapping_IN.JOINT_POS_EX[i_jx]);
-		
-		if(inst->PROFINET_Mapping_IN.JOINT_POS_EX_SIGN.OUTPUT[i_j] == TRUE){
-			inst->RT_Data.Q_Ex[i_jx] = (REAL)(inst->PROFINET_Mapping_IN.JOINT_POS_EX[i_jx].OUTPUT) / inst->Internal.ACCURACY_FACTOR;
-		}else{
-			inst->RT_Data.Q_Ex[i_jx] = (-1) * ((REAL)(inst->PROFINET_Mapping_IN.JOINT_POS_EX[i_jx].OUTPUT) / inst->Internal.ACCURACY_FACTOR);
 		}
 	}
 }
