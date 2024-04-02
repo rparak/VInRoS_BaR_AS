@@ -87,6 +87,9 @@ MODULE Module1
     
     ! Joint Position Data
     PERS jointtarget J_Position{100};
+    
+    ! TCP Position Data
+    PERS robtarget TCP_Position{100};
 
     ! Joint Speed Data
     PERS speeddata J_Speed{100};
@@ -131,6 +134,10 @@ MODULE Module1
                     SetDO ROB_ST_IN_POS_PROFINET_OUT, 0;
                     ! Move Joint (Absolute)
                     SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 30;
+                ELSEIF PLC_CMD_START_PROFINET_IN = 1 AND PLC_CMD_MAIN_ID_PROFINET_IN = 2 THEN
+                    SetDO ROB_ST_IN_POS_PROFINET_OUT, 0;
+                    ! Move Linear
+                    SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 40;
                 ENDIF
                 
                 IF PLC_ST_ACTIVE_PROFINET_IN = 0 THEN
@@ -138,7 +145,7 @@ MODULE Module1
                     SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 10;
                 ENDIF
                 
-            CASE 30: ! MOVE CARTESIAN STATE (JOINT) - EXECUTE !
+            CASE 30: ! MOVE JOINT ABSOLUTE STATE - EXECUTE !
                 ! Description: !
                 !   Control Function (MoveAbsJ): Moves the robot to an absolute joint position !
 
@@ -148,6 +155,19 @@ MODULE Module1
                 ELSE
                     SetGO ROB_MOTION_TRAJ_ID_PROFINET_OUT, aux_trajectory_index_var;
                     MoveAbsJ J_Position{aux_trajectory_index_var + 1}\NoEOffs, J_Speed{aux_trajectory_index_var + 1}, J_Zone{aux_trajectory_index_var + 1}, robTool\WObj:=wobj0;
+                    aux_trajectory_index_var := aux_trajectory_index_var + 1;
+                ENDIF
+                
+            CASE 40: ! MOVE CARTESIAN STATE - EXECUTE !
+                ! Description: !
+                !   Control Function (MoveL): Moves the tool center point (TCP) linearly !
+
+                IF aux_trajectory_index_var = PLC_TRAJ_SIZE_PROFINET_IN THEN
+                    SetDO ROB_ST_IN_POS_PROFINET_OUT, 1;
+                    SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 20;
+                ELSE
+                    SetGO ROB_MOTION_TRAJ_ID_PROFINET_OUT, aux_trajectory_index_var;
+                    MoveL TCP_Position{aux_trajectory_index_var + 1}, J_Speed{aux_trajectory_index_var + 1}, J_Zone{aux_trajectory_index_var + 1}, robTool\WObj:=wobj0;
                     aux_trajectory_index_var := aux_trajectory_index_var + 1;
                 ENDIF
         ENDTEST

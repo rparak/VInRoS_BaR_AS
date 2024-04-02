@@ -88,6 +88,9 @@ MODULE Module1
     
     ! Joint Position Data
     PERS jointtarget J_Position{100};
+    
+    ! TCP Position Data
+    PERS robtarget TCP_Position{100};
 
     ! Joint Speed Data
     PERS speeddata J_Speed{100};
@@ -122,8 +125,11 @@ MODULE Module1
                 aux_traj_id    := 0;
                 
                 IF PLC_CMD_UTP_PROFINET_IN = 1 AND PLC_CMD_UPT_ID_PROFINET_IN = 1 THEN
-                    ! Update Trajectory Parameters
+                    ! Update Trajectory Parameters (Joint)
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 40;
+                ELSEIF PLC_CMD_UTP_PROFINET_IN = 1 AND PLC_CMD_UPT_ID_PROFINET_IN = 2 THEN
+                    ! Update Trajectory Parameters (TCP)
+                    SetGO ROB_ST_UPT_ID_PROFINET_OUT, 50;
                 ELSEIF PLC_CMD_UTP_PROFINET_IN = 1 AND PLC_CMD_UPT_ID_PROFINET_IN = 10 THEN
                     ! Update Tool Parameters
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 100;
@@ -167,6 +173,42 @@ MODULE Module1
                 IF PLC_ST_UPDATE_DONE_PROFINET_IN = 0 THEN
                     SetDO ROB_ST_UPDATE_DONE_PROFINET_OUT, 1;
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 40;
+                ENDIF
+                
+            CASE 50:
+                IF PLC_TRAJ_SIZE_PROFINET_IN = actual_traj_id THEN
+                    SetGO ROB_ST_UPT_ID_PROFINET_OUT, 10;
+                ELSE
+                    aux_traj_id := actual_traj_id;
+                    SetGO ROB_ST_UPT_ID_PROFINET_OUT, 51;
+                ENDIF
+               
+            CASE 51:
+                IF actual_traj_id = aux_traj_id THEN
+                    actual_traj_id := aux_traj_id + 1;
+                    SetGO ROB_ST_UPT_ID_PROFINET_OUT, 52;
+                ENDIF
+                
+            CASE 52:
+                IF PLC_ST_UPDATE_DONE_PROFINET_IN = 1 THEN
+                    SetDO ROB_ST_UPDATE_DONE_PROFINET_OUT, 0;
+                    SetGO ROB_ST_UPT_ID_PROFINET_OUT, 53;
+                ENDIF
+                
+            CASE 53:
+                ! Set parameters for the specified motion type !
+                ! SPEED / ZONE
+                J_Speed{actual_traj_id} := set_speeddata(SPEED_DATA_PROFINET_IN); J_Zone{actual_traj_id} := set_zonedata(ZONE_DATA_PROFINET_IN);
+                ! TCP (Tool Center Point)
+                ! Position
+                ! Rotation
+                ! Configuration
+                ! External Position
+                !TCP_Position{actual_traj_id}.extax.eax_a := sign() * ((DnumToNum(GInputDnum(Q5_PROFINET_IN))) / rm_str.internal.accuracy_factor);
+                
+                IF PLC_ST_UPDATE_DONE_PROFINET_IN = 0 THEN
+                    SetDO ROB_ST_UPDATE_DONE_PROFINET_OUT, 1;
+                    SetGO ROB_ST_UPT_ID_PROFINET_OUT, 50;
                 ENDIF
                 
             CASE 100:! UPDATE TOOL PARAMETERS STATE !

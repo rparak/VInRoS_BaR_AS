@@ -26,56 +26,68 @@
 _LOCAL UINT aux_trajectory_ID;
 
 typedef enum ABB_Library_statesPLC_enum{
-	ABBt_STATE_INITIALIZATION       = 0,
-	ABBt_STATE_START_INIT           = 5,
-	ABBt_STATE_START_MOTOR_ON       = 6,
-	ABBt_STATE_START_PP_TO_M        = 7,
-	ABBt_STATE_START_EXECUTE        = 8,
-	ABBt_STATE_STOP_INIT            = 10,
-	ABBt_STATE_STOP_EXECUTE         = 11,
-	ABBt_STATE_STOP_MOTOR_OFF       = 12,
-	ABBt_STATE_STOPPED_PP_TO_MAIN   = 13,
-	ABBt_STATE_STOPPED_TO_START     = 14,
-	ABBt_STATE_WAIT                 = 20,
-	ABBt_STATE_MOVE_JOINT_WAIT      = 30,
-	ABBt_STATE_MOVE_JOINT_CHECK     = 31,
-	ABBt_STATE_MOVE_JOINT_EXECUTE   = 32
+	ABBt_STATE_INITIALIZATION     = 0,
+	ABBt_STATE_START_INIT         = 5,
+	ABBt_STATE_START_MOTOR_ON     = 6,
+	ABBt_STATE_START_PP_TO_M      = 7,
+	ABBt_STATE_START_EXECUTE      = 8,
+	ABBt_STATE_STOP_INIT          = 10,
+	ABBt_STATE_STOP_EXECUTE       = 11,
+	ABBt_STATE_STOP_MOTOR_OFF     = 12,
+	ABBt_STATE_STOPPED_PP_TO_MAIN = 13,
+	ABBt_STATE_STOPPED_TO_START   = 14,
+	ABBt_STATE_WAIT               = 20,
+	ABBt_STATE_MOVE_JOINT_CHECK   = 30,
+	ABBt_STATE_MOVE_JOINT_EXECUTE = 31,
+	ABBt_STATE_MOVE_TCP_CHECK     = 40,
+	ABBt_STATE_MOVE_TCP_EXECUTE   = 41
 }ABB_Library_statesPLC_enum;
 
 typedef enum ABB_Library_statesROB_m_enum{
-	ABBr_STATE_INITIALIZATION       = 10,
-	ABBr_STATE_WAIT                 = 20,
-	ABBr_STATE_MOVE_JOINT           = 30,
+	ABBr_STATE_INITIALIZATION = 10,
+	ABBr_STATE_WAIT           = 20,
+	ABBr_STATE_MOVE_JOINT     = 30,
+	ABBr_STATE_MOVE_TCP       = 40
 }ABB_Library_statesROB_m_enum;
 
 typedef enum ABB_Library_statesROB_u_enum{
-	ABBu_STATE_INITIALIZATION       = 10, 
-	ABBu_STATE_UPDATE_TRAJECTORY_1  = 40,
-	ABBu_STATE_UPDATE_TRAJECTORY_2  = 41,
-	ABBu_STATE_UPDATE_TRAJECTORY_3  = 42,
-	ABBu_STATE_UPDATE_TRAJECTORY_4  = 43,
-	ABBu_STATE_UPDATE_TOOL_PARAM    = 100
+	ABBu_STATE_INITIALIZATION      = 10, 
+	ABBu_STATE_UPDATE_JOINT_TRAJ_1 = 40,
+	ABBu_STATE_UPDATE_JOINT_TRAJ_2 = 41,
+	ABBu_STATE_UPDATE_JOINT_TRAJ_3 = 42,
+	ABBu_STATE_UPDATE_JOINT_TRAJ_4 = 43,
+	ABBu_STATE_UPDATE_TCP_TRAJ_1   = 50,
+	ABBu_STATE_UPDATE_TCP_TRAJ_2   = 51,
+	ABBu_STATE_UPDATE_TCP_TRAJ_3   = 52,
+	ABBu_STATE_UPDATE_TCP_TRAJ_4   = 53,
+	ABBu_STATE_UPDATE_TOOL_PARAM   = 100
 }ABB_Library_statesROB_u_enum;
 
 typedef enum ABB_Library_cmd_m_state_enum{
-	MAIN_ID_EMPTY			 = 0,
-	MAIN_ID_JOINT_ABSOLUTE   = 1
+	MAIN_ID_EMPTY		   = 0,
+	MAIN_ID_JOINT_ABSOLUTE = 1,
+	MAIN_ID_TCP_LINEAR     = 2,
 }ABB_Library_cmd_m_state_enum;
 
 typedef enum ABB_Library_cmd_u_state_enum{
 	UPT_ID_EMPTY			= 0,
 	UPT_ID_TRAJECTORY_JOINT = 1,
+	UPT_ID_TRAJECTORY_TCP   = 2,
 	UPT_ID_ROB_TOOL	        = 10
 }ABB_Library_cmd_u_state_enum;
 
 typedef enum ABB_Library_update_enum{
-	UPT_STATE_INITIALIZATION        = 0,
-	UPT_STATE_WAIT                  = 10,
-	UPT_STATE_JOINT_TRAJECTORY_1    = 40,
-	UPT_STATE_JOINT_TRAJECTORY_2    = 41,
-	UPT_STATE_JOINT_TRAJECTORY_3    = 42,
-	UPT_STATE_JOINT_TRAJECTORY_4    = 43,
-	UPT_STATE_RTOOL                 = 100
+	UPT_STATE_INITIALIZATION = 0,
+	UPT_STATE_WAIT           = 10,
+	UPT_STATE_JOINT_TRAJ_1   = 40,
+	UPT_STATE_JOINT_TRAJ_2   = 41,
+	UPT_STATE_JOINT_TRAJ_3   = 42,
+	UPT_STATE_JOINT_TRAJ_4   = 43,
+	UPT_STATE_TCP_TRAJ_1     = 50,
+	UPT_STATE_TCP_TRAJ_2     = 51,
+	UPT_STATE_TCP_TRAJ_3     = 52,
+	UPT_STATE_TCP_TRAJ_4     = 53,
+	UPT_STATE_RTOOL          = 100
 }ABB_Library_update_enum;
 
 typedef enum ABB_Library_mParam_speed_enum{
@@ -144,6 +156,12 @@ typedef struct ABB_Library_profinet_in_str{
 	struct Convert_USINT_Array_To_UINT MOTION_TRAJECTORY_ID;
 	struct Convert_USINT_Array_To_UINT JOINT_POS[7];
 	struct Convert_USINT_To_BOOL_Array JOINT_POS_SIGN;
+	struct Convert_USINT_Array_To_UDINT TCP_POS[3];
+	struct Convert_USINT_Array_To_UINT TCP_ROT[3];
+	struct Convert_USINT_Array_To_UINT TCP_EX_POS;
+	struct Convert_USINT_To_BOOL_Array TCP_SIGN;
+	USINT TCP_CFG[4];
+	struct Convert_USINT_To_BOOL_Array TCP_CFG_SIGN;
 }ABB_Library_profinet_in_str;
 
 typedef struct ABB_Library_profinet_out_str{
@@ -157,8 +175,14 @@ typedef struct ABB_Library_profinet_out_str{
 	USINT ZONE;
 	struct Convert_UINT_To_USINT_Array JOINT_POS[7];
 	struct Convert_BOOL_Array_To_USINT JOINT_POS_SIGN;
+	struct Convert_UDINT_To_USINT_Array TCP_POS[3];
+	struct Convert_UINT_To_USINT_Array TCP_ROT[3];
+	struct Convert_UINT_To_USINT_Array TCP_EX_POS;
+	struct Convert_BOOL_Array_To_USINT TCP_SIGN;
+	USINT TCP_CFG[4];
+	struct Convert_BOOL_Array_To_USINT TCP_CFG_SIGN;
 	struct Convert_BOOL_Array_To_USINT RTOOL_RH;
-	struct Convert_UDINT_To_USINT_Array RTOOL_POS[3];
+	struct Convert_UINT_To_USINT_Array RTOOL_POS[3];
 	struct Convert_BOOL_Array_To_USINT RTOOL_POS_SIGN;
 	struct Convert_UDINT_To_USINT_Array RTOOL_ROT_QUAT[4];
 	struct Convert_BOOL_Array_To_USINT RTOOL_ROT_QUAT_SIGN;
@@ -191,8 +215,16 @@ typedef struct ABB_Library_command_str{
 	ABB_Library_sysOUT_str System;
 }ABB_Library_command_str;
 
+typedef struct ABB_Library_TCP_str{
+	REAL Position[3];
+	REAL Rotation[3];
+	SINT Configuration[4];
+	REAL External_Position;
+}ABB_Library_TCP_str;
+
 typedef struct ABB_Library_profinet_rtData_str{
 	REAL Q[7];
+	ABB_Library_TCP_str TCP;
 }ABB_Library_profinet_rtData_str;
 
 typedef struct ABB_Library_profinet_Jw_str{
@@ -200,7 +232,8 @@ typedef struct ABB_Library_profinet_Jw_str{
 }ABB_Library_profinet_Jw_str;
 
 typedef struct ABB_Library_parameter_str{
-	ABB_Library_profinet_Jw_str Position[100];
+	ABB_Library_profinet_Jw_str Joint[100];
+	ABB_Library_TCP_str TCP[100];
 	ABB_Library_mParam_speed_enum Speed[100];
 	ABB_Library_mParam_zone_enum Zone[100];
 	UINT Trajectory_Size;
@@ -440,6 +473,9 @@ void ABB_Library(struct ABB_Library* inst){
 				if(inst->Command.START == TRUE && inst->Command.ID.Motion == MAIN_ID_JOINT_ABSOLUTE){
 					inst->Command.STOP          = FALSE;
 					inst->Internal.actual_state = ABBt_STATE_MOVE_JOINT_CHECK;
+				}else if(inst->Command.START == TRUE && inst->Command.ID.Motion == MAIN_ID_TCP_LINEAR){
+					inst->Command.STOP          = FALSE;
+					inst->Internal.actual_state = ABBt_STATE_MOVE_TCP_CHECK;
 				}
 				
 				if(inst->Power_OFF == TRUE){
@@ -447,8 +483,7 @@ void ABB_Library(struct ABB_Library* inst){
 				}
 			}
 			break;
-		
-
+	
 		case ABBt_STATE_MOVE_JOINT_CHECK:
 			{
 				inst->Internal.before_state = ABBt_STATE_MOVE_JOINT_CHECK;
@@ -474,9 +509,36 @@ void ABB_Library(struct ABB_Library* inst){
 				}
 			}
 			break;
+		
+		case ABBt_STATE_MOVE_TCP_CHECK:
+			{
+				inst->Internal.before_state = ABBt_STATE_MOVE_TCP_CHECK;
+						
+				if(inst->Status.Robot.ID.Motion == ABBr_STATE_MOVE_TCP && inst->Status.Robot.In_Position == FALSE){
+					inst->Command.START     = FALSE;
+					inst->Command.ID.Motion = MAIN_ID_EMPTY;
+					
+					inst->Internal.actual_state = ABBt_STATE_MOVE_TCP_EXECUTE;
+				}
+			}
+			break;
+
+		case ABBt_STATE_MOVE_TCP_EXECUTE:
+			{
+				inst->Internal.before_state = ABBt_STATE_MOVE_TCP_EXECUTE;
+						
+				if(inst->Status.Robot.In_Position == TRUE){
+					inst->Command.START     = FALSE;
+					inst->Command.ID.Motion = MAIN_ID_EMPTY;
+					
+					inst->Internal.actual_state = ABBt_STATE_WAIT;
+				}
+			}
+			break;
 	}
 	
-	if(inst->Internal.actual_state == ABBt_STATE_MOVE_JOINT_CHECK || inst->Internal.actual_state == ABBt_STATE_MOVE_JOINT_EXECUTE){
+	if(inst->Internal.actual_state == ABBt_STATE_MOVE_JOINT_CHECK || inst->Internal.actual_state == ABBt_STATE_MOVE_JOINT_EXECUTE ||
+	   inst->Internal.actual_state == ABBt_STATE_MOVE_TCP_CHECK || inst->Internal.actual_state == ABBt_STATE_MOVE_TCP_EXECUTE){
 		if(inst->Command.STOP == TRUE){
 			inst->Internal.actual_state = ABBt_STATE_STOP_EXECUTE;
 		}
@@ -536,14 +598,16 @@ void Update_Parameters(struct ABB_Library* inst){
 		case UPT_STATE_WAIT:
 			{
 				if(inst->Command.UPDATE == TRUE && inst->Command.ID.Update == UPT_ID_TRAJECTORY_JOINT){
-					inst->Internal.Update.actual_state = UPT_STATE_JOINT_TRAJECTORY_1;
+					inst->Internal.Update.actual_state = UPT_STATE_JOINT_TRAJ_1;
+				}else if(inst->Command.UPDATE == TRUE && inst->Command.ID.Update == UPT_ID_TRAJECTORY_TCP){
+					inst->Internal.Update.actual_state = UPT_STATE_TCP_TRAJ_1;
 				}else if(inst->Command.UPDATE == TRUE && inst->Command.ID.Update  == UPT_ID_ROB_TOOL){
 					inst->Internal.Update.actual_state = UPT_STATE_RTOOL;
 				} 
 			}
 			break;
 		
-		case UPT_STATE_JOINT_TRAJECTORY_1:
+		case UPT_STATE_JOINT_TRAJ_1:
 			{
 				if(inst->Parameter.Trajectory_Size == inst->Internal.Update.ID){
 					if(inst->Status.Robot.ID.Update == ABBu_STATE_INITIALIZATION){
@@ -552,40 +616,40 @@ void Update_Parameters(struct ABB_Library* inst){
 						inst->Internal.Update.actual_state  = UPT_STATE_WAIT;
 					}
 				}else{
-					if(inst->Status.Robot.ID.Update == ABBu_STATE_UPDATE_TRAJECTORY_3){
+					if(inst->Status.Robot.ID.Update == ABBu_STATE_UPDATE_JOINT_TRAJ_3){
 						aux_trajectory_ID = inst->Internal.Update.ID;
 						
 						inst->Command.UPDATE                = FALSE;
 						inst->Command.ID.Update             = UPT_ID_EMPTY;
-						inst->Internal.Update.actual_state  = UPT_STATE_JOINT_TRAJECTORY_2;
+						inst->Internal.Update.actual_state  = UPT_STATE_JOINT_TRAJ_2;
 					}
 				}	
 			}
 			break;
 		
-		case UPT_STATE_JOINT_TRAJECTORY_2:
+		case UPT_STATE_JOINT_TRAJ_2:
 			{
 				if(inst->Internal.Update.ID == aux_trajectory_ID){
 					inst->Internal.Update.ID = aux_trajectory_ID + 1;
 				}
 				
-				inst->Internal.Update.actual_state  = UPT_STATE_JOINT_TRAJECTORY_3;
+				inst->Internal.Update.actual_state  = UPT_STATE_JOINT_TRAJ_3;
 			}
 			break;
 		
-		case UPT_STATE_JOINT_TRAJECTORY_3:
+		case UPT_STATE_JOINT_TRAJ_3:
 			{
 				inst->PROFINET_Mapping_OUT.SPEED = (unsigned char)inst->Parameter.Speed[inst->Internal.Update.ID - 1];
 				inst->PROFINET_Mapping_OUT.ZONE  = (unsigned char)inst->Parameter.Zone[inst->Internal.Update.ID - 1];
 					
 				unsigned char i_j;
-				for(i_j = 0; i_j < (unsigned char)(sizeof(inst->Parameter.Position[0].Q)/sizeof(inst->Parameter.Position[0].Q[0])); i_j++){
-					if(inst->Parameter.Position[inst->Internal.Update.ID - 1].Q[i_j] >= 0.0){
+				for(i_j = 0; i_j < (unsigned char)(sizeof(inst->Parameter.Joint[0].Q)/sizeof(inst->Parameter.Joint[0].Q[0])); i_j++){
+					if(inst->Parameter.Joint[inst->Internal.Update.ID - 1].Q[i_j] >= 0.0){
 						inst->PROFINET_Mapping_OUT.JOINT_POS_SIGN.INPUT[i_j] = TRUE;
-						inst->PROFINET_Mapping_OUT.JOINT_POS[i_j].INPUT      = (UINT)(ceil((inst->Parameter.Position[inst->Internal.Update.ID - 1].Q[i_j] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR);
+						inst->PROFINET_Mapping_OUT.JOINT_POS[i_j].INPUT      = (UINT)(ceil((inst->Parameter.Joint[inst->Internal.Update.ID - 1].Q[i_j] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR);
 					}else{
 						inst->PROFINET_Mapping_OUT.JOINT_POS_SIGN.INPUT[i_j] = FALSE;
-						inst->PROFINET_Mapping_OUT.JOINT_POS[i_j].INPUT      = (-1) * ((UINT)(ceil((inst->Parameter.Position[inst->Internal.Update.ID - 1].Q[i_j] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR));
+						inst->PROFINET_Mapping_OUT.JOINT_POS[i_j].INPUT      = (-1) * ((UINT)(ceil((inst->Parameter.Joint[inst->Internal.Update.ID - 1].Q[i_j] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR));
 					}
 					
 					Convert_UINT_To_USINT_Array(&inst->PROFINET_Mapping_OUT.JOINT_POS[i_j]);
@@ -595,18 +659,18 @@ void Update_Parameters(struct ABB_Library* inst){
 				
 				inst->Status.PLC.Update_Done = TRUE;
 				
-				if(inst->Status.Robot.ID.Update == ABBu_STATE_UPDATE_TRAJECTORY_4){
-					inst->Internal.Update.actual_state = UPT_STATE_JOINT_TRAJECTORY_4;
+				if(inst->Status.Robot.ID.Update == ABBu_STATE_UPDATE_JOINT_TRAJ_4){
+					inst->Internal.Update.actual_state = UPT_STATE_JOINT_TRAJ_4;
 				}
 			}
 			break;
 		
-		case UPT_STATE_JOINT_TRAJECTORY_4:
+		case UPT_STATE_JOINT_TRAJ_4:
 			{
 				inst->Status.PLC.Update_Done = FALSE;
 				
 				if(inst->Status.Robot.Update_Done == TRUE){
-					inst->Internal.Update.actual_state = UPT_STATE_JOINT_TRAJECTORY_1;
+					inst->Internal.Update.actual_state = UPT_STATE_JOINT_TRAJ_1;
 				}
 			}
 			break;
@@ -629,7 +693,7 @@ void Update_Parameters(struct ABB_Library* inst){
 						inst->PROFINET_Mapping_OUT.RTOOL_POS[i_tp].INPUT      = (-1) * ((UDINT)(ceil((inst->Rob_Tool.tFrame.Position[i_tp] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR));
 					}
 					
-					Convert_UDINT_To_USINT_Array(&inst->PROFINET_Mapping_OUT.RTOOL_POS[i_tp]);
+					Convert_UINT_To_USINT_Array(&inst->PROFINET_Mapping_OUT.RTOOL_POS[i_tp]);
 					
 					if(inst->Rob_Tool.tLoad.center_of_gravity[i_tp] >= 0.0){
 						inst->PROFINET_Mapping_OUT.RTOOL_COG_SIGN.INPUT[i_tp] = TRUE;
@@ -686,6 +750,14 @@ void Update_Parameters(struct ABB_Library* inst){
 }
 
 void Write_Data_PLC_to_ROB(struct ABB_Library* inst){
+	/**
+	Description:
+		Function to write the basic data to the robot controller.
+	
+	Args:
+		(1) inst [struct ABB_Library*]: Function block instance.
+	*/
+	
 	inst->PROFINET_Mapping_OUT.STATUS.INPUT[0] = inst->Status.PLC.Active;
 	inst->PROFINET_Mapping_OUT.STATUS.INPUT[1] = inst->Status.PLC.Update_Done;
 	Convert_BOOL_Array_To_USINT(&inst->PROFINET_Mapping_OUT.STATUS);
@@ -712,7 +784,7 @@ void Write_Data_PLC_to_ROB(struct ABB_Library* inst){
 void Read_Data_ROB_to_PLC(struct ABB_Library* inst){
 	/**
 	Description:
-		Function to data collection from the robot controller.
+		Function to collect data from the robot controller.
 	
 	Args:
 		(1) inst [struct ABB_Library*]: Function block instance.
@@ -745,6 +817,41 @@ void Read_Data_ROB_to_PLC(struct ABB_Library* inst){
 			inst->RT_Data.Q[i_j] = (REAL)(inst->PROFINET_Mapping_IN.JOINT_POS[i_j].OUTPUT) / inst->Internal.ACCURACY_FACTOR;
 		}else{
 			inst->RT_Data.Q[i_j] = (-1) * ((REAL)(inst->PROFINET_Mapping_IN.JOINT_POS[i_j].OUTPUT) / inst->Internal.ACCURACY_FACTOR);
+		}
+	}
+	
+	Convert_USINT_To_BOOL_Array(&inst->PROFINET_Mapping_IN.TCP_SIGN);
+	unsigned char i_tcp;
+	for(i_tcp = 0; i_tcp < (unsigned char)(sizeof(inst->RT_Data.TCP.Position)/sizeof(inst->RT_Data.TCP.Position[0])); i_tcp++){
+		Convert_USINT_Array_To_UDINT(&inst->PROFINET_Mapping_IN.TCP_POS[i_tcp]);
+		Convert_USINT_Array_To_UINT(&inst->PROFINET_Mapping_IN.TCP_ROT[i_tcp]);
+		
+		if(inst->PROFINET_Mapping_IN.TCP_SIGN.OUTPUT[i_tcp] == TRUE){
+			inst->RT_Data.TCP.Position[i_tcp] = (REAL)(inst->PROFINET_Mapping_IN.TCP_POS[i_tcp].OUTPUT) / inst->Internal.ACCURACY_FACTOR;
+		}else{
+			inst->RT_Data.TCP.Position[i_tcp] = (-1) * ((REAL)(inst->PROFINET_Mapping_IN.TCP_POS[i_tcp].OUTPUT) / inst->Internal.ACCURACY_FACTOR);
+		}
+		
+		if(inst->PROFINET_Mapping_IN.TCP_SIGN.OUTPUT[i_tcp + 3] == TRUE){
+			inst->RT_Data.TCP.Rotation[i_tcp] = (REAL)(inst->PROFINET_Mapping_IN.TCP_ROT[i_tcp].OUTPUT) / inst->Internal.ACCURACY_FACTOR;
+		}else{
+			inst->RT_Data.TCP.Rotation[i_tcp] = (-1) * ((REAL)(inst->PROFINET_Mapping_IN.TCP_ROT[i_tcp].OUTPUT) / inst->Internal.ACCURACY_FACTOR);
+		}
+	}
+	
+	if(inst->PROFINET_Mapping_IN.TCP_SIGN.OUTPUT[6] == TRUE){
+		inst->RT_Data.TCP.External_Position = (REAL)(inst->PROFINET_Mapping_IN.TCP_EX_POS.OUTPUT) / inst->Internal.ACCURACY_FACTOR;
+	}else{
+		inst->RT_Data.TCP.External_Position = (-1) * ((REAL)(inst->PROFINET_Mapping_IN.TCP_EX_POS.OUTPUT) / inst->Internal.ACCURACY_FACTOR);
+	}
+	
+	Convert_USINT_To_BOOL_Array(&inst->PROFINET_Mapping_IN.TCP_CFG_SIGN);
+	unsigned char i_cfg;
+	for(i_cfg = 0; i_cfg < (unsigned char)(sizeof(inst->RT_Data.TCP.Configuration)/sizeof(inst->RT_Data.TCP.Configuration[0])); i_cfg++){
+		if(inst->PROFINET_Mapping_IN.TCP_CFG_SIGN.OUTPUT[i_cfg] == TRUE){
+			inst->RT_Data.TCP.Configuration[i_cfg] = (SINT)inst->PROFINET_Mapping_IN.TCP_CFG[i_cfg];
+		}else{
+			inst->RT_Data.TCP.Configuration[i_cfg] = (SINT)((-1) * inst->PROFINET_Mapping_IN.TCP_CFG[i_cfg]);
 		}
 	}
 }

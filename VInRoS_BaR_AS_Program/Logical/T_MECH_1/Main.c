@@ -6,9 +6,6 @@
 
 #include "Main.h"
 
-// Signal Oreder -> 11
-// Allow Integration Part
-
 _LOCAL struct MpAxisBasic MpAxisBasic_0;
 _LOCAL struct MpAxisBasicParType AxisParameters;
 _LOCAL enum Mechanism_State_ID_enum state_id;

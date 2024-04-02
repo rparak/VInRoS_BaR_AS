@@ -45,16 +45,16 @@ void _INIT ProgramInit(void)
 	ABB_Library_Rob_1.Rob_Tool.tLoad.moment_of_inertia[2] = 0.0;
 	
 	
-	ABB_Library_Rob_1.Parameter.Position[0].Q[0] = 0.0; ABB_Library_Rob_1.Parameter.Position[0].Q[1] = 0.0;
-	ABB_Library_Rob_1.Parameter.Position[0].Q[2] = 0.0; ABB_Library_Rob_1.Parameter.Position[0].Q[3] = 0.0;
-	ABB_Library_Rob_1.Parameter.Position[0].Q[4] = 0.0; ABB_Library_Rob_1.Parameter.Position[0].Q[5] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[0].Q[0] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[1] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[0].Q[2] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[3] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[0].Q[4] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[5] = 0.0;
 	ABB_Library_Rob_1.Parameter.Speed[0] = 8;
 	ABB_Library_Rob_1.Parameter.Zone[0]  = 0;
 	
 	// 
-	ABB_Library_Rob_1.Parameter.Position[1].Q[0] = 90.0; ABB_Library_Rob_1.Parameter.Position[1].Q[1] = 0.0;
-	ABB_Library_Rob_1.Parameter.Position[1].Q[2] = 0.0; ABB_Library_Rob_1.Parameter.Position[1].Q[3] = 0.0;
-	ABB_Library_Rob_1.Parameter.Position[1].Q[4] = 0.0; ABB_Library_Rob_1.Parameter.Position[1].Q[5] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[1].Q[0] = 90.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[1] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[1].Q[2] = 0.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[3] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[1].Q[4] = 0.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[5] = 0.0;
 	ABB_Library_Rob_1.Parameter.Speed[1] = 8;
 	ABB_Library_Rob_1.Parameter.Zone[1]  = 0;
 	
