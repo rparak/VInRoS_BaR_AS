@@ -111,6 +111,10 @@
         </Variable>
       </GlobalVariables>
       <Task Name="T_MECH_1" />
+      <Task Name="T_ROB_1">
+        <Variable Name="Sim_PROFINET_Mapping_IN" />
+        <Variable Name="Sim_PROFINET_Mapping_OUT" />
+      </Task>
     </Module>
   </DefaultView>
 </OpcUaSource>
