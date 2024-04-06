@@ -675,6 +675,103 @@ void Update_Parameters(struct ABB_Library* inst){
 			}
 			break;
 		
+		case UPT_STATE_TCP_TRAJ_1:
+			{
+				if(inst->Parameter.Trajectory_Size == inst->Internal.Update.ID){
+					if(inst->Status.Robot.ID.Update == ABBu_STATE_INITIALIZATION){
+						inst->Internal.Update.ID = NULL;
+						aux_trajectory_ID                   = NULL;
+						inst->Internal.Update.actual_state  = UPT_STATE_WAIT;
+					}
+				}else{
+					if(inst->Status.Robot.ID.Update == ABBu_STATE_UPDATE_TCP_TRAJ_3){
+						aux_trajectory_ID = inst->Internal.Update.ID;
+						
+						inst->Command.UPDATE                = FALSE;
+						inst->Command.ID.Update             = UPT_ID_EMPTY;
+						inst->Internal.Update.actual_state  = UPT_STATE_TCP_TRAJ_2;
+					}
+				}	
+			}
+			break;
+		
+		case UPT_STATE_TCP_TRAJ_2:
+			{
+				if(inst->Internal.Update.ID == aux_trajectory_ID){
+					inst->Internal.Update.ID = aux_trajectory_ID + 1;
+				}
+				
+				inst->Internal.Update.actual_state  = UPT_STATE_TCP_TRAJ_3;
+			}
+			break;
+		
+		case UPT_STATE_TCP_TRAJ_3:
+			{
+				inst->PROFINET_Mapping_OUT.SPEED = (unsigned char)inst->Parameter.Speed[inst->Internal.Update.ID - 1];
+				inst->PROFINET_Mapping_OUT.ZONE  = (unsigned char)inst->Parameter.Zone[inst->Internal.Update.ID - 1];
+					
+				unsigned char i_tcp;
+				for(i_tcp = 0; i_tcp < (unsigned char)(sizeof(inst->Parameter.TCP[0].Position)/sizeof(inst->Parameter.TCP[0].Position[0])); i_tcp++){
+					if(inst->Parameter.TCP[inst->Internal.Update.ID - 1].Position[i_tcp] >= 0.0){
+						inst->PROFINET_Mapping_OUT.TCP_SIGN.INPUT[i_tcp] = TRUE;
+						inst->PROFINET_Mapping_OUT.TCP_POS[i_tcp].INPUT  = (UDINT)(ceil((inst->Parameter.TCP[inst->Internal.Update.ID - 1].Position[i_tcp] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR);
+					}else{
+						inst->PROFINET_Mapping_OUT.TCP_SIGN.INPUT[i_tcp] = FALSE;
+						inst->PROFINET_Mapping_OUT.TCP_POS[i_tcp].INPUT  = (-1) * ((UDINT)(ceil((inst->Parameter.TCP[inst->Internal.Update.ID - 1].Position[i_tcp] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR));
+					}
+					Convert_UDINT_To_USINT_Array(&inst->PROFINET_Mapping_OUT.TCP_POS[i_tcp]);
+					
+					if(inst->Parameter.TCP[inst->Internal.Update.ID - 1].Rotation[i_tcp] >= 0.0){
+						inst->PROFINET_Mapping_OUT.TCP_SIGN.INPUT[3 + i_tcp] = TRUE;
+						inst->PROFINET_Mapping_OUT.TCP_ROT[i_tcp].INPUT  = (UDINT)(ceil((inst->Parameter.TCP[inst->Internal.Update.ID - 1].Rotation[i_tcp] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR);
+					}else{
+						inst->PROFINET_Mapping_OUT.TCP_SIGN.INPUT[3 + i_tcp] = FALSE;
+						inst->PROFINET_Mapping_OUT.TCP_ROT[i_tcp].INPUT  = (-1) * ((UDINT)(ceil((inst->Parameter.TCP[inst->Internal.Update.ID - 1].Rotation[i_tcp] * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR));
+					}
+					Convert_UINT_To_USINT_Array(&inst->PROFINET_Mapping_OUT.TCP_ROT[i_tcp]);
+				}
+				
+				if(inst->Parameter.TCP[inst->Internal.Update.ID - 1].External_Position >= 0.0){
+					inst->PROFINET_Mapping_OUT.TCP_SIGN.INPUT[6] = TRUE;
+					inst->PROFINET_Mapping_OUT.TCP_EX_POS.INPUT  = (UDINT)(ceil((inst->Parameter.TCP[inst->Internal.Update.ID - 1].External_Position * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR);
+				}else{
+					inst->PROFINET_Mapping_OUT.TCP_SIGN.INPUT[6] = FALSE;
+					inst->PROFINET_Mapping_OUT.TCP_EX_POS.INPUT  = (-1) * ((UDINT)(ceil((inst->Parameter.TCP[inst->Internal.Update.ID - 1].External_Position * inst->Internal.ACCURACY_FACTOR)*CEIL_DEFUALT_FACTOR)/CEIL_DEFUALT_FACTOR));
+				}
+				
+				Convert_BOOL_Array_To_USINT(&inst->PROFINET_Mapping_OUT.TCP_SIGN);
+				
+				unsigned char i_cfg;
+				for(i_cfg = 0; i_cfg < (unsigned char)(sizeof(inst->Parameter.TCP[0].Configuration)/sizeof(inst->Parameter.TCP[0].Configuration[0])); i_cfg++){
+					if(inst->Parameter.TCP[inst->Internal.Update.ID - 1].Configuration[i_cfg] >= 0){
+						inst->PROFINET_Mapping_OUT.TCP_CFG_SIGN.INPUT[i_cfg] = TRUE;
+						inst->PROFINET_Mapping_OUT.TCP_CFG[i_cfg]            = inst->Parameter.TCP[inst->Internal.Update.ID - 1].Configuration[i_cfg];
+					}else{
+						inst->PROFINET_Mapping_OUT.TCP_CFG_SIGN.INPUT[i_cfg] = FALSE;
+						inst->PROFINET_Mapping_OUT.TCP_CFG[i_cfg]            = (-1) * inst->Parameter.TCP[inst->Internal.Update.ID - 1].Configuration[i_cfg];
+					}
+				}
+				
+				Convert_BOOL_Array_To_USINT(&inst->PROFINET_Mapping_OUT.TCP_CFG_SIGN);
+				
+				inst->Status.PLC.Update_Done = TRUE;
+				
+				if(inst->Status.Robot.ID.Update == ABBu_STATE_UPDATE_TCP_TRAJ_4){
+					inst->Internal.Update.actual_state = UPT_STATE_TCP_TRAJ_4;
+				}
+			}
+			break;
+		
+		case UPT_STATE_TCP_TRAJ_4:
+			{
+				inst->Status.PLC.Update_Done = FALSE;
+				
+				if(inst->Status.Robot.Update_Done == TRUE){
+					inst->Internal.Update.actual_state = UPT_STATE_TCP_TRAJ_1;
+				}
+			}
+			break;
+		////
 		case UPT_STATE_RTOOL:
 			{
 				inst->PROFINET_Mapping_OUT.RTOOL_RH.INPUT[0] = inst->Rob_Tool.robHold;

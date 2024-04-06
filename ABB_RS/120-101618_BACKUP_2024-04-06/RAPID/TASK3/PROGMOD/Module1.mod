@@ -156,18 +156,6 @@ MODULE Module1
         ENDIF
     ENDFUNC
     
-    FUNC num DegToRad(num value)
-        ! Description:                                       !
-        !   Conversion function between degrees and radians. !
-        !                                                    !
-        ! IN:                                                !
-        ! [1] value [num]: Real number (Degree).             !
-        ! OUT:                                               !
-        ! [1] return [num]: Radian.                          !
-        
-        RETURN ((value) * M_PI / 180.0);
-    ENDFUNC
-    
     PROC ER_Reset_Parameters_Q()
         ! Description:                                                   !
         !   Event routine function (non-parametric) for parameter reset. !

@@ -67,27 +67,27 @@ MODULE Module1
         r_data.TCP_Sign.Position.X := sign(Round(r_data.ROB_CURRENT_DATA.trans.x \Dec:=NUM_OF_ROUNDED_PLACES));
         SetDO TCP_POS_X_SIGN_PROFINET_OUT, r_data.TCP_Sign.Position.X;
         IF r_data.TCP_Sign.Position.X = 0 THEN
-            SetGO TCP_POS_X_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.trans.x * accuracy_factor)) \Dec:=0);
+            SetGO TCP_POS_X_PROFINET_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.trans.x * accuracy_factor)) \Dec:=0);
         ELSE  
-            SetGO TCP_POS_X_OUT, Round((r_data.ROB_CURRENT_DATA.trans.x * accuracy_factor) \Dec:=0);
+            SetGO TCP_POS_X_PROFINET_OUT, Round((r_data.ROB_CURRENT_DATA.trans.x * accuracy_factor) \Dec:=0);
         ENDIF
         
         ! TCP Position (X, Y, Z) -> Y Parameter
         r_data.TCP_Sign.Position.Y := sign(Round(r_data.ROB_CURRENT_DATA.trans.y \Dec:=NUM_OF_ROUNDED_PLACES));
         SetDO TCP_POS_Y_SIGN_PROFINET_OUT, r_data.TCP_Sign.Position.Y;
         IF r_data.TCP_Sign.Position.Y = 0 THEN
-            SetGO TCP_POS_Y_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.trans.y * accuracy_factor)) \Dec:=0);
+            SetGO TCP_POS_Y_PROFINET_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.trans.y * accuracy_factor)) \Dec:=0);
         ELSE  
-            SetGO TCP_POS_Y_OUT, Round((r_data.ROB_CURRENT_DATA.trans.y * accuracy_factor) \Dec:=0);
+            SetGO TCP_POS_Y_PROFINET_OUT, Round((r_data.ROB_CURRENT_DATA.trans.y * accuracy_factor) \Dec:=0);
         ENDIF
         
         ! TCP Position (X, Y, Z) -> Z Parameter
         r_data.TCP_Sign.Position.Z := sign(Round(r_data.ROB_CURRENT_DATA.trans.z \Dec:=NUM_OF_ROUNDED_PLACES));
         SetDO TCP_POS_Z_SIGN_PROFINET_OUT, r_data.TCP_Sign.Position.Z;
         IF r_data.TCP_Sign.Position.Z = 0 THEN
-            SetGO TCP_POS_Z_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.trans.z * accuracy_factor)) \Dec:=0);
+            SetGO TCP_POS_Z_PROFINET_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.trans.z * accuracy_factor)) \Dec:=0);
         ELSE  
-            SetGO TCP_POS_Z_OUT, Round((r_data.ROB_CURRENT_DATA.trans.z * accuracy_factor) \Dec:=0);
+            SetGO TCP_POS_Z_PROFINET_OUT, Round((r_data.ROB_CURRENT_DATA.trans.z * accuracy_factor) \Dec:=0);
         ENDIF
         
         ! Description:                                                                    !
@@ -95,29 +95,29 @@ MODULE Module1
         
         ! TCP Rotation (Euler Angles: X, Y, Z) -> X Parameter
         r_data.TCP_Sign.Rotation.X := sign(Round(EulerZYX(\X, r_data.ROB_CURRENT_DATA.rot) \Dec:=NUM_OF_ROUNDED_PLACES));
-        SetDO TCP_ROT_Y_SIGN_PROFINET_OUT, r_data.TCP_Sign.Rotation.X;
+        SetDO TCP_ROT_X_SIGN_PROFINET_OUT, r_data.TCP_Sign.Rotation.X;
         IF r_data.TCP_Sign.Rotation.X = 0 THEN
-            SetGO TCP_ROT_X_OUT, Round(((-1) * (EulerZYX(\X, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor)) \Dec:=0);
+            SetGO TCP_ROT_X_PROFINET_OUT, Round(((-1) * (EulerZYX(\X, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor)) \Dec:=0);
         ELSE  
-            SetGO TCP_ROT_X_OUT, Round((EulerZYX(\X, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor) \Dec:=0);
+            SetGO TCP_ROT_X_PROFINET_OUT, Round((EulerZYX(\X, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor) \Dec:=0);
         ENDIF
         
         ! TCP Rotation (Euler Angles: X, Y, Z) -> Y Parameter
         r_data.TCP_Sign.Rotation.Y := sign(Round(EulerZYX(\Y, r_data.ROB_CURRENT_DATA.rot) \Dec:=NUM_OF_ROUNDED_PLACES));
         SetDO TCP_ROT_Y_SIGN_PROFINET_OUT, r_data.TCP_Sign.Rotation.Y;
         IF r_data.TCP_Sign.Rotation.Y = 0 THEN
-            SetGO TCP_ROT_Y_OUT, Round(((-1) * (EulerZYX(\Y, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor)) \Dec:=0);
+            SetGO TCP_ROT_Y_PROFINET_OUT, Round(((-1) * (EulerZYX(\Y, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor)) \Dec:=0);
         ELSE  
-            SetGO TCP_ROT_Y_OUT, Round((EulerZYX(\Y, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor) \Dec:=0);
+            SetGO TCP_ROT_Y_PROFINET_OUT, Round((EulerZYX(\Y, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor) \Dec:=0);
         ENDIF
         
         ! TCP Rotation (Euler Angles: X, Y, Z) -> Z Parameter
         r_data.TCP_Sign.Rotation.Z := sign(Round(EulerZYX(\Z, r_data.ROB_CURRENT_DATA.rot) \Dec:=NUM_OF_ROUNDED_PLACES));
         SetDO TCP_ROT_Z_SIGN_PROFINET_OUT, r_data.TCP_Sign.Rotation.Z;
         IF r_data.TCP_Sign.Rotation.Z = 0 THEN
-            SetGO TCP_ROT_Z_OUT, Round(((-1) * (EulerZYX(\Z, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor)) \Dec:=0);
+            SetGO TCP_ROT_Z_PROFINET_OUT, Round(((-1) * (EulerZYX(\Z, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor)) \Dec:=0);
         ELSE  
-            SetGO TCP_ROT_Z_OUT, Round((EulerZYX(\Z, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor) \Dec:=0);
+            SetGO TCP_ROT_Z_PROFINET_OUT, Round((EulerZYX(\Z, r_data.ROB_CURRENT_DATA.rot) * accuracy_factor) \Dec:=0);
         ENDIF
         
         ! Description:                                             !
@@ -127,36 +127,36 @@ MODULE Module1
         r_data.TCP_Sign.Configuration.Cfg_1 := sign(r_data.ROB_CURRENT_DATA.robconf.cf1);
         SetDO TCP_CFG_1_SIGN_PROFINET_OUT, r_data.TCP_Sign.Configuration.Cfg_1;
         IF r_data.TCP_Sign.Configuration.Cfg_1 = 0 THEN
-            SetGO TCP_CFG_1_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cf1;
+            SetGO TCP_CFG_1_PROFINET_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cf1;
         ELSE
-            SetGO TCP_CFG_1_OUT, r_data.ROB_CURRENT_DATA.robconf.cf1;
+            SetGO TCP_CFG_1_PROFINET_OUT, r_data.ROB_CURRENT_DATA.robconf.cf1;
         ENDIF
         
         ! TCP Configuration (1, 4, 6, X) -> Parameter 4
         r_data.TCP_Sign.Configuration.Cfg_4 := sign(r_data.ROB_CURRENT_DATA.robconf.cf4);
         SetDO TCP_CFG_4_SIGN_PROFINET_OUT, r_data.TCP_Sign.Configuration.Cfg_4;
         IF r_data.TCP_Sign.Configuration.Cfg_4 = 0 THEN
-            SetGO TCP_CFG_4_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cf4;
+            SetGO TCP_CFG_4_PROFINET_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cf4;
         ELSE
-            SetGO TCP_CFG_4_OUT, r_data.ROB_CURRENT_DATA.robconf.cf4;
+            SetGO TCP_CFG_4_PROFINET_OUT, r_data.ROB_CURRENT_DATA.robconf.cf4;
         ENDIF
         
         ! TCP Configuration (1, 4, 6, X) -> Parameter 6
         r_data.TCP_Sign.Configuration.Cfg_6 := sign(r_data.ROB_CURRENT_DATA.robconf.cf6);
         SetDO TCP_CFG_6_SIGN_PROFINET_OUT, r_data.TCP_Sign.Configuration.Cfg_6;
         IF r_data.TCP_Sign.Configuration.Cfg_6 = 0 THEN
-            SetGO TCP_CFG_6_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cf6;
+            SetGO TCP_CFG_6_PROFINET_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cf6;
         ELSE
-            SetGO TCP_CFG_6_OUT, r_data.ROB_CURRENT_DATA.robconf.cf6;
+            SetGO TCP_CFG_6_PROFINET_OUT, r_data.ROB_CURRENT_DATA.robconf.cf6;
         ENDIF
     
         ! TCP Configuration (1, 4, 6, X) -> Parameter X
         r_data.TCP_Sign.Configuration.Cfg_X := sign(r_data.ROB_CURRENT_DATA.robconf.cfx);
         SetDO TCP_CFG_X_SIGN_PROFINET_OUT, r_data.TCP_Sign.Configuration.Cfg_X;
         IF r_data.TCP_Sign.Configuration.Cfg_X = 0 THEN
-            SetGO TCP_CFG_X_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cfx;
+            SetGO TCP_CFG_X_PROFINET_OUT, (-1) * r_data.ROB_CURRENT_DATA.robconf.cfx;
         ELSE
-            SetGO TCP_CFG_X_OUT, r_data.ROB_CURRENT_DATA.robconf.cfx;
+            SetGO TCP_CFG_X_PROFINET_OUT, r_data.ROB_CURRENT_DATA.robconf.cfx;
         ENDIF
         
         ! Description:                      !
@@ -167,9 +167,9 @@ MODULE Module1
         SetDO TCP_EX_POS_SIGN_PROFINET_OUT, r_data.TCP_Sign.External_Position;
         IF r_data.ROB_CURRENT_DATA.extax.eax_a <> 9E+09 THEN
             IF r_data.TCP_Sign.External_Position = 0 THEN
-                SetGO TCP_EX_POS_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.extax.eax_a * accuracy_factor)) \Dec:=0);
+                SetGO TCP_EX_POS_PROFINET_OUT, Round(((-1) * (r_data.ROB_CURRENT_DATA.extax.eax_a * accuracy_factor)) \Dec:=0);
             ELSE  
-                SetGO TCP_EX_POS_OUT, Round((r_data.ROB_CURRENT_DATA.extax.eax_a * accuracy_factor) \Dec:=0);
+                SetGO TCP_EX_POS_PROFINET_OUT, Round((r_data.ROB_CURRENT_DATA.extax.eax_a * accuracy_factor) \Dec:=0);
             ENDIF
         ENDIF
         
@@ -189,18 +189,6 @@ MODULE Module1
         ELSE
            RETURN 0;
         ENDIF
-    ENDFUNC
-    
-    FUNC num DegToRad(num value)
-        ! Description:                                       !
-        !   Conversion function between degrees and radians. !
-        !                                                    !
-        ! IN:                                                !
-        ! [1] value [num]: Real number (Degree).             !
-        ! OUT:                                               !
-        ! [1] return [num]: Radian.                          !
-        
-        RETURN ((value) * M_PI / 180.0);
     ENDFUNC
     
     PROC ER_Reset_Parameters_TCP()

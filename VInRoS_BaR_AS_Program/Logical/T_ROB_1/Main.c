@@ -8,7 +8,6 @@
 
 _LOCAL enum Robot_State_ID_enum state_id;
 
-
 /*
 if(Global_VInRoS_Str.Rob_Id_1.Command.Start == TRUE){
 	ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
@@ -44,21 +43,50 @@ void _INIT ProgramInit(void)
 	ABB_Library_Rob_1.Rob_Tool.tLoad.moment_of_inertia[0] = 0.0; ABB_Library_Rob_1.Rob_Tool.tLoad.moment_of_inertia[1] = 0.0;
 	ABB_Library_Rob_1.Rob_Tool.tLoad.moment_of_inertia[2] = 0.0;
 	
+	ABB_Library_Rob_1.Parameter.Joint[0].Q[0] = 130.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[1] = -10.0;
+	ABB_Library_Rob_1.Parameter.Joint[0].Q[2] = 15.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[3] = -50.0;
+	ABB_Library_Rob_1.Parameter.Joint[0].Q[4] = 60.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[5] = 60.0;
+	ABB_Library_Rob_1.Parameter.Speed[0] = vSPEED_100;
+	ABB_Library_Rob_1.Parameter.Zone[0]  = zZone_fine;
+	 
+	ABB_Library_Rob_1.Parameter.Joint[1].Q[0] = 110.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[1] = 60.0;
+	ABB_Library_Rob_1.Parameter.Joint[1].Q[2] = -20.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[3] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[1].Q[4] = -60.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[5] = -40.0;
+	ABB_Library_Rob_1.Parameter.Speed[1] = vSPEED_100;
+	ABB_Library_Rob_1.Parameter.Zone[1]  = zZone_fine;
 	
-	ABB_Library_Rob_1.Parameter.Joint[0].Q[0] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[1] = 0.0;
-	ABB_Library_Rob_1.Parameter.Joint[0].Q[2] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[3] = 0.0;
-	ABB_Library_Rob_1.Parameter.Joint[0].Q[4] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[5] = 0.0;
+	ABB_Library_Rob_1.Parameter.Joint[2].Q[0] = -30.0; ABB_Library_Rob_1.Parameter.Joint[2].Q[1] = 20.0;
+	ABB_Library_Rob_1.Parameter.Joint[2].Q[2] = 10.0; ABB_Library_Rob_1.Parameter.Joint[2].Q[3] = 40.0;
+	ABB_Library_Rob_1.Parameter.Joint[2].Q[4] = 90.0; ABB_Library_Rob_1.Parameter.Joint[2].Q[5] = 0.0;
+	ABB_Library_Rob_1.Parameter.Speed[2] = vSPEED_100;
+	ABB_Library_Rob_1.Parameter.Zone[2]  = zZone_fine;
+	
+	ABB_Library_Rob_1.Parameter.Joint[3].Q[0] = 0.0; ABB_Library_Rob_1.Parameter.Joint[3].Q[1] = -50.0;
+	ABB_Library_Rob_1.Parameter.Joint[3].Q[2] = -20.0; ABB_Library_Rob_1.Parameter.Joint[3].Q[3] = 90.0;
+	ABB_Library_Rob_1.Parameter.Joint[3].Q[4] = -40.0; ABB_Library_Rob_1.Parameter.Joint[3].Q[5] = 100.0;
+	ABB_Library_Rob_1.Parameter.Speed[3] = vSPEED_100;
+	ABB_Library_Rob_1.Parameter.Zone[3]  = zZone_fine;
+	
+	ABB_Library_Rob_1.Parameter.Joint[4].Q[0] = 65.0; ABB_Library_Rob_1.Parameter.Joint[4].Q[1] = 10.0;
+	ABB_Library_Rob_1.Parameter.Joint[4].Q[2] = 20.0; ABB_Library_Rob_1.Parameter.Joint[4].Q[3] = 50.0;
+	ABB_Library_Rob_1.Parameter.Joint[4].Q[4] = 55.0; ABB_Library_Rob_1.Parameter.Joint[4].Q[5] = -20.0;
+	ABB_Library_Rob_1.Parameter.Speed[4] = vSPEED_100;
+	ABB_Library_Rob_1.Parameter.Zone[4]  = zZone_fine;
+
+	ABB_Library_Rob_1.Parameter.Trajectory_Size = 5;
+	
+	/*
+	ABB_Library_Rob_1.Parameter.TCP[0].Position[0] = 0.0; ABB_Library_Rob_1.Parameter.TCP[0].Position[1] = 0.0;
+	ABB_Library_Rob_1.Parameter.TCP[0].Position[2] = 0.0;
+	ABB_Library_Rob_1.Parameter.TCP[0].Rotation[0] = 0.0; ABB_Library_Rob_1.Parameter.TCP[0].Rotation[1] = 0.0;
+	ABB_Library_Rob_1.Parameter.TCP[0].Rotation[2] = 0.0;
+	ABB_Library_Rob_1.Parameter.TCP[0].Configuration[0] = 0.0; ABB_Library_Rob_1.Parameter.TCP[0].Configuration[1] = 0.0;
+	ABB_Library_Rob_1.Parameter.TCP[0].Configuration[2] = 0.0; ABB_Library_Rob_1.Parameter.TCP[0].Configuration[3] = 0.0;
 	ABB_Library_Rob_1.Parameter.Speed[0] = 8;
 	ABB_Library_Rob_1.Parameter.Zone[0]  = 0;
 	
-	// 
-	ABB_Library_Rob_1.Parameter.Joint[1].Q[0] = 90.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[1] = 0.0;
-	ABB_Library_Rob_1.Parameter.Joint[1].Q[2] = 0.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[3] = 0.0;
-	ABB_Library_Rob_1.Parameter.Joint[1].Q[4] = 0.0; ABB_Library_Rob_1.Parameter.Joint[1].Q[5] = 0.0;
-	ABB_Library_Rob_1.Parameter.Speed[1] = 8;
-	ABB_Library_Rob_1.Parameter.Zone[1]  = 0;
-	
 	ABB_Library_Rob_1.Parameter.Trajectory_Size = 2;
+	*/
 	
 	/*
 	// 

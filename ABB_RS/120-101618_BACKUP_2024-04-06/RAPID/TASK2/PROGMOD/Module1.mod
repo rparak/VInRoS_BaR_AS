@@ -93,10 +93,10 @@ MODULE Module1
     PERS robtarget TCP_Position{100};
 
     ! Joint Speed Data
-    PERS speeddata J_Speed{100};
+    PERS speeddata Speed{100};
     
     ! Joint Zone Data
-    PERS zonedata J_Zone{100};
+    PERS zonedata Zone{100};
 
     ! Characteristics of a robotic tool (end-effector / gripper)
     PERS tooldata robTool;
@@ -158,7 +158,7 @@ MODULE Module1
             CASE 43:
                 ! Set parameters for the specified motion type !
                 ! SPEED / ZONE
-                J_Speed{actual_traj_id} := set_speeddata(SPEED_DATA_PROFINET_IN); J_Zone{actual_traj_id} := set_zonedata(ZONE_DATA_PROFINET_IN);
+                Speed{actual_traj_id} := set_speeddata(SPEED_DATA_PROFINET_IN); Zone{actual_traj_id} := set_zonedata(ZONE_DATA_PROFINET_IN);
                 ! JOINT POSITION
                 ! Q0 ... Q5
                 J_Position{actual_traj_id}.robax.rax_1 := sign(Q0_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(Q0_PROFINET_IN))) / rm_str.internal.accuracy_factor);
@@ -198,13 +198,23 @@ MODULE Module1
             CASE 53:
                 ! Set parameters for the specified motion type !
                 ! SPEED / ZONE
-                J_Speed{actual_traj_id} := set_speeddata(SPEED_DATA_PROFINET_IN); J_Zone{actual_traj_id} := set_zonedata(ZONE_DATA_PROFINET_IN);
+                Speed{actual_traj_id} := set_speeddata(SPEED_DATA_PROFINET_IN); Zone{actual_traj_id} := set_zonedata(ZONE_DATA_PROFINET_IN);
                 ! TCP (Tool Center Point)
                 ! Position
+                TCP_Position{actual_traj_id}.trans.x := sign(TCP_POS_X_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(TCP_POS_X_PROFINET_IN))) / rm_str.internal.accuracy_factor);
+                TCP_Position{actual_traj_id}.trans.y := sign(TCP_POS_Y_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(TCP_POS_Y_PROFINET_IN))) / rm_str.internal.accuracy_factor);
+                TCP_Position{actual_traj_id}.trans.z := sign(TCP_POS_Z_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(TCP_POS_Z_PROFINET_IN))) / rm_str.internal.accuracy_factor);
                 ! Rotation
+                TCP_Position{actual_traj_id}.rot := OrientZYX(sign(TCP_ROT_X_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(TCP_ROT_X_PROFINET_IN))) / rm_str.internal.accuracy_factor),
+                                                              sign(TCP_ROT_Y_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(TCP_ROT_Y_PROFINET_IN))) / rm_str.internal.accuracy_factor),
+                                                              sign(TCP_ROT_Z_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(TCP_ROT_Z_PROFINET_IN))) / rm_str.internal.accuracy_factor));
                 ! Configuration
+                TCP_Position{actual_traj_id}.robconf.cf1 := sign(TCP_CFG_1_SIGN_PROFINET_IN) * (TCP_CFG_1_PROFINET_IN); 
+                TCP_Position{actual_traj_id}.robconf.cf4 := sign(TCP_CFG_4_SIGN_PROFINET_IN) * (TCP_CFG_4_PROFINET_IN);
+                TCP_Position{actual_traj_id}.robconf.cf6 := sign(TCP_CFG_6_SIGN_PROFINET_IN) * (TCP_CFG_6_PROFINET_IN);
+                TCP_Position{actual_traj_id}.robconf.cfx := sign(TCP_CFG_X_SIGN_PROFINET_IN) * (TCP_CFG_X_PROFINET_IN);
                 ! External Position
-                !TCP_Position{actual_traj_id}.extax.eax_a := sign() * ((DnumToNum(GInputDnum(Q5_PROFINET_IN))) / rm_str.internal.accuracy_factor);
+                TCP_Position{actual_traj_id}.extax.eax_a := sign(TCP_EX_POS_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(TCP_EX_POS_PROFINET_IN))) / rm_str.internal.accuracy_factor);
                 
                 IF PLC_ST_UPDATE_DONE_PROFINET_IN = 0 THEN
                     SetDO ROB_ST_UPDATE_DONE_PROFINET_OUT, 1;

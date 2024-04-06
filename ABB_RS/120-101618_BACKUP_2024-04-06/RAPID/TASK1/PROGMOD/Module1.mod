@@ -92,10 +92,10 @@ MODULE Module1
     PERS robtarget TCP_Position{100};
 
     ! Joint Speed Data
-    PERS speeddata J_Speed{100};
+    PERS speeddata Speed{100};
     
     ! Joint Zone Data
-    PERS zonedata J_Zone{100};
+    PERS zonedata Zone{100};
 
     ! Characteristics of a robotic tool (end-effector / gripper)
     PERS tooldata robTool;
@@ -154,7 +154,7 @@ MODULE Module1
                     SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 20;
                 ELSE
                     SetGO ROB_MOTION_TRAJ_ID_PROFINET_OUT, aux_trajectory_index_var;
-                    MoveAbsJ J_Position{aux_trajectory_index_var + 1}\NoEOffs, J_Speed{aux_trajectory_index_var + 1}, J_Zone{aux_trajectory_index_var + 1}, robTool\WObj:=wobj0;
+                    MoveAbsJ J_Position{aux_trajectory_index_var + 1}\NoEOffs, Speed{aux_trajectory_index_var + 1}, Zone{aux_trajectory_index_var + 1}, robTool\WObj:=wobj0;
                     aux_trajectory_index_var := aux_trajectory_index_var + 1;
                 ENDIF
                 
@@ -167,7 +167,7 @@ MODULE Module1
                     SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 20;
                 ELSE
                     SetGO ROB_MOTION_TRAJ_ID_PROFINET_OUT, aux_trajectory_index_var;
-                    MoveL TCP_Position{aux_trajectory_index_var + 1}, J_Speed{aux_trajectory_index_var + 1}, J_Zone{aux_trajectory_index_var + 1}, robTool\WObj:=wobj0;
+                    MoveL TCP_Position{aux_trajectory_index_var + 1}, Speed{aux_trajectory_index_var + 1}, Zone{aux_trajectory_index_var + 1}, robTool\WObj:=wobj0;
                     aux_trajectory_index_var := aux_trajectory_index_var + 1;
                 ENDIF
         ENDTEST
@@ -196,6 +196,5 @@ MODULE Module1
         
         SetDO ROB_ST_IN_POS_PROFINET_OUT, 1;
         SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 10;
-        
     ENDPROC
 ENDMODULE
