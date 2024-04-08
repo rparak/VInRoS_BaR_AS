@@ -4,6 +4,11 @@
 #include <AsDefault.h>
 #endif
 
+/*
+	Note:
+		Safety Password: SafetyI4C
+*/
+
 #define TRUE 1
 #define FALSE (!TRUE)
 #define NULL 0

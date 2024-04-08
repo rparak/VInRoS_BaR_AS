@@ -25,6 +25,7 @@ if(Global_VInRoS_Str.Rob_Id_1.Command.STOP == TRUE){
 
 void _INIT ProgramInit(void)
 {
+	// 
 	memset(&Global_VInRoS_Str.Rob_Id_1, 0, sizeof(Global_VInRoS_Str.Rob_Id_1));
 	
 	ABB_Library_Rob_1.Enable = TRUE;
