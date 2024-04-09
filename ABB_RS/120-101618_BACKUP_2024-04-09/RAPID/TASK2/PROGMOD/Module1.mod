@@ -120,9 +120,20 @@ MODULE Module1
     !       Motion Task : N/A        !
     PROC Main()
         TEST ROB_ST_UPT_ID_PROFINET_OUT
-            CASE 10:
+            CASE 10: ! WAIT STATE !
+                ! Description: !
+                !   State of waiting for command with index from the PC's (PLC) !
+                
+                ! Reset parameters
                 actual_traj_id := 0;
                 aux_traj_id    := 0;
+                
+                ! Initialize the internal value of the accuracy conversion factor
+                rm_str.internal.accuracy_factor            := 100;
+                rm_str.internal.accuracy_factor_QUATERNION := 100000000;
+                
+                ! Information that the robot side is already active
+                SetDO ROB_ST_ACTIVE_PROFINET_OUT, 1;
                 
                 IF PLC_CMD_UTP_PROFINET_IN = 1 AND PLC_CMD_UPT_ID_PROFINET_IN = 1 THEN
                     ! Update Trajectory Parameters (Joint)
@@ -135,7 +146,7 @@ MODULE Module1
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 100;
                 ENDIF
                 
-            CASE 40:
+            CASE 40: ! UPDATE JOINT PARAMETERS STATE - CHECK !
                 IF PLC_TRAJ_SIZE_PROFINET_IN = actual_traj_id THEN
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 10;
                 ELSE
@@ -143,19 +154,19 @@ MODULE Module1
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 41;
                 ENDIF
                
-            CASE 41:
+            CASE 41: ! UPDATE JOINT PARAMETERS STATE - INCREASE INDEX !
                 IF actual_traj_id = aux_traj_id THEN
                     actual_traj_id := aux_traj_id + 1;
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 42;
                 ENDIF
                 
-            CASE 42:
+            CASE 42: ! UPDATE JOINT PARAMETERS STATE - INFORM PLC !
                 IF PLC_ST_UPDATE_DONE_PROFINET_IN = 1 THEN
                     SetDO ROB_ST_UPDATE_DONE_PROFINET_OUT, 0;
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 43;
                 ENDIF
  
-            CASE 43:
+            CASE 43: ! UPDATE JOINT PARAMETERS STATE - EXECUTE !
                 ! Set parameters for the specified motion type !
                 ! SPEED / ZONE
                 Speed{actual_traj_id} := set_speeddata(SPEED_DATA_PROFINET_IN); Zone{actual_traj_id} := set_zonedata(ZONE_DATA_PROFINET_IN);
@@ -175,7 +186,7 @@ MODULE Module1
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 40;
                 ENDIF
                 
-            CASE 50:
+            CASE 50: ! UPDATE TCP PARAMETERS STATE - INCREASE INDEX !
                 IF PLC_TRAJ_SIZE_PROFINET_IN = actual_traj_id THEN
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 10;
                 ELSE
@@ -183,19 +194,19 @@ MODULE Module1
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 51;
                 ENDIF
                
-            CASE 51:
+            CASE 51: ! UPDATE TCP PARAMETERS STATE - CHECK !
                 IF actual_traj_id = aux_traj_id THEN
                     actual_traj_id := aux_traj_id + 1;
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 52;
                 ENDIF
                 
-            CASE 52:
+            CASE 52: ! UPDATE TCP PARAMETERS STATE - INFORM PLC !
                 IF PLC_ST_UPDATE_DONE_PROFINET_IN = 1 THEN
                     SetDO ROB_ST_UPDATE_DONE_PROFINET_OUT, 0;
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 53;
                 ENDIF
                 
-            CASE 53:
+            CASE 53: ! UPDATE TCP PARAMETERS STATE - EXECUTE !
                 ! Set parameters for the specified motion type !
                 ! SPEED / ZONE
                 Speed{actual_traj_id} := set_speeddata(SPEED_DATA_PROFINET_IN); Zone{actual_traj_id} := set_zonedata(ZONE_DATA_PROFINET_IN);
@@ -221,42 +232,42 @@ MODULE Module1
                     SetGO ROB_ST_UPT_ID_PROFINET_OUT, 50;
                 ENDIF
                 
-            CASE 100:! UPDATE TOOL PARAMETERS STATE !
+            CASE 100: ! UPDATE TOOL PARAMETERS STATE !
                 ! Description: !
-                !   Define the parameters of the robotic tool                                            !
+                !   Define the parameters of the robotic tool !
                 
                 ! The robot is holding the tool (TRUE / FALSE)
                 IF RTOOL_RH_PROFINET_IN = 1 THEN
                     robTool.robhold := TRUE;
+                
+                    ! Translation position
+                    robTool.tframe.trans := [sign(RTOOL_X_POS_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_X_POS_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
+                                             sign(RTOOL_Y_POS_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Y_POS_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
+                                             sign(RTOOL_Z_POS_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Z_POS_PROFINET_IN))) / rm_str.internal.accuracy_factor)];
+                    ! Rotation Position
+                    robTool.tframe.rot := [sign(RTOOL_QX_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QX_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
+                                           sign(RTOOL_QY_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QY_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION),
+                                           sign(RTOOL_QZ_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QZ_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION),      
+                                           sign(RTOOL_QW_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QW_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION)];
+                    ! Tool Mass
+                    robTool.tload.mass := GInput(RTOOL_MASS_PROFINET_IN) / rm_str.internal.accuracy_factor;
+                    
+                    ! Center of Gravity
+                    robTool.tload.cog := [sign(RTOOL_X_COG_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_X_COG_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
+                                          sign(RTOOL_Y_COG_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Y_COG_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
+                                          sign(RTOOL_Z_COG_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Z_COG_PROFINET_IN))) / rm_str.internal.accuracy_factor)];
+                    ! Inertial axes of tool load
+                    robTool.tload.aom := [sign(RTOOL_QX_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QX_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
+                                          sign(RTOOL_QY_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QY_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
+                                          sign(RTOOL_QZ_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QZ_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
+                                          sign(RTOOL_QW_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QW_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION)];
+                    ! Momets of inertia
+                    robTool.tload.ix := DnumToNum(GInputDnum(RTOOL_IX_MOI_PROFINET_IN)) / rm_str.internal.accuracy_factor;
+                    robTool.tload.iy := DnumToNum(GInputDnum(RTOOL_IY_MOI_PROFINET_IN)) / rm_str.internal.accuracy_factor;
+                    robTool.tload.iz := DnumToNum(GInputDnum(RTOOL_IZ_MOI_PROFINET_IN)) / rm_str.internal.accuracy_factor;
                 ELSE
-                    robTool.robhold := FALSE;
+                    robTool := [TRUE,[[0,0,0],[1,0,0,0]],[0.001,[0,0,0.001],[1,0,0,0],0,0,0]];
                 ENDIF
-                
-                ! Translation position
-                robTool.tframe.trans := [sign(RTOOL_X_POS_SING_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_X_POS_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
-                                         sign(RTOOL_Y_POS_SING_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Y_POS_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
-                                         sign(RTOOL_Z_POS_SING_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Z_POS_PROFINET_IN))) / rm_str.internal.accuracy_factor)];
-                ! Rotation Position
-                robTool.tframe.rot := [sign(RTOOL_QX_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QX_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
-                                       sign(RTOOL_QY_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QY_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION),
-                                       sign(RTOOL_QZ_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QZ_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION),      
-                                       sign(RTOOL_QW_ROT_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QW_ROT_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION)];
-                ! Tool Mass
-                robTool.tload.mass := GInput(RTOOL_MASS_PROFINET_IN) / rm_str.internal.accuracy_factor;
-                
-                ! Center of Gravity
-                robTool.tload.cog := [sign(RTOOL_X_COG_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_X_COG_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
-                                      sign(RTOOL_Y_COG_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Y_COG_PROFINET_IN))) / rm_str.internal.accuracy_factor), 
-                                      sign(RTOOL_Z_COG_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_Z_COG_PROFINET_IN))) / rm_str.internal.accuracy_factor)];
-                ! Inertial axes of tool load
-                robTool.tload.aom := [sign(RTOOL_QX_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QX_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
-                                      sign(RTOOL_QY_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QY_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
-                                      sign(RTOOL_QZ_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QZ_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION), 
-                                      sign(RTOOL_QW_AOM_SIGN_PROFINET_IN) * ((DnumToNum(GInputDnum(RTOOL_QW_AOM_PROFINET_IN))) / rm_str.internal.accuracy_factor_QUATERNION)];
-                ! Momets of inertia
-                robTool.tload.ix := DnumToNum(GInputDnum(RTOOL_IX_MOI_PROFINET_IN)) / rm_str.internal.accuracy_factor;
-                robTool.tload.iy := DnumToNum(GInputDnum(RTOOL_IY_MOI_PROFINET_IN)) / rm_str.internal.accuracy_factor;
-                robTool.tload.iz := DnumToNum(GInputDnum(RTOOL_IZ_MOI_PROFINET_IN)) / rm_str.internal.accuracy_factor;
                 
                 ! Characteristics of a robotic tool (end-effector / gripper)
                 !   Note: Upload (Current Data)
