@@ -85,5 +85,33 @@
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Mech_Id_1.Info.Active" attribute="value" />
 			<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList11" attribute="selectedIndex" />
 		</Binding>
-	</Bindings>
+	<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Info.Safety" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList20" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Info.Error" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList19" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Info.Home" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList18" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Info.Power" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList17" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Info.Active" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList16" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Command.Start" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="PushButton16" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Command.Stop" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="PushButton15" attribute="value" />
+</Binding>
+</Bindings>
 </BindingsSet>

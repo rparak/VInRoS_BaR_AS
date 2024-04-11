@@ -33,32 +33,32 @@ void _INIT ProgramInit(void)
 	Trajectory_Str.Targets.Joint[0].Q[0] = 130.0; Trajectory_Str.Targets.Joint[0].Q[1] = -10.0;
 	Trajectory_Str.Targets.Joint[0].Q[2] = 15.0; Trajectory_Str.Targets.Joint[0].Q[3] = -50.0;
 	Trajectory_Str.Targets.Joint[0].Q[4] = 60.0; Trajectory_Str.Targets.Joint[0].Q[5] = 60.0;
-	Trajectory_Str.Targets.Speed[0] = vSPEED_100;
-	Trajectory_Str.Targets.Zone[0]  = zZone_fine;
+	Trajectory_Str.Targets.Speed[0] = vSPEED_200;
+	Trajectory_Str.Targets.Zone[0]  = zZone_5;
 	// 
 	Trajectory_Str.Targets.Joint[1].Q[0] = 110.0; Trajectory_Str.Targets.Joint[1].Q[1] = 60.0;
 	Trajectory_Str.Targets.Joint[1].Q[2] = -20.0; Trajectory_Str.Targets.Joint[1].Q[3] = 0.0;
 	Trajectory_Str.Targets.Joint[1].Q[4] = -60.0; Trajectory_Str.Targets.Joint[1].Q[5] = -40.0;
-	Trajectory_Str.Targets.Speed[1] = vSPEED_100;
-	Trajectory_Str.Targets.Zone[1]  = zZone_fine;
+	Trajectory_Str.Targets.Speed[1] = vSPEED_200;
+	Trajectory_Str.Targets.Zone[1]  = zZone_5;
 	// 
 	Trajectory_Str.Targets.Joint[2].Q[0] = -30.0; Trajectory_Str.Targets.Joint[2].Q[1] = 20.0;
 	Trajectory_Str.Targets.Joint[2].Q[2] = 10.0; Trajectory_Str.Targets.Joint[2].Q[3] = 40.0;
 	Trajectory_Str.Targets.Joint[2].Q[4] = 90.0; Trajectory_Str.Targets.Joint[2].Q[5] = 0.0;
-	Trajectory_Str.Targets.Speed[2] = vSPEED_100;
-	Trajectory_Str.Targets.Zone[2]  = zZone_fine;
+	Trajectory_Str.Targets.Speed[2] = vSPEED_200;
+	Trajectory_Str.Targets.Zone[2]  = zZone_5;
 	// 
 	Trajectory_Str.Targets.Joint[3].Q[0] = 0.0; Trajectory_Str.Targets.Joint[3].Q[1] = -50.0;
 	Trajectory_Str.Targets.Joint[3].Q[2] = -20.0; Trajectory_Str.Targets.Joint[3].Q[3] = 90.0;
 	Trajectory_Str.Targets.Joint[3].Q[4] = -40.0; Trajectory_Str.Targets.Joint[3].Q[5] = 100.0;
-	Trajectory_Str.Targets.Speed[3] = vSPEED_100;
-	Trajectory_Str.Targets.Zone[3]  = zZone_fine;
+	Trajectory_Str.Targets.Speed[3] = vSPEED_200;
+	Trajectory_Str.Targets.Zone[3]  = zZone_5;
 	// 
 	Trajectory_Str.Targets.Joint[4].Q[0] = 65.0; Trajectory_Str.Targets.Joint[4].Q[1] = 10.0;
 	Trajectory_Str.Targets.Joint[4].Q[2] = 20.0; Trajectory_Str.Targets.Joint[4].Q[3] = 50.0;
 	Trajectory_Str.Targets.Joint[4].Q[4] = 55.0; Trajectory_Str.Targets.Joint[4].Q[5] = -20.0;
-	Trajectory_Str.Targets.Speed[4] = vSPEED_100;
-	Trajectory_Str.Targets.Zone[4]  = zZone_fine;
+	Trajectory_Str.Targets.Speed[4] = vSPEED_200;
+	Trajectory_Str.Targets.Zone[4]  = zZone_5;
 	
 	//
 	Trajectory_Str.Length = 5;
@@ -77,7 +77,12 @@ void _CYCLIC ProgramCyclic(void)
 			
 		case ROB_STATE_POWER:
 			{
-				if(Global_VInRoS_Str.Rob_Id_1.Info.Power == TRUE){
+				if(Global_VInRoS_Str.Rob_Id_1.Command.Power == TRUE){
+					ABB_Library_Rob_1.Power_ON = TRUE;
+					Global_VInRoS_Str.Rob_Id_1.Command.Power = FALSE;
+				}
+				
+				if(Global_VInRoS_Str.Rob_Id_1.Info.Power == TRUE && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
 					state_id = ROB_STATE_WAIT;
 				}
 			}
@@ -85,18 +90,24 @@ void _CYCLIC ProgramCyclic(void)
 			
 		case ROB_STATE_WAIT:
 			{
+				ABB_Library_Rob_1.Command.STOP  = FALSE;
+				ABB_Library_Rob_1.Command.START = FALSE;
+				
 				if(Global_VInRoS_Str.Rob_Id_1.Command.Home == TRUE){
-					state_id = ROB_STATE_HOME_UPD_PARAMETERS;
+					state_id = ROB_STATE_HOME_UPD_PARAMETERS_1;
 				}
 				
 				if(Global_VInRoS_Str.Rob_Id_1.Command.Start == TRUE){
-					state_id = ROB_STATE_UPD_PARAMETERS;
+					state_id = ROB_STATE_UPD_PARAMETERS_1;
 				}
 			}
 			break;
 			
-		case ROB_STATE_UPD_PARAMETERS:
+		case ROB_STATE_UPD_PARAMETERS_1:
 			{
+				Global_VInRoS_Str.Rob_Id_1.Info.Update_Done = FALSE;
+				Global_VInRoS_Str.Rob_Id_1.Command.Start = FALSE;
+				
 				memcpy(ABB_Library_Rob_1.Parameter.Joint, Trajectory_Str.Targets.Joint, 
 					(sizeof(Trajectory_Str.Targets.Joint) / sizeof(Trajectory_Str.Targets.Joint[0])) * sizeof(REAL));
 				int i;
@@ -107,19 +118,30 @@ void _CYCLIC ProgramCyclic(void)
 				
 				ABB_Library_Rob_1.Parameter.Trajectory_Size = Trajectory_Str.Length;
 				
-				Global_VInRoS_Str.Rob_Id_1.Command.Update = TRUE;
+				ABB_Library_Rob_1.Command.ID.Update = UPT_ID_TRAJECTORY_JOINT;
+				ABB_Library_Rob_1.Command.UPDATE    = TRUE;
 				
-				if(Global_VInRoS_Str.Rob_Id_1.Info.Update_Done == FALSE){
-					state_id = ROB_STATE_MOTION_1;
+				if(ABB_Library_Rob_1.Internal.Update.actual_state != UPT_STATE_WAIT){
+					state_id = ROB_STATE_UPD_PARAMETERS_2;
 				}
 			}
 			break;
 			
+		case ROB_STATE_UPD_PARAMETERS_2:
+			{
+				if(ABB_Library_Rob_1.Status.Robot.Update_Done == TRUE && ABB_Library_Rob_1.Internal.Update.actual_state == UPT_STATE_WAIT){
+					Global_VInRoS_Str.Rob_Id_1.Info.Update_Done = TRUE;
+					state_id = ROB_STATE_MOTION_1;
+				}
+			}
+			break;
+		
 		case ROB_STATE_MOTION_1:
 			{
-				Global_VInRoS_Str.Rob_Id_1.Command.Start = TRUE;
+				ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
+				ABB_Library_Rob_1.Command.START = TRUE;
 				
-				if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Update_Done == TRUE){
+				if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE){
 					state_id = ROB_STATE_MOTION_2;
 				}
 			}
@@ -127,10 +149,11 @@ void _CYCLIC ProgramCyclic(void)
 			
 		case ROB_STATE_MOTION_2:
 			{
+				ABB_Library_Rob_1.Command.START = FALSE;
+				
 				Trajectory_Str.Iteration = ABB_Library_Rob_1.Status.Robot.Trajectory_ID;
 				
 				if(Global_VInRoS_Str.Rob_Id_1.Command.Stop == TRUE){
-					ABB_Library_Rob_1.Command.STOP = TRUE;
 					state_id = ROB_STATE_STOP;
 				}else{
 					if(Global_VInRoS_Str.Rob_Id_1.Info.In_Position == TRUE){
@@ -140,21 +163,32 @@ void _CYCLIC ProgramCyclic(void)
 			}
 			break;
 			
-		case ROB_STATE_HOME_UPD_PARAMETERS:
+		case ROB_STATE_HOME_UPD_PARAMETERS_1:
 			{
+				Global_VInRoS_Str.Rob_Id_1.Info.Update_Done = FALSE;
 				Global_VInRoS_Str.Rob_Id_1.Command.Home = FALSE;
 				
 				ABB_Library_Rob_1.Parameter.Joint[0].Q[0] = 90.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[1] = 0.0;
 				ABB_Library_Rob_1.Parameter.Joint[0].Q[2] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[3] = 0.0;
 				ABB_Library_Rob_1.Parameter.Joint[0].Q[4] = 90.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[5] = 0.0;
-				ABB_Library_Rob_1.Parameter.Speed[0] = vSPEED_50;
+				ABB_Library_Rob_1.Parameter.Speed[0] = vSPEED_100;
 				ABB_Library_Rob_1.Parameter.Zone[0]  = zZone_fine;
 				
 				ABB_Library_Rob_1.Parameter.Trajectory_Size = 1;
 				
-				Global_VInRoS_Str.Rob_Id_1.Command.Update = TRUE;
+				ABB_Library_Rob_1.Command.ID.Update = UPT_ID_TRAJECTORY_JOINT;
+				ABB_Library_Rob_1.Command.UPDATE    = TRUE;
 				
-				if(Global_VInRoS_Str.Rob_Id_1.Info.Update_Done == FALSE){
+				if(ABB_Library_Rob_1.Internal.Update.actual_state != UPT_STATE_WAIT){
+					state_id = ROB_STATE_HOME_UPD_PARAMETERS_2;
+				}
+			}
+			break;
+			
+		case ROB_STATE_HOME_UPD_PARAMETERS_2:
+			{
+				if(ABB_Library_Rob_1.Status.Robot.Update_Done == TRUE && ABB_Library_Rob_1.Internal.Update.actual_state == UPT_STATE_WAIT){
+					Global_VInRoS_Str.Rob_Id_1.Info.Update_Done = TRUE;
 					state_id = ROB_STATE_HOME_MOTION_1;
 				}
 			}
@@ -162,10 +196,12 @@ void _CYCLIC ProgramCyclic(void)
 			
 		case ROB_STATE_HOME_MOTION_1:
 			{
-				Global_VInRoS_Str.Rob_Id_1.Command.Start = TRUE;
+				Global_VInRoS_Str.Rob_Id_1.Info.Home = FALSE;
 				
-				if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Update_Done == TRUE){
-					Global_VInRoS_Str.Rob_Id_1.Info.Home = FALSE;
+				ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
+				ABB_Library_Rob_1.Command.START = TRUE;
+				
+				if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE){
 					state_id = ROB_STATE_HOME_MOTION_2;
 				}
 			}
@@ -173,8 +209,9 @@ void _CYCLIC ProgramCyclic(void)
 			
 		case ROB_STATE_HOME_MOTION_2:
 			{
+				ABB_Library_Rob_1.Command.START = FALSE;
+				
 				if(Global_VInRoS_Str.Rob_Id_1.Command.Stop == TRUE){
-					ABB_Library_Rob_1.Command.STOP = TRUE;
 					state_id = ROB_STATE_STOP;
 				}else{
 					if(Global_VInRoS_Str.Rob_Id_1.Info.In_Position == TRUE){
@@ -193,6 +230,8 @@ void _CYCLIC ProgramCyclic(void)
 				
 				if(ABB_Library_Rob_1.Internal.actual_state == ABBt_STATE_WAIT && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
 					state_id = ROB_STATE_WAIT;
+				}else{
+					ABB_Library_Rob_1.Command.STOP = TRUE;
 				}
 			}
 			break;
@@ -208,30 +247,15 @@ void _CYCLIC ProgramCyclic(void)
 			break;
 	}
 	
-
-	if(Global_VInRoS_Str.Rob_Id_1.Command.Power == TRUE){
-		ABB_Library_Rob_1.Power_ON = TRUE;
-		Global_VInRoS_Str.Rob_Id_1.Command.Power = FALSE;
-	}
-	
-	if(Global_VInRoS_Str.Rob_Id_1.Command.Start == TRUE){
-		ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
-		ABB_Library_Rob_1.Command.START = TRUE;
-		Global_VInRoS_Str.Rob_Id_1.Command.Start = FALSE;
-	}
-	
-	if(Global_VInRoS_Str.Rob_Id_1.Command.Update == TRUE){
-		ABB_Library_Rob_1.Command.ID.Update = UPT_ID_TRAJECTORY_JOINT;
-		ABB_Library_Rob_1.Command.UPDATE = TRUE;
-		Global_VInRoS_Str.Rob_Id_1.Command.Update = FALSE;
-	}
-	
 	ABB_Library(&ABB_Library_Rob_1);
 	
 	Global_VInRoS_Str.Rob_Id_1.Info.Active = ABB_Library_Rob_1.Status.Robot.Active;
 	Global_VInRoS_Str.Rob_Id_1.Info.Power = ABB_Library_Rob_1.Status.Robot.System.MOTOR_ON;
-	Global_VInRoS_Str.Rob_Id_1.Info.Update_Done = ABB_Library_Rob_1.Status.Robot.Update_Done;
-	Global_VInRoS_Str.Rob_Id_1.Info.In_Position = ABB_Library_Rob_1.Status.Robot.In_Position;
+	if(ABB_Library_Rob_1.Status.Robot.In_Position == TRUE && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
+		Global_VInRoS_Str.Rob_Id_1.Info.In_Position = TRUE;
+	}else{
+		Global_VInRoS_Str.Rob_Id_1.Info.In_Position = FALSE;
+	}
 	Global_VInRoS_Str.Rob_Id_1.Info.Error  = FALSE;
 	Global_VInRoS_Str.Rob_Id_1.Info.Safety = FALSE;
 	

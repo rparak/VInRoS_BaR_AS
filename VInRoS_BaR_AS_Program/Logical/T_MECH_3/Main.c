@@ -28,11 +28,11 @@ void _INIT ProgramInit(void)
 	Trajectory_Str.Targets.Position[3] = 600.0;
 	Trajectory_Str.Targets.Position[4] = 300.0;
 	
-	Trajectory_Str.Targets.Velocity[0] = 300.0;
+	Trajectory_Str.Targets.Velocity[0] = 200.0;
 	Trajectory_Str.Targets.Velocity[1] = 200.0;
-	Trajectory_Str.Targets.Velocity[2] = 300.0;
+	Trajectory_Str.Targets.Velocity[2] = 200.0;
 	Trajectory_Str.Targets.Velocity[3] = 200.0;
-	Trajectory_Str.Targets.Velocity[4] = 300.0;
+	Trajectory_Str.Targets.Velocity[4] = 200.0;
 	
 	Trajectory_Str.Length = 5;
 	
@@ -125,8 +125,8 @@ void _CYCLIC ProgramCyclic(void)
 		case MECH_STATE_HOME_UPD_PARAMETERS:
 			{
 				Global_VInRoS_Str.Mech_Id_3.Parameters.Position = 400.0;
-				Global_VInRoS_Str.Mech_Id_3.Parameters.Velocity = 250.0;
-				Global_VInRoS_Str.Mech_Id_3.Parameters.Acc_Dec  = 2500.0;
+				Global_VInRoS_Str.Mech_Id_3.Parameters.Velocity = 100.0;
+				Global_VInRoS_Str.Mech_Id_3.Parameters.Acc_Dec  = 1000.0;
 				
 				Global_VInRoS_Str.Mech_Id_3.Command.Update = TRUE;
 				if(Global_VInRoS_Str.Mech_Id_3.Info.Update_Done == TRUE){

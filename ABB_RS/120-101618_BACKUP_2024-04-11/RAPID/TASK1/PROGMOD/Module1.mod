@@ -114,7 +114,7 @@ MODULE Module1
                 !   Initialization state to check everything on the PC's (PLC) side and activation to control !
                 
                 IF PLC_ST_ACTIVE_PROFINET_IN = 1 THEN
-                    ! Wait State {rm_str.status.plc.ModuleOK = TRUE -> Everything on the PC's (PLC) side is OK}
+                    ! Wait State. Everything on the PC's (PLC) side is OK
                     SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 20;
                 ENDIF
                 

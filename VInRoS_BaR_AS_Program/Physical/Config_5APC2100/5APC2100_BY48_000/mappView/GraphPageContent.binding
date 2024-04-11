@@ -25,5 +25,53 @@
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Mech_Id_3.Position" attribute="value" />
 			<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="OnlineChartGraph11" attribute="value" />
 		</Binding>
-	</Bindings>
+	<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[4]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="NumericOutput24" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[3]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="NumericOutput21" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[3]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="OnlineChartGraph22" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[2]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="NumericOutput22" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[2]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="OnlineChartGraph21" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[1]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="NumericOutput19" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[1]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="OnlineChartGraph20" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[0]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="NumericOutput18" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[0]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="OnlineChartGraph19" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[4]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="OnlineChartGraph23" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[5]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="NumericOutput20" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Position.Q[5]" attribute="value" />
+<Target xsi:type="brease" contentRefId="GraphPageContent" widgetRefId="OnlineChartGraph24" attribute="value" />
+</Binding>
+</Bindings>
 </BindingsSet>

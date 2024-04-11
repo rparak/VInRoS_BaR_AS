@@ -70,7 +70,6 @@ TYPE
 		Stop : BOOL;
 		Reset_Error : BOOL;
 		Reset_Safety : BOOL;
-		Update : BOOL;
 	END_STRUCT;
 	Robot_Info_Str : 	STRUCT 
 		Active : BOOL;

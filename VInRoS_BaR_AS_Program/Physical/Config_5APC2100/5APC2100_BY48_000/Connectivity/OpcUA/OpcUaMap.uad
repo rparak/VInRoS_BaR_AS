@@ -108,6 +108,29 @@
               </Variable>
             </Variable>
           </Variable>
+          <Variable Name="Rob_Id_1">
+            <Variable Name="Position">
+              <Variable Name="Q" RecursiveEnable="2" />
+            </Variable>
+            <Variable Name="Info">
+              <Variable Name="Move_Active" />
+              <Variable Name="Active" />
+              <Variable Name="Power" />
+              <Variable Name="Home" />
+              <Variable Name="Safety" />
+              <Variable Name="Error" />
+              <Variable Name="In_Position" />
+              <Variable Name="Update_Done" />
+            </Variable>
+            <Variable Name="Command">
+              <Variable Name="Power" />
+              <Variable Name="Home" />
+              <Variable Name="Start" />
+              <Variable Name="Stop" />
+              <Variable Name="Reset_Error" />
+              <Variable Name="Reset_Safety" />
+            </Variable>
+          </Variable>
         </Variable>
         <Variable Name="ROB_1_Sim_PROFINET_Mapping_IN" />
         <Variable Name="ROB_1_Sim_PROFINET_Mapping_OUT" />
