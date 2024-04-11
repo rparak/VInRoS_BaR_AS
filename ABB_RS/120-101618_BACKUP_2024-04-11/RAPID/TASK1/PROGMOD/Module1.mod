@@ -113,6 +113,8 @@ MODULE Module1
                 ! Description: !
                 !   Initialization state to check everything on the PC's (PLC) side and activation to control !
                 
+                SetDO ROB_ST_IN_POS_PROFINET_OUT, 1;
+                
                 IF PLC_ST_ACTIVE_PROFINET_IN = 1 THEN
                     ! Wait State. Everything on the PC's (PLC) side is OK
                     SetGO ROB_ST_MAIN_ID_PROFINET_OUT, 20;

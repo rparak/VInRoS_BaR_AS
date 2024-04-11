@@ -22,19 +22,23 @@ void _INIT ProgramInit(void)
 	MpAxisBasic_0.MpLink     = &gAxis_Mech_03;
 	MpAxisBasic_0.Parameters = &AxisParameters;
 	
-	Trajectory_Str.Targets.Position[0] = 700.0;
-	Trajectory_Str.Targets.Position[1] = 100.0;
-	Trajectory_Str.Targets.Position[2] = 400.0;
+	Trajectory_Str.Targets.Position[0] = 400.0;
+	Trajectory_Str.Targets.Position[1] = 700.0;
+	Trajectory_Str.Targets.Position[2] = 300.0;
 	Trajectory_Str.Targets.Position[3] = 600.0;
-	Trajectory_Str.Targets.Position[4] = 300.0;
+	Trajectory_Str.Targets.Position[4] = 200.0;
+	Trajectory_Str.Targets.Position[5] = 750.0;
+	Trajectory_Str.Targets.Position[6] = 400.0;
 	
 	Trajectory_Str.Targets.Velocity[0] = 200.0;
-	Trajectory_Str.Targets.Velocity[1] = 200.0;
-	Trajectory_Str.Targets.Velocity[2] = 200.0;
-	Trajectory_Str.Targets.Velocity[3] = 200.0;
+	Trajectory_Str.Targets.Velocity[1] = 300.0;
+	Trajectory_Str.Targets.Velocity[2] = 280.0;
+	Trajectory_Str.Targets.Velocity[3] = 130.0;
 	Trajectory_Str.Targets.Velocity[4] = 200.0;
+	Trajectory_Str.Targets.Velocity[5] = 130.0;
+	Trajectory_Str.Targets.Velocity[6] = 280.0;
 	
-	Trajectory_Str.Length = 5;
+	Trajectory_Str.Length = 7;
 	
 	state_id = MECH_STATE_ACTIVE;
 }
@@ -74,7 +78,7 @@ void _CYCLIC ProgramCyclic(void)
 					state_id = MECH_STATE_HOME_UPD_PARAMETERS;
 				}
 				
-				if(Global_VInRoS_Str.Mech_Id_3.Command.Start == TRUE){
+				if(Global_VInRoS_Str.Mech_Id_3.Command.Start == TRUE || Global_VInRoS_Str.Rob_Id_1.Command.Start == TRUE){
 					Trajectory_Str.Iteration = FALSE;
 					state_id = MECH_STATE_UPD_PARAMETERS;
 				}
@@ -83,6 +87,8 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_UPD_PARAMETERS:
 			{
+				Global_VInRoS_Str.Mech_Id_3.Command.Start = FALSE;
+				
 				Global_VInRoS_Str.Mech_Id_3.Parameters.Position = Trajectory_Str.Targets.Position[Trajectory_Str.Iteration];
 				Global_VInRoS_Str.Mech_Id_3.Parameters.Velocity = Trajectory_Str.Targets.Velocity[Trajectory_Str.Iteration];
 				Global_VInRoS_Str.Mech_Id_3.Parameters.Acc_Dec  = Trajectory_Str.Targets.Velocity[Trajectory_Str.Iteration]*10;
@@ -96,16 +102,18 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_MOTION_1:
 			{
-				Global_VInRoS_Str.Mech_Id_3.Command.Move = TRUE;
-				if(Global_VInRoS_Str.Mech_Id_3.Info.Move_Active == TRUE){
-					state_id = MECH_STATE_MOTION_2;
+				if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE){
+					Global_VInRoS_Str.Mech_Id_3.Command.Move = TRUE;
+					if(Global_VInRoS_Str.Mech_Id_3.Info.Move_Active == TRUE){
+						state_id = MECH_STATE_MOTION_2;
+					}
 				}
 			}
 			break;
 		
 		case MECH_STATE_MOTION_2:
 			{
-				if(Global_VInRoS_Str.Mech_Id_3.Command.Stop == TRUE){
+				if(Global_VInRoS_Str.Mech_Id_3.Command.Stop == TRUE  || Global_VInRoS_Str.Rob_Id_1.Command.Stop == TRUE){
 					state_id = MECH_STATE_STOP;
 				}else{
 					if(Global_VInRoS_Str.Mech_Id_3.Info.In_Position == TRUE){

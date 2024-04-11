@@ -29,8 +29,6 @@
       <Parameter ID="AssignedOperatingSystem" Value="GPOS" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="BR_AS_I4C_Program_Config_5APC2100" />
-    <Parameter ID="RebootReset" Value="1" />
-    <Parameter ID="RebootPowerfail" Value="2" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="5ACCIF01.FPSC-001.IF1" />
     <Parameter ID="TaskClassIdleTime" Value="2000" />

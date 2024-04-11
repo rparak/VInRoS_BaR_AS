@@ -43,7 +43,7 @@ void _CYCLIC ProgramCyclic(void)
 	switch(state_id){
 		case MECH_STATE_ACTIVE:
 			{
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Active == 1){
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Active == TRUE){
 					state_id = MECH_STATE_POWER;
 				}
 			}
@@ -51,7 +51,7 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_POWER:
 			{
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Power == 1){
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Power == TRUE){
 					state_id = MECH_STATE_HOME;
 				}
 			}
@@ -59,9 +59,9 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_HOME:
 			{
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Home == 1){
-					MpAxisBasic_0.Home = 0;
-					Global_VInRoS_Str.Mech_Id_1.Command.Home = 0;
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Home == TRUE){
+					MpAxisBasic_0.Home = FALSE;
+					Global_VInRoS_Str.Mech_Id_1.Command.Home = FALSE;
 					state_id = MECH_STATE_WAIT;
 				}
 			}
@@ -69,11 +69,11 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_WAIT:
 			{
-				if(Global_VInRoS_Str.Mech_Id_1.Command.Home == 1){
+				if(Global_VInRoS_Str.Mech_Id_1.Command.Home == TRUE){
 					state_id = MECH_STATE_HOME_UPD_PARAMETERS;
 				}
 				
-				if(Global_VInRoS_Str.Mech_Id_1.Command.Start == 1){
+				if(Global_VInRoS_Str.Mech_Id_1.Command.Start == TRUE){
 					Trajectory_Str.Iteration = 0;
 					state_id = MECH_STATE_UPD_PARAMETERS;
 				}
@@ -86,8 +86,8 @@ void _CYCLIC ProgramCyclic(void)
 				Global_VInRoS_Str.Mech_Id_1.Parameters.Velocity = Trajectory_Str.Targets.Velocity[Trajectory_Str.Iteration];
 				Global_VInRoS_Str.Mech_Id_1.Parameters.Acc_Dec  = Trajectory_Str.Targets.Velocity[Trajectory_Str.Iteration]*10;
 				
-				Global_VInRoS_Str.Mech_Id_1.Command.Update = 1;
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Update_Done == 1){
+				Global_VInRoS_Str.Mech_Id_1.Command.Update = TRUE;
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Update_Done == TRUE){
 					state_id = MECH_STATE_MOTION_1;
 				}
 			}
@@ -95,8 +95,8 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_MOTION_1:
 			{
-				Global_VInRoS_Str.Mech_Id_1.Command.Move = 1;
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Move_Active == 1){
+				Global_VInRoS_Str.Mech_Id_1.Command.Move = TRUE;
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Move_Active == TRUE){
 					state_id = MECH_STATE_MOTION_2;
 				}
 			}
@@ -104,10 +104,10 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_MOTION_2:
 			{
-				if(Global_VInRoS_Str.Mech_Id_1.Command.Stop == 1){
+				if(Global_VInRoS_Str.Mech_Id_1.Command.Stop == TRUE){
 					state_id = MECH_STATE_STOP;
 				}else{
-					if(Global_VInRoS_Str.Mech_Id_1.Info.In_Position == 1){
+					if(Global_VInRoS_Str.Mech_Id_1.Info.In_Position == TRUE){
 						Global_VInRoS_Str.Mech_Id_1.Command.Move = 0;
 					
 						if(Trajectory_Str.Iteration == Trajectory_Str.Length - 1){
@@ -127,8 +127,8 @@ void _CYCLIC ProgramCyclic(void)
 				Global_VInRoS_Str.Mech_Id_1.Parameters.Velocity = 500.0;
 				Global_VInRoS_Str.Mech_Id_1.Parameters.Acc_Dec  = 5000.0;
 				
-				Global_VInRoS_Str.Mech_Id_1.Command.Update = 1;
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Update_Done == 1){
+				Global_VInRoS_Str.Mech_Id_1.Command.Update = TRUE;
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Update_Done == TRUE){
 					state_id = MECH_STATE_HOME_MOTION_1;
 				}
 			}
@@ -136,8 +136,8 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_HOME_MOTION_1:
 			{		
-				Global_VInRoS_Str.Mech_Id_1.Command.Move = 1;
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Move_Active == 1){
+				Global_VInRoS_Str.Mech_Id_1.Command.Move = TRUE;
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Move_Active == TRUE){
 					state_id = MECH_STATE_HOME_MOTION_2;
 				}	
 			}
@@ -145,9 +145,9 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_HOME_MOTION_2:
 			{
-				if(Global_VInRoS_Str.Mech_Id_1.Info.In_Position == 1){
-					Global_VInRoS_Str.Mech_Id_1.Command.Move = 0;
-					Global_VInRoS_Str.Mech_Id_1.Command.Home = 0;
+				if(Global_VInRoS_Str.Mech_Id_1.Info.In_Position == TRUE){
+					Global_VInRoS_Str.Mech_Id_1.Command.Move = FALSE;
+					Global_VInRoS_Str.Mech_Id_1.Command.Home = FALSE;
 					state_id = MECH_STATE_WAIT;
 				}
 			}
@@ -156,11 +156,11 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_STOP:
 			{
-				Global_VInRoS_Str.Mech_Id_1.Command.Stop  = 0;
-				Global_VInRoS_Str.Mech_Id_1.Command.Start = 0;
+				Global_VInRoS_Str.Mech_Id_1.Command.Stop  = FALSE;
+				Global_VInRoS_Str.Mech_Id_1.Command.Start = FALSE;
 				
-				Global_VInRoS_Str.Mech_Id_1.Command.Move = 0;
-				if(Global_VInRoS_Str.Mech_Id_1.Info.Move_Active == 0){
+				Global_VInRoS_Str.Mech_Id_1.Command.Move = FALSE;
+				if(Global_VInRoS_Str.Mech_Id_1.Info.Move_Active == FALSE){
 					state_id = MECH_STATE_WAIT;
 				}
 			}
