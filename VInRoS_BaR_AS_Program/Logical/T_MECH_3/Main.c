@@ -22,23 +22,21 @@ void _INIT ProgramInit(void)
 	MpAxisBasic_0.MpLink     = &gAxis_Mech_03;
 	MpAxisBasic_0.Parameters = &AxisParameters;
 	
-	Trajectory_Str.Targets.Position[0] = 400.0;
-	Trajectory_Str.Targets.Position[1] = 700.0;
-	Trajectory_Str.Targets.Position[2] = 300.0;
-	Trajectory_Str.Targets.Position[3] = 600.0;
-	Trajectory_Str.Targets.Position[4] = 200.0;
-	Trajectory_Str.Targets.Position[5] = 750.0;
-	Trajectory_Str.Targets.Position[6] = 400.0;
+	Trajectory_Str.Targets.Position[0] = 700.0;
+	Trajectory_Str.Targets.Position[1] = 300.0;
+	Trajectory_Str.Targets.Position[2] = 600.0;
+	Trajectory_Str.Targets.Position[3] = 200.0;
+	Trajectory_Str.Targets.Position[4] = 750.0;
+	Trajectory_Str.Targets.Position[5] = 400.0;
 	
-	Trajectory_Str.Targets.Velocity[0] = 200.0;
-	Trajectory_Str.Targets.Velocity[1] = 300.0;
-	Trajectory_Str.Targets.Velocity[2] = 280.0;
-	Trajectory_Str.Targets.Velocity[3] = 130.0;
-	Trajectory_Str.Targets.Velocity[4] = 200.0;
-	Trajectory_Str.Targets.Velocity[5] = 130.0;
-	Trajectory_Str.Targets.Velocity[6] = 280.0;
+	Trajectory_Str.Targets.Velocity[0] = 300.0;
+	Trajectory_Str.Targets.Velocity[1] = 280.0;
+	Trajectory_Str.Targets.Velocity[2] = 130.0;
+	Trajectory_Str.Targets.Velocity[3] = 200.0;
+	Trajectory_Str.Targets.Velocity[4] = 130.0;
+	Trajectory_Str.Targets.Velocity[5] = 290.0;
 	
-	Trajectory_Str.Length = 7;
+	Trajectory_Str.Length = 6;
 	
 	state_id = MECH_STATE_ACTIVE;
 }
@@ -87,8 +85,6 @@ void _CYCLIC ProgramCyclic(void)
 		
 		case MECH_STATE_UPD_PARAMETERS:
 			{
-				Global_VInRoS_Str.Mech_Id_3.Command.Start = FALSE;
-				
 				Global_VInRoS_Str.Mech_Id_3.Parameters.Position = Trajectory_Str.Targets.Position[Trajectory_Str.Iteration];
 				Global_VInRoS_Str.Mech_Id_3.Parameters.Velocity = Trajectory_Str.Targets.Velocity[Trajectory_Str.Iteration];
 				Global_VInRoS_Str.Mech_Id_3.Parameters.Acc_Dec  = Trajectory_Str.Targets.Velocity[Trajectory_Str.Iteration]*10;

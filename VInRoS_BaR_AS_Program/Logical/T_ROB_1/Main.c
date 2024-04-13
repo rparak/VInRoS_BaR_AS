@@ -30,52 +30,45 @@ void _INIT ProgramInit(void)
 	ABB_Library_Rob_1.Rob_Tool.tLoad.moment_of_inertia[2] = 0.0;
 	
 	// 
-	Trajectory_Str.Targets.Joint[0].Q[0] = 90.0; Trajectory_Str.Targets.Joint[0].Q[1] = 0.0;
-	Trajectory_Str.Targets.Joint[0].Q[2] = 0.0; Trajectory_Str.Targets.Joint[0].Q[3] = 0.0;
-	Trajectory_Str.Targets.Joint[0].Q[4] = 90.0; Trajectory_Str.Targets.Joint[0].Q[5] = 0.0;
-	Trajectory_Str.Targets.Speed[0] = vSPEED_200;
+	Trajectory_Str.Targets.Joint[0].Q[0] = 130.0; Trajectory_Str.Targets.Joint[0].Q[1] = -10.0;
+	Trajectory_Str.Targets.Joint[0].Q[2] = 15.0; Trajectory_Str.Targets.Joint[0].Q[3] = -50.0;
+	Trajectory_Str.Targets.Joint[0].Q[4] = 60.0; Trajectory_Str.Targets.Joint[0].Q[5] = 60.0;
+	Trajectory_Str.Targets.Speed[0] = vSPEED_150;
 	Trajectory_Str.Targets.Zone[0]  = zZone_fine;
-	
 	// 
-	Trajectory_Str.Targets.Joint[1].Q[0] = 130.0; Trajectory_Str.Targets.Joint[1].Q[1] = -10.0;
-	Trajectory_Str.Targets.Joint[1].Q[2] = 15.0; Trajectory_Str.Targets.Joint[1].Q[3] = -50.0;
-	Trajectory_Str.Targets.Joint[1].Q[4] = 60.0; Trajectory_Str.Targets.Joint[1].Q[5] = 60.0;
-	Trajectory_Str.Targets.Speed[1] = vSPEED_150;
+	Trajectory_Str.Targets.Joint[1].Q[0] = 110.0; Trajectory_Str.Targets.Joint[1].Q[1] = 60.0;
+	Trajectory_Str.Targets.Joint[1].Q[2] = -20.0; Trajectory_Str.Targets.Joint[1].Q[3] = 0.0;
+	Trajectory_Str.Targets.Joint[1].Q[4] = -60.0; Trajectory_Str.Targets.Joint[1].Q[5] = -40.0;
+	Trajectory_Str.Targets.Speed[1] = vSPEED_300;
 	Trajectory_Str.Targets.Zone[1]  = zZone_fine;
 	// 
-	Trajectory_Str.Targets.Joint[2].Q[0] = 110.0; Trajectory_Str.Targets.Joint[2].Q[1] = 60.0;
-	Trajectory_Str.Targets.Joint[2].Q[2] = -20.0; Trajectory_Str.Targets.Joint[2].Q[3] = 0.0;
-	Trajectory_Str.Targets.Joint[2].Q[4] = -60.0; Trajectory_Str.Targets.Joint[2].Q[5] = -40.0;
-	Trajectory_Str.Targets.Speed[2] = vSPEED_300;
+	Trajectory_Str.Targets.Joint[2].Q[0] = -30.0; Trajectory_Str.Targets.Joint[2].Q[1] = 20.0;
+	Trajectory_Str.Targets.Joint[2].Q[2] = 10.0; Trajectory_Str.Targets.Joint[2].Q[3] = 40.0;
+	Trajectory_Str.Targets.Joint[2].Q[4] = 90.0; Trajectory_Str.Targets.Joint[2].Q[5] = 0.0;
+	Trajectory_Str.Targets.Speed[2] = vSPEED_500;
 	Trajectory_Str.Targets.Zone[2]  = zZone_fine;
 	// 
-	Trajectory_Str.Targets.Joint[3].Q[0] = -30.0; Trajectory_Str.Targets.Joint[3].Q[1] = 20.0;
-	Trajectory_Str.Targets.Joint[3].Q[2] = 10.0; Trajectory_Str.Targets.Joint[3].Q[3] = 40.0;
-	Trajectory_Str.Targets.Joint[3].Q[4] = 90.0; Trajectory_Str.Targets.Joint[3].Q[5] = 0.0;
-	Trajectory_Str.Targets.Speed[3] = vSPEED_500;
+	Trajectory_Str.Targets.Joint[3].Q[0] = 0.0; Trajectory_Str.Targets.Joint[3].Q[1] = -50.0;
+	Trajectory_Str.Targets.Joint[3].Q[2] = -20.0; Trajectory_Str.Targets.Joint[3].Q[3] = 90.0;
+	Trajectory_Str.Targets.Joint[3].Q[4] = -40.0; Trajectory_Str.Targets.Joint[3].Q[5] = 100.0;
+	Trajectory_Str.Targets.Speed[3] = vSPEED_400;
 	Trajectory_Str.Targets.Zone[3]  = zZone_fine;
 	// 
-	Trajectory_Str.Targets.Joint[4].Q[0] = 0.0; Trajectory_Str.Targets.Joint[4].Q[1] = -50.0;
-	Trajectory_Str.Targets.Joint[4].Q[2] = -20.0; Trajectory_Str.Targets.Joint[4].Q[3] = 90.0;
-	Trajectory_Str.Targets.Joint[4].Q[4] = -40.0; Trajectory_Str.Targets.Joint[4].Q[5] = 100.0;
-	Trajectory_Str.Targets.Speed[4] = vSPEED_400;
+	Trajectory_Str.Targets.Joint[4].Q[0] = 65.0; Trajectory_Str.Targets.Joint[4].Q[1] = 10.0;
+	Trajectory_Str.Targets.Joint[4].Q[2] = 20.0; Trajectory_Str.Targets.Joint[4].Q[3] = 50.0;
+	Trajectory_Str.Targets.Joint[4].Q[4] = 55.0; Trajectory_Str.Targets.Joint[4].Q[5] = -20.0;
+	Trajectory_Str.Targets.Speed[4] = vSPEED_200;
 	Trajectory_Str.Targets.Zone[4]  = zZone_fine;
+	
 	// 
-	Trajectory_Str.Targets.Joint[5].Q[0] = 65.0; Trajectory_Str.Targets.Joint[5].Q[1] = 10.0;
-	Trajectory_Str.Targets.Joint[5].Q[2] = 20.0; Trajectory_Str.Targets.Joint[5].Q[3] = 50.0;
-	Trajectory_Str.Targets.Joint[5].Q[4] = 55.0; Trajectory_Str.Targets.Joint[5].Q[5] = -20.0;
-	Trajectory_Str.Targets.Speed[5] = vSPEED_200;
+	Trajectory_Str.Targets.Joint[5].Q[0] = 90.0; Trajectory_Str.Targets.Joint[5].Q[1] = 0.0;
+	Trajectory_Str.Targets.Joint[5].Q[2] = 0.0; Trajectory_Str.Targets.Joint[5].Q[3] = 0.0;
+	Trajectory_Str.Targets.Joint[5].Q[4] = 90.0; Trajectory_Str.Targets.Joint[5].Q[5] = 0.0;
+	Trajectory_Str.Targets.Speed[5] = vSPEED_150;
 	Trajectory_Str.Targets.Zone[5]  = zZone_fine;
 	
-	// 
-	Trajectory_Str.Targets.Joint[6].Q[0] = 90.0; Trajectory_Str.Targets.Joint[6].Q[1] = 0.0;
-	Trajectory_Str.Targets.Joint[6].Q[2] = 0.0; Trajectory_Str.Targets.Joint[6].Q[3] = 0.0;
-	Trajectory_Str.Targets.Joint[6].Q[4] = 90.0; Trajectory_Str.Targets.Joint[6].Q[5] = 0.0;
-	Trajectory_Str.Targets.Speed[6] = vSPEED_150;
-	Trajectory_Str.Targets.Zone[6]  = zZone_fine;
-	
 	//
-	Trajectory_Str.Length = 7;
+	Trajectory_Str.Length = 6;
 }
 
 void _CYCLIC ProgramCyclic(void)
@@ -120,8 +113,7 @@ void _CYCLIC ProgramCyclic(void)
 		case ROB_STATE_UPD_PARAMETERS_1:
 			{
 				Global_VInRoS_Str.Rob_Id_1.Info.Update_Done = FALSE;
-				Global_VInRoS_Str.Rob_Id_1.Command.Start = FALSE;
-				
+
 				memcpy(ABB_Library_Rob_1.Parameter.Joint, Trajectory_Str.Targets.Joint, 
 					(sizeof(Trajectory_Str.Targets.Joint) / sizeof(Trajectory_Str.Targets.Joint[0])) * sizeof(REAL));
 				int i;
@@ -286,15 +278,6 @@ void _CYCLIC ProgramCyclic(void)
 	
 	if(Global_VInRoS_Str.Rob_Id_1.Info.Error == TRUE){
 		state_id = ROB_STATE_ERROR;	
-	}
-	
-	if(SAFETY_ACTIVE == FALSE || SAFETY_STATUS == FALSE){
-		Global_VInRoS_Str.Rob_Id_1.Info.Safety = TRUE;
-	}else{
-		Global_VInRoS_Str.Rob_Id_1.Info.Safety = FALSE;
-	}
-	if(SAFETY_ACTIVE == TRUE || SAFETY_STATUS == FALSE){
-		RESET_SAFETY = Global_VInRoS_Str.Rob_Id_1.Command.Reset_Safety;
 	}
 }
 

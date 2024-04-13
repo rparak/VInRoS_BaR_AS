@@ -214,18 +214,11 @@ void _CYCLIC ProgramCyclic(void)
 	}else{
 		Global_VInRoS_Str.Mech_Id_2.Info.In_Position = FALSE;
 	}
+	Global_VInRoS_Str.Mech_Id_2.Info.Safety = FALSE;
+	
 	Global_VInRoS_Str.Mech_Id_2.Position = MpAxisBasic_0.Position;
 	
 	if(Global_VInRoS_Str.Mech_Id_2.Info.Error == TRUE){
 		state_id = MECH_STATE_ERROR;	
-	}
-	
-	if(SAFETY_ACTIVE == FALSE || SAFETY_STATUS == FALSE){
-		Global_VInRoS_Str.Mech_Id_2.Info.Safety = TRUE;
-	}else{
-		Global_VInRoS_Str.Mech_Id_2.Info.Safety = FALSE;
-	}
-	if(SAFETY_ACTIVE == TRUE || SAFETY_STATUS == FALSE){
-		RESET_SAFETY = Global_VInRoS_Str.Mech_Id_2.Command.Reset_Safety;
 	}
 }
