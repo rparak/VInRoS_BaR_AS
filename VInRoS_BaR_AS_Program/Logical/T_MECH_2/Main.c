@@ -24,13 +24,13 @@ void _INIT ProgramInit(void)
 	Trajectory_Str.Targets.Position[0] = 100.0;
 	Trajectory_Str.Targets.Position[1] = 1100.0;
 	Trajectory_Str.Targets.Position[2] = 700.0;
-	Trajectory_Str.Targets.Position[3] = 300.0;
+	Trajectory_Str.Targets.Position[3] = 200.0;
 	Trajectory_Str.Targets.Position[4] = 1200.0;
 	
 	Trajectory_Str.Targets.Velocity[0] = 500.0;
 	Trajectory_Str.Targets.Velocity[1] = 1000.0;
 	Trajectory_Str.Targets.Velocity[2] = 200.0;
-	Trajectory_Str.Targets.Velocity[3] = 1500.0;
+	Trajectory_Str.Targets.Velocity[3] = 500.0;
 	Trajectory_Str.Targets.Velocity[4] = 400.0;
 	
 	Trajectory_Str.Length = 5;
