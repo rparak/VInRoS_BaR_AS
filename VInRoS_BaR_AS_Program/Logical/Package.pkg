@@ -10,6 +10,8 @@
     <Object Type="Program" Language="ANSIC">T_MECH_3</Object>
     <Object Type="Program" Language="ANSIC">T_EX600</Object>
     <Object Type="Program" Language="ANSIC">T_ROB_1</Object>
+    <Object Type="Program" Language="ANSIC">T_ROB_2_L</Object>
+    <Object Type="Program" Language="ANSIC">T_ROB_2_R</Object>
     <Object Type="Package">mappView</Object>
   </Objects>
 </Package>

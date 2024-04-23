@@ -10,7 +10,6 @@
 #include "Converter.h"
 
 void Sim_PROFINET_Mapping_IO_Data(struct ABB_Library* inst, USINT offset);
-void Set_Trajectory_Parameters(struct Traj_Str* inst);
 
 typedef enum Robot_State_ID_enum{
 	ROB_STATE_ACTIVE,

@@ -8,6 +8,8 @@
   </TaskClass>
   <TaskClass Name="Cyclic#2">
     <Task Name="T_ROB_1" Source="T_ROB_1.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
+    <Task Name="T_ROB_2_L" Source="T_ROB_2_L.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
+    <Task Name="T_ROB_2_R" Source="T_ROB_2_R.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#3">
     <Task Name="T_EX600" Source="T_EX600.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />

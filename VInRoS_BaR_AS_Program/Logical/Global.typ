@@ -5,8 +5,8 @@ TYPE
 		Mech_Id_2 : Mechanism_Str;
 		Mech_Id_3 : Mechanism_Str;
 		Rob_Id_1 : Robot_Str;
-		Rob_Id_2_L : USINT;
-		Rob_Id_2_R : USINT;
+		Rob_Id_2_L : Robot_Str;
+		Rob_Id_2_R : Robot_Str;
 		EX_600 : EX_600_Str;
 	END_STRUCT;
 	Mechanism_Str : 	STRUCT 
