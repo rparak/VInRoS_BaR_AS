@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <osdd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ethernet-powerlink.org/osdd osdd.xsd" xmlns:xlink="http://www.w3.org/1999/xlink" Version="1.6" xmlns="http://www.ethernet-powerlink.org/osdd">
   <Topology SafetyDomain="1">
-    <GeneratorDescription Name="AutomationStudio" Version="4.12.4.107" LanguageID="1">
+    <GeneratorDescription Name="AutomationStudio" Version="4.12.5.95" LanguageID="1">
       <Info Name="ARVersion" Value="48302" />
       <Info Name="SafetyRelease" Value="1.10" />
       <Info Name="Communication" Value="/IF=tcpip /LOPO=11159 /SA=1 /COMT=2500 /RT=1000 /AM=* /SDT=5 /DAIP=192.168.0.51 /REPO=11159 /ANSL=1 /PT=11169 /PORT=50000" />

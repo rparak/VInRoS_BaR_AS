@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio Version=4.12.4.107 FileVersion="4.9"?>
+<?AutomationStudio Version=4.12.5.95 FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
   <Module Name="5ACCIF01.FPSC-001" Type="5ACCIF01.FPSC-001" Version="1.9.1.0">
     <Connection Connector="SL" TargetModule="5APC2100_BY48_000" TargetConnector="SL1" />
@@ -29,7 +29,6 @@
       <Parameter ID="AssignedOperatingSystem" Value="GPOS" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="BR_AS_I4C_Program_Config_5APC2100" />
-    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="SimulationIPAddress" Value="192.168.0.25" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="5ACCIF01.FPSC-001.IF1" />
