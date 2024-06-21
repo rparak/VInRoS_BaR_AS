@@ -792,6 +792,24 @@ FUNCTION_BLOCK MC_BR_LoadProgram
 	END_VAR
 END_FUNCTION_BLOCK
 
+FUNCTION_BLOCK MC_BR_RestartData
+	VAR_INPUT
+		AxesGroup : REFERENCE TO McAxesGroupType; (*The axis group reference establishes the connection between the function block and the axis group.*)
+		Execute : BOOL; (*Execution of the function block begins on a rising edge of this input.*)
+		Name : STRING[260]; (*File name*)
+		Mode : McRestartDataModeEnum; (*Defines which file should be used to load or save the restart data.*)
+	END_VAR
+	VAR_OUTPUT
+		Done : BOOL; (*Execution successful. Function block is finished.*)
+		Busy : BOOL; (*Function block is active and must continue to be called.*)
+		Error : BOOL; (*Execution error*)
+		ErrorID : DINT; (*Error number*)
+	END_VAR
+	VAR
+		Internal : McInternalType;
+	END_VAR
+END_FUNCTION_BLOCK
+
 FUNCTION_BLOCK MC_BR_VelLimitMonPoints
 	VAR_INPUT
 		AxesGroup : REFERENCE TO McAxesGroupType; (*The axis group reference establishes the connection between the function block and the axis group.*)
@@ -842,6 +860,25 @@ FUNCTION_BLOCK MC_BR_GroupAxisExclusion
 		Error : BOOL; (*Execution error*)
 		ErrorID : DINT; (*Error number*)
 		Excluded : BOOL; (*Exclusion status of the axis.*)
+	END_VAR
+	VAR
+		Internal : McInternalType; (*Internal data*)
+	END_VAR
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK MC_BR_GroupInterrupt
+	VAR_INPUT
+		AxesGroup : REFERENCE TO McAxesGroupType; (*The axis group reference establishes the connection between the function block and the axis group.*)
+		Execute : BOOL; (*Execution of the function block begins on a rising edge of this input.*)
+		Parameters : McInterruptParType; (*Parameters for the interruption of the movement.*)
+	END_VAR
+	VAR_OUTPUT
+		Done : BOOL; (*Execution successful. Function block is finished.*)
+		Busy : BOOL; (*Function block is active and must continue to be called.*)
+		CommandAborted : BOOL; (*Command aborted by another command*)
+		Error : BOOL; (*Error occurred during execution.*)
+		ErrorID : DINT; (*Error number*)
+		Phase : McInterruptPhaseEnum; (*Indicates the current phase of the interrupt.*)
 	END_VAR
 	VAR
 		Internal : McInternalType; (*Internal data*)

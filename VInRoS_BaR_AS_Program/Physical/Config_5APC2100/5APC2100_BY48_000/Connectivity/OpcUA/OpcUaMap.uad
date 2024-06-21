@@ -153,6 +153,14 @@
           <Variable Name="Length" />
         </Variable>
       </Task>
+      <Task Name="T_MECH_3">
+        <Variable Name="Trajectory_Str">
+          <Variable Name="Targets">
+            <Variable Name="Position" />
+          </Variable>
+          <Variable Name="Length" />
+        </Variable>
+      </Task>
     </Module>
   </DefaultView>
 </OpcUaSource>

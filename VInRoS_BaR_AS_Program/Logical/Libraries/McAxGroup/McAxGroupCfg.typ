@@ -5,6 +5,53 @@ TYPE
 	McAGAPhsAxType : STRUCT (*Defines the axes which are part of the axes group*)
 		Axis : McCfgUnboundedArrayType;
 	END_STRUCT;
+	McAGSRQSPwrOnAStopEnum :
+		( (*Power on after stop selector setting*)
+		mcAGSRQSPONAS_NOT_USE := 0, (*Not used - Quickstop functionality is disabled*)
+		mcAGSRQSPONAS_USE := 1 (*Used - Quickstop functionality is enabled*)
+		);
+	McAGSRQSPUseSrcEnum :
+		( (*Source selector setting*)
+		mcAGSRQSPUS_VAR := 0, (*Variable - Use PV as trigger source*)
+		mcAGSRQSPUS_IO_CH := 1 (*I/O channel - Get value from an I/O channel*)
+		);
+	McAGSRQSPUseSrcVarType : STRUCT (*Type mcAGSRQSPUS_VAR settings*)
+		PVMapping : STRING[250];
+	END_STRUCT;
+	McAGSRQSPUseSrcIOChType : STRUCT (*Type mcAGSRQSPUS_IO_CH settings*)
+		ChannelMapping : STRING[250]; (*Input source for status input*)
+	END_STRUCT;
+	McAGSRQSPUseSrcType : STRUCT (*Source which is used for this functionality*)
+		Type : McAGSRQSPUseSrcEnum; (*Source selector setting*)
+		Variable : McAGSRQSPUseSrcVarType; (*Type mcAGSRQSPUS_VAR settings*)
+		IOChannel : McAGSRQSPUseSrcIOChType; (*Type mcAGSRQSPUS_IO_CH settings*)
+	END_STRUCT;
+	McAGSRQSPUseLvlEnum :
+		( (*Level of the source which leads to an stop reaction*)
+		mcAGSRQSPUL_LOW := 0, (*Low - Low level of source triggers the stop reaction*)
+		mcAGSRQSPUL_HIGH := 1 (*High - High level of source triggers the stop reaction*)
+		);
+	McAGSRQSPUseType : STRUCT (*Type mcAGSRQSPONAS_USE settings*)
+		Source : McAGSRQSPUseSrcType; (*Source which is used for this functionality*)
+		Level : McAGSRQSPUseLvlEnum; (*Level of the source which leads to an stop reaction*)
+	END_STRUCT;
+	McAGSRQSPwrOnAStopType : STRUCT (*Controller stays in status on after stop reaction*)
+		Type : McAGSRQSPwrOnAStopEnum; (*Power on after stop selector setting*)
+		Used : McAGSRQSPUseType; (*Type mcAGSRQSPONAS_USE settings*)
+	END_STRUCT;
+	McAGSRQSPwrOffAStopEnum :
+		( (*Power off after stop selector setting*)
+		mcAGSRQSPOFFAS_NOT_USE := 0, (*Not used - Quickstop functionality is disabled*)
+		mcAGSRQSPOFFAS_USE := 1 (*Used - Quickstop functionality is enabled*)
+		);
+	McAGSRQSPwrOffAStopType : STRUCT (*Controller is switched off after stop reaction*)
+		Type : McAGSRQSPwrOffAStopEnum; (*Power off after stop selector setting*)
+		Used : McAGSRQSPUseType; (*Type mcAGSRQSPOFFAS_USE settings*)
+	END_STRUCT;
+	McAGSRQSType : STRUCT (*Enables Quickstop functionality for the axis group*)
+		PowerOnAfterStop : McAGSRQSPwrOnAStopType; (*Controller stays in status on after stop reaction*)
+		PowerOffAfterStop : McAGSRQSPwrOffAStopType; (*Controller is switched off after stop reaction*)
+	END_STRUCT;
 	McAGAGFType : STRUCT
 		FeatureReference : McCfgUnboundedArrayType; (*Name of the axes group feature reference*)
 	END_STRUCT;

@@ -274,6 +274,9 @@ void _CYCLIC ProgramCyclic(void)
 				}
 				break;
 		}
+		
+		Global_VInRoS_Str.Mech_Id_1.Info.Power = TRUE;
+		Global_VInRoS_Str.Mech_Id_1.Info.Home  = TRUE;
 	}
 }
 

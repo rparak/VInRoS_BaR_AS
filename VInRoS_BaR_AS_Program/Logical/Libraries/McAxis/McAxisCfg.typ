@@ -762,4 +762,7 @@ TYPE
 	McCfgAxFeatAcpNetwErrReacType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_AX_FEAT_ACP_NETW_ERR_REAC*)
 		NetworkErrorReaction : McAFANERNetwErrReacType; (*Reaction in case of a network error*)
 	END_STRUCT;
+	McCfgAxFeatAcpCycDatProcType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_AX_FEAT_ACP_CYC_DAT_PROC*)
+		ProcessingTaskClass : McPTCEnum; (*Cyclic task class for command processing*)
+	END_STRUCT;
 END_TYPE

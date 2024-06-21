@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* McAxGroup 5.22.2 */
+/* McAxGroup 5.26.1 */
 
 #ifndef _MCAXGROUP_
 #define _MCAXGROUP_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _McAxGroup_VERSION
-#define _McAxGroup_VERSION 5.22.2
+#define _McAxGroup_VERSION 5.26.1
 #endif
 
 #include <bur/plctypes.h>
@@ -141,6 +141,11 @@ typedef enum McUnloadProgramModeEnum
 	mcUNLOADPRG_ALL
 } McUnloadProgramModeEnum;
 
+typedef enum McRestartDataModeEnum
+{	mcRESTARTDATA_LOAD,
+	mcRESTARTDATA_SAVE
+} McRestartDataModeEnum;
+
 typedef enum McToolWireFramePointTypeEnum
 {	mcTOOL_WF_TYPE_DISABLED,
 	mcTOOL_WF_TYPE_CONNECTION_LINE,
@@ -157,6 +162,42 @@ typedef enum McExclusionCmdEnum
 typedef enum McExclusionTypeEnum
 {	mcEXCL_GROUP_INTERPOLATION
 } McExclusionTypeEnum;
+
+typedef enum McInterruptModeEnum
+{	mcINTMODE_JERK_LIMIT
+} McInterruptModeEnum;
+
+typedef enum McInterruptTypeEnum
+{	mcINTTYPE_STANDARD,
+	mcINTTYPE_RELEASE_AXES
+} McInterruptTypeEnum;
+
+typedef enum McInterruptPhaseEnum
+{	mcINTPH_INACTIVE,
+	mcINTPH_INTERRUPTING,
+	mcINTPH_WAIT_FOR_TRACK_PATH_STOP,
+	mcINTPH_INTERRUPTED
+} McInterruptPhaseEnum;
+
+typedef enum McAGSRQSPwrOnAStopEnum
+{	mcAGSRQSPONAS_NOT_USE = 0,
+	mcAGSRQSPONAS_USE = 1
+} McAGSRQSPwrOnAStopEnum;
+
+typedef enum McAGSRQSPUseSrcEnum
+{	mcAGSRQSPUS_VAR = 0,
+	mcAGSRQSPUS_IO_CH = 1
+} McAGSRQSPUseSrcEnum;
+
+typedef enum McAGSRQSPUseLvlEnum
+{	mcAGSRQSPUL_LOW = 0,
+	mcAGSRQSPUL_HIGH = 1
+} McAGSRQSPUseLvlEnum;
+
+typedef enum McAGSRQSPwrOffAStopEnum
+{	mcAGSRQSPOFFAS_NOT_USE = 0,
+	mcAGSRQSPOFFAS_USE = 1
+} McAGSRQSPwrOffAStopEnum;
 
 typedef enum McAGFSBSBCErrBxEnum
 {	mcAGFSBSBCEB_CLOSE_IMMED = 0,
@@ -296,6 +337,12 @@ typedef struct McToolDynamicsType
 	struct McToolTranslationType MomentOfInertiaAbout;
 } McToolDynamicsType;
 
+typedef struct McProductLoadType
+{	double Mass;
+	struct McToolTranslationType CenterOfGravity;
+	struct McToolTranslationType MomentOfInertiaAbout;
+} McProductLoadType;
+
 typedef struct McToolWireFramePointType
 {	enum McToolWireFramePointTypeEnum Type;
 	struct McToolTranslationType Translation;
@@ -311,6 +358,11 @@ typedef struct McExclusionParType
 	plcstring AxisName[251];
 } McExclusionParType;
 
+typedef struct McInterruptParType
+{	enum McInterruptModeEnum Mode;
+	enum McInterruptTypeEnum Type;
+} McInterruptParType;
+
 typedef struct McAGAPhsAxAxType
 {	struct McCfgReferenceType AxisReference;
 } McAGAPhsAxAxType;
@@ -318,6 +370,40 @@ typedef struct McAGAPhsAxAxType
 typedef struct McAGAPhsAxType
 {	struct McCfgUnboundedArrayType Axis;
 } McAGAPhsAxType;
+
+typedef struct McAGSRQSPUseSrcVarType
+{	plcstring PVMapping[251];
+} McAGSRQSPUseSrcVarType;
+
+typedef struct McAGSRQSPUseSrcIOChType
+{	plcstring ChannelMapping[251];
+} McAGSRQSPUseSrcIOChType;
+
+typedef struct McAGSRQSPUseSrcType
+{	enum McAGSRQSPUseSrcEnum Type;
+	struct McAGSRQSPUseSrcVarType Variable;
+	struct McAGSRQSPUseSrcIOChType IOChannel;
+} McAGSRQSPUseSrcType;
+
+typedef struct McAGSRQSPUseType
+{	struct McAGSRQSPUseSrcType Source;
+	enum McAGSRQSPUseLvlEnum Level;
+} McAGSRQSPUseType;
+
+typedef struct McAGSRQSPwrOnAStopType
+{	enum McAGSRQSPwrOnAStopEnum Type;
+	struct McAGSRQSPUseType Used;
+} McAGSRQSPwrOnAStopType;
+
+typedef struct McAGSRQSPwrOffAStopType
+{	enum McAGSRQSPwrOffAStopEnum Type;
+	struct McAGSRQSPUseType Used;
+} McAGSRQSPwrOffAStopType;
+
+typedef struct McAGSRQSType
+{	struct McAGSRQSPwrOnAStopType PowerOnAfterStop;
+	struct McAGSRQSPwrOffAStopType PowerOffAfterStop;
+} McAGSRQSType;
 
 typedef struct McAGAGFType
 {	struct McCfgUnboundedArrayType FeatureReference;
@@ -1197,6 +1283,24 @@ typedef struct MC_BR_LoadProgram
 	plcbit Error;
 } MC_BR_LoadProgram_typ;
 
+typedef struct MC_BR_RestartData
+{
+	/* VAR_INPUT (analog) */
+	struct McAxesGroupType* AxesGroup;
+	plcstring Name[261];
+	enum McRestartDataModeEnum Mode;
+	/* VAR_OUTPUT (analog) */
+	signed long ErrorID;
+	/* VAR (analog) */
+	struct McInternalType Internal;
+	/* VAR_INPUT (digital) */
+	plcbit Execute;
+	/* VAR_OUTPUT (digital) */
+	plcbit Done;
+	plcbit Busy;
+	plcbit Error;
+} MC_BR_RestartData_typ;
+
 typedef struct MC_BR_VelLimitMonPoints
 {
 	/* VAR_INPUT (analog) */
@@ -1253,6 +1357,25 @@ typedef struct MC_BR_GroupAxisExclusion
 	plcbit Excluded;
 } MC_BR_GroupAxisExclusion_typ;
 
+typedef struct MC_BR_GroupInterrupt
+{
+	/* VAR_INPUT (analog) */
+	struct McAxesGroupType* AxesGroup;
+	struct McInterruptParType Parameters;
+	/* VAR_OUTPUT (analog) */
+	signed long ErrorID;
+	enum McInterruptPhaseEnum Phase;
+	/* VAR (analog) */
+	struct McInternalType Internal;
+	/* VAR_INPUT (digital) */
+	plcbit Execute;
+	/* VAR_OUTPUT (digital) */
+	plcbit Done;
+	plcbit Busy;
+	plcbit CommandAborted;
+	plcbit Error;
+} MC_BR_GroupInterrupt_typ;
+
 
 
 /* Prototyping of functions and function blocks */
@@ -1295,9 +1418,11 @@ _BUR_PUBLIC void MC_MoveLinearAbsolute_15(struct MC_MoveLinearAbsolute_15* inst)
 _BUR_PUBLIC void MC_MoveLinearRelative_15(struct MC_MoveLinearRelative_15* inst);
 _BUR_PUBLIC void MC_BR_UnloadProgram(struct MC_BR_UnloadProgram* inst);
 _BUR_PUBLIC void MC_BR_LoadProgram(struct MC_BR_LoadProgram* inst);
+_BUR_PUBLIC void MC_BR_RestartData(struct MC_BR_RestartData* inst);
 _BUR_PUBLIC void MC_BR_VelLimitMonPoints(struct MC_BR_VelLimitMonPoints* inst);
 _BUR_PUBLIC void MC_BR_SkipBlock(struct MC_BR_SkipBlock* inst);
 _BUR_PUBLIC void MC_BR_GroupAxisExclusion(struct MC_BR_GroupAxisExclusion* inst);
+_BUR_PUBLIC void MC_BR_GroupInterrupt(struct MC_BR_GroupInterrupt* inst);
 
 
 #ifdef __cplusplus

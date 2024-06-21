@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* MpAxis 5.22.2 */
+/* MpAxis 5.26.1 */
 
 #ifndef _MPAXIS_
 #define _MPAXIS_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _MpAxis_VERSION
-#define _MpAxis_VERSION 5.22.2
+#define _MpAxis_VERSION 5.26.1
 #endif
 
 #include <bur/plctypes.h>
@@ -43,6 +43,7 @@ typedef enum MpAxisErrorEnum
 	mcAXIS_WRN_PLC_OPEN = -2141019903,
 	mcAXIS_WRN_MULTIPLE_COMMAND = -2141019902,
 	mcAXIS_ERR_RECOVERY_NOT_ALLOWED = -1067278072,
+	mcAXIS_WRN_RESTOREPOS_INVALID = -2141019895,
 	mcAXIS_ERR_ACTIVATION = -1064239103,
 	mcAXIS_ERR_MPLINK_NULL = -1064239102,
 	mcAXIS_ERR_MPLINK_INVALID = -1064239101,
@@ -124,6 +125,11 @@ typedef enum MpAxisMoveCyclicVelocityModeEnum
 	mcAXIS_MCV_MODE_MOVE_VEL_CTRL
 } MpAxisMoveCyclicVelocityModeEnum;
 
+typedef struct MpAxisHomingAddTorqLimParType
+{	float PositiveDirection;
+	float NegativeDirection;
+} MpAxisHomingAddTorqLimParType;
+
 typedef struct MpAxisHomingOptionsType
 {	float StartVelocity;
 	float HomingVelocity;
@@ -142,6 +148,8 @@ typedef struct MpAxisHomingOptionsType
 	signed char DriveSpecificHomingMode;
 	double SensorOffset;
 	enum McDirectionEnum SensorOffsetDirection;
+	enum McSwitchEnum DisableRestorePositionOnEnable;
+	struct MpAxisHomingAddTorqLimParType AdditionalTorqueLimit;
 } MpAxisHomingOptionsType;
 
 typedef struct MpAxisHomingType

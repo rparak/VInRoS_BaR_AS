@@ -295,18 +295,29 @@ TYPE
 	McMSGBEnum :
 		( (*Gearbox selector setting*)
 		mcMSG_NOT_USE := 0, (*Not used -*)
-		mcMSG_USE := 1 (*Used -*)
+		mcMSG_USE := 1, (*Used -*)
+		mcMSG_USE_W_DYN_TORQ_LIM := 2 (*Used with dynamic torque limitation -*)
 		);
 	McMSGBUseType : STRUCT (*Type mcMSG_USE settings*)
 		GearRatio : McCfgGearBoxType; (*Ratio between a gearbox input and output*)
 		MaximumInputSpeed : REAL; (*Maximum permissible speed at gearbox input [rpm]*)
 		NominalOutputTorque : REAL; (*Nominal torque at gearbox output [Nm]*)
 		PeakOutputTorque : REAL; (*Peak torque at gearbox output [Nm]*)
-		MomentOfInertia : REAL; (*Moment of inertia for the gearbox [kgcm²]*)
+		MomentOfInertia : REAL; (*Moment of inertia for the gearbox at gearbox input [kgcm²]*)
+	END_STRUCT;
+	McMSGBUseWDynTorqLimType : STRUCT (*Type mcMSG_USE_W_DYN_TORQ_LIM settings*)
+		GearRatio : McCfgGearBoxType; (*Ratio between a gearbox input and output*)
+		MaximumInputSpeed : REAL; (*Maximum permissible speed at gearbox input [rpm]*)
+		NominalOutputTorque : REAL; (*Nominal torque at gearbox output [Nm]*)
+		PeakOutputTorque : REAL; (*Peak torque at gearbox output [Nm]*)
+		MomentOfInertia : REAL; (*Moment of inertia for the gearbox at gearbox input [kgcm²]*)
+		ViscousFriction : REAL; (*Speed dependent friction at gearbox input [torque per rotations/secound] [Nms]*)
+		StaticFriction : REAL; (*Static friction at gearbox input [Nm]*)
 	END_STRUCT;
 	McMSGBType : STRUCT (*Gearbox*)
 		Type : McMSGBEnum; (*Gearbox selector setting*)
 		Used : McMSGBUseType; (*Type mcMSG_USE settings*)
+		UsedWithDynamicTorqueLimitation : McMSGBUseWDynTorqLimType; (*Type mcMSG_USE_W_DYN_TORQ_LIM settings*)
 	END_STRUCT;
 	McCfgMotSynType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_MOT_SYN*)
 		Motor : McMSMotType;
@@ -455,18 +466,29 @@ TYPE
 	McMIGBEnum :
 		( (*Gearbox selector setting*)
 		mcMIG_NOT_USE := 0, (*Not used -*)
-		mcMIG_USE := 1 (*Used -*)
+		mcMIG_USE := 1, (*Used -*)
+		mcMIG_USE_W_DYN_TORQ_LIM := 2 (*Used with dynamic torque limitation -*)
 		);
 	McMIGBUseType : STRUCT (*Type mcMIG_USE settings*)
 		GearRatio : McCfgGearBoxType; (*Ratio between a gearbox input and output*)
 		MaximumInputSpeed : REAL; (*Maximum permissible speed at gearbox input [rpm]*)
 		NominalOutputTorque : REAL; (*Nominal torque at gearbox output [Nm]*)
 		PeakOutputTorque : REAL; (*Peak torque at gearbox output [Nm]*)
-		MomentOfInertia : REAL; (*Moment of inertia for the gearbox [kgcm²]*)
+		MomentOfInertia : REAL; (*Moment of inertia for the gearbox at gearbox input [kgcm²]*)
+	END_STRUCT;
+	McMIGBUseWDynTorqLimType : STRUCT (*Type mcMIG_USE_W_DYN_TORQ_LIM settings*)
+		GearRatio : McCfgGearBoxType; (*Ratio between a gearbox input and output*)
+		MaximumInputSpeed : REAL; (*Maximum permissible speed at gearbox input [rpm]*)
+		NominalOutputTorque : REAL; (*Nominal torque at gearbox output [Nm]*)
+		PeakOutputTorque : REAL; (*Peak torque at gearbox output [Nm]*)
+		MomentOfInertia : REAL; (*Moment of inertia for the gearbox at gearbox input [kgcm²]*)
+		ViscousFriction : REAL; (*Speed dependent friction at gearbox input [torque per rotations/secound] [Nms]*)
+		StaticFriction : REAL; (*Static friction at gearbox input [Nm]*)
 	END_STRUCT;
 	McMIGBType : STRUCT (*Gearbox*)
 		Type : McMIGBEnum; (*Gearbox selector setting*)
 		Used : McMIGBUseType; (*Type mcMIG_USE settings*)
+		UsedWithDynamicTorqueLimitation : McMIGBUseWDynTorqLimType; (*Type mcMIG_USE_W_DYN_TORQ_LIM settings*)
 	END_STRUCT;
 	McCfgMotInductType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_MOT_INDUCT*)
 		Motor : McMIMotType;
@@ -591,18 +613,29 @@ TYPE
 	McMSAMCGBEnum :
 		( (*Gearbox selector setting*)
 		mcMSAMCG_NOT_USE := 0, (*Not used -*)
-		mcMSAMCG_USE := 1 (*Used -*)
+		mcMSAMCG_USE := 1, (*Used -*)
+		mcMSAMCG_USE_W_DYN_TORQ_LIM := 2 (*Used with dynamic torque limitation -*)
 		);
 	McMSAMCGBUseType : STRUCT (*Type mcMSAMCG_USE settings*)
 		GearRatio : McCfgGearBoxType; (*Ratio between a gearbox input and output*)
 		MaximumInputSpeed : REAL; (*Maximum permissible speed at gearbox input [rpm]*)
 		NominalOutputTorque : REAL; (*Nominal torque at gearbox output [Nm]*)
 		PeakOutputTorque : REAL; (*Peak torque at gearbox output [Nm]*)
-		MomentOfInertia : REAL; (*Moment of inertia for the gearbox [kgcm²]*)
+		MomentOfInertia : REAL; (*Moment of inertia for the gearbox at gearbox input [kgcm²]*)
+	END_STRUCT;
+	McMSAMCGBUseWDynTorqLimType : STRUCT (*Type mcMSAMCG_USE_W_DYN_TORQ_LIM settings*)
+		GearRatio : McCfgGearBoxType; (*Ratio between a gearbox input and output*)
+		MaximumInputSpeed : REAL; (*Maximum permissible speed at gearbox input [rpm]*)
+		NominalOutputTorque : REAL; (*Nominal torque at gearbox output [Nm]*)
+		PeakOutputTorque : REAL; (*Peak torque at gearbox output [Nm]*)
+		MomentOfInertia : REAL; (*Moment of inertia for the gearbox at gearbox input [kgcm²]*)
+		ViscousFriction : REAL; (*Speed dependent friction at gearbox input [torque per rotations/secound] [Nms]*)
+		StaticFriction : REAL; (*Static friction at gearbox input [Nm]*)
 	END_STRUCT;
 	McMSAMCGBType : STRUCT (*Gearbox*)
 		Type : McMSAMCGBEnum; (*Gearbox selector setting*)
 		Used : McMSAMCGBUseType; (*Type mcMSAMCG_USE settings*)
+		UsedWithDynamicTorqueLimitation : McMSAMCGBUseWDynTorqLimType; (*Type mcMSAMCG_USE_W_DYN_TORQ_LIM settings*)
 	END_STRUCT;
 	McCfgMotSynAmcType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_MOT_SYN_AMC*)
 		Motor : McMSAMCMotType;
@@ -792,7 +825,8 @@ TYPE
 		mcAMPICEITIMEOF_MEOF_25000 := 0, (*MEOF 25000 - 25000 Hz*)
 		mcAMPICEITIMEOF_MEOF_50000 := 1, (*MEOF 50000 - 50000 Hz*)
 		mcAMPICEITIMEOF_MEOF_100000 := 2, (*MEOF 100000 - 100000 Hz*)
-		mcAMPICEITIMEOF_MEOF_200000 := 3 (*MEOF 200000 - 200000 Hz*)
+		mcAMPICEITIMEOF_MEOF_200000 := 3, (*MEOF 200000 - 200000 Hz*)
+		mcAMPICEITIMEOF_MEOF_400000 := 4 (*MEOF 400000 - 400000 Hz*)
 		);
 	McAMPICEITIncrOutStgEnum :
 		( (*Output stage*)
@@ -811,7 +845,8 @@ TYPE
 		mcAMPICEITIWDCMMEOF_MEOF_25000 := 0, (*MEOF 25000 - 25000 Hz*)
 		mcAMPICEITIWDCMMEOF_MEOF_50000 := 1, (*MEOF 50000 - 50000 Hz*)
 		mcAMPICEITIWDCMMEOF_MEOF_100000 := 2, (*MEOF 100000 - 100000 Hz*)
-		mcAMPICEITIWDCMMEOF_MEOF_200000 := 3 (*MEOF 200000 - 200000 Hz*)
+		mcAMPICEITIWDCMMEOF_MEOF_200000 := 3, (*MEOF 200000 - 200000 Hz*)
+		mcAMPICEITIWDCMMEOF_MEOF_400000 := 4 (*MEOF 400000 - 400000 Hz*)
 		);
 	McAMPICEITIWDCMOutStgEnum :
 		( (*Output stage*)
@@ -857,7 +892,8 @@ TYPE
 		mcAPICEXIT_SSI := 8, (*SSI -*)
 		mcAPICEXIT_HIPERFACE_DSL := 9, (*HIPERFACE DSL -*)
 		mcAPICEXIT_TFMT := 10, (*T-Format - Tamagawa digital interface*)
-		mcAPICEXIT_RES := 11 (*Resolver -*)
+		mcAPICEXIT_RES := 11, (*Resolver -*)
+		mcAPICEXIT_ENDAT_3 := 12 (*EnDat 3 -*)
 		);
 	McAP3PICEITEnDatType : STRUCT (*Type mcAPICEXIT_ENDAT settings*)
 		LineResistance : REAL; (*Line resistance encoder supply [Ohm]*)
@@ -1073,7 +1109,8 @@ TYPE
 		mcAP3SPICEIT_SSI := 8, (*SSI -*)
 		mcAP3SPICEIT_HIPERFACE_DSL := 9, (*HIPERFACE DSL -*)
 		mcAP3SPICEIT_TFMT := 10, (*T-Format - Tamagawa digital encoder*)
-		mcAP3SPICEIT_RES := 11 (*Resolver -*)
+		mcAP3SPICEIT_RES := 11, (*Resolver -*)
+		mcAP3SPICEIT_ENDAT_3 := 12 (*EnDat 3 -*)
 		);
 	McAP3SPICEITSinType : STRUCT (*Type mcAP3SPICEIT_SIN settings*)
 		LineResistance : REAL; (*Line resistance encoder supply [Ohm]*)
@@ -1438,7 +1475,9 @@ TYPE
 		mcACLFS_LIM := 5, (*Limiter - Limiter*)
 		mcACLFS_LIN_LIM := 6, (*Linear limitation - Linear limitation*)
 		mcACLFS_RISE_TIME_LIM := 7, (*Rise time limitation - Rise time limitation*)
-		mcACLFS_COMP := 8 (*Compensation - Compensation*)
+		mcACLFS_COMP := 8, (*Compensation - Compensation*)
+		mcACLFS_ADPT_NOTCH := 9, (*Adaptive notch - Adaptive notch*)
+		mcACLFS_VAR_CTRL_NOTCH := 10 (*Variable controlled notch - Variable controlled notch*)
 		);
 	McACLFSLP2ndOrdType : STRUCT (*Type mcACLFS_LP_2ND_ORD settings*)
 		CutOffFrequency : REAL; (*Cut off frequency [Hz]*)
@@ -1493,6 +1532,17 @@ TYPE
 		MultiplicationFactorParID : UINT; (*Multiplication Factor ParID*)
 		AdditiveValueParID : UINT; (*Additive Value ParID*)
 	END_STRUCT;
+	McACLFSAdptNotchType : STRUCT (*Type mcACLFS_ADPT_NOTCH settings*)
+		CenterFrequency : REAL; (*Center frequency [Hz]*)
+		Bandwidth : REAL; (*Bandwidth [Hz]*)
+		LowerFrequencyLimit : REAL; (*Lower frequency limit [Hz]*)
+		UpperFrequencyLimit : REAL; (*Upper frequency limit [Hz]*)
+		AdaptionThreshold : REAL; (*Adaption threshold [A]*)
+	END_STRUCT;
+	McACLFSVarCtrlNotchType : STRUCT (*Type mcACLFS_VAR_CTRL_NOTCH settings*)
+		CenterFrequencyParID : UINT; (*Center frequency ParID*)
+		BandwidthParID : UINT; (*Bandwidth ParID*)
+	END_STRUCT;
 	McACLFSType : STRUCT (*Type of the loop filter*)
 		Type : McACLFSEnum; (*Loop filter 1-3 selector setting*)
 		Lowpass2ndOrder : McACLFSLP2ndOrdType; (*Type mcACLFS_LP_2ND_ORD settings*)
@@ -1503,6 +1553,8 @@ TYPE
 		LinearLimitation : McACLFSLinLimType; (*Type mcACLFS_LIN_LIM settings*)
 		RiseTimeLimitation : McACLFSRiseTimeLimType; (*Type mcACLFS_RISE_TIME_LIM settings*)
 		Compensation : McACLFSCompType; (*Type mcACLFS_COMP settings*)
+		AdaptiveNotch : McACLFSAdptNotchType; (*Type mcACLFS_ADPT_NOTCH settings*)
+		VariableControlledNotch : McACLFSVarCtrlNotchType; (*Type mcACLFS_VAR_CTRL_NOTCH settings*)
 	END_STRUCT;
 	McACLFType : STRUCT (*Parameters of the loop filters*)
 		LoopFilter : ARRAY[0..2] OF McACLFSType; (*Type of the loop filter*)
@@ -1793,6 +1845,23 @@ TYPE
 		NotUsed : McAHModBlkRefPNotUseType; (*Type mcAHMRP_NOT_USE settings*)
 		Used : McAHModBlkRefPUseType; (*Type mcAHMRP_USE settings*)
 	END_STRUCT;
+	McAHModBlkTorqAddTorqLimEnum :
+		( (*Additional torque limit selector setting*)
+		mcAHMBTATL_NOT_USE := 0, (*Not used - Additional torque limit is not used*)
+		mcAHMBTATL_POS_DIR := 1, (*Positive direction - Additional torque limit is active in positive movement direction*)
+		mcAHMBTATL_NEG_DIR := 2 (*Negative direction - Additional torque limit is active in negative movement direction*)
+		);
+	McAHModBlkTqAddTqLimPosDirType : STRUCT (*Type mcAHMBTATL_POS_DIR settings*)
+		TorqueLimit : REAL; (*Additional torque limit in positive movement direction for homing on block [Nm]*)
+	END_STRUCT;
+	McAHModBlkTqAddTqLimNegDirType : STRUCT (*Type mcAHMBTATL_NEG_DIR settings*)
+		TorqueLimit : REAL; (*Additional torque limit in negative movement direction for homing on block [Nm]*)
+	END_STRUCT;
+	McAHModBlkTorqAddTorqLimType : STRUCT (*Activate an additional torque limit for a defined movement direction*)
+		Type : McAHModBlkTorqAddTorqLimEnum; (*Additional torque limit selector setting*)
+		PositiveDirection : McAHModBlkTqAddTqLimPosDirType; (*Type mcAHMBTATL_POS_DIR settings*)
+		NegativeDirection : McAHModBlkTqAddTqLimNegDirType; (*Type mcAHMBTATL_NEG_DIR settings*)
+	END_STRUCT;
 	McAHModBlkTorqType : STRUCT (*Type mcAHM_BLK_TORQ settings*)
 		Position : LREAL; (*Home position [Measurement units]*)
 		StartVelocity : REAL; (*Speed for searching the reference switch [Measurement units/s]*)
@@ -1803,6 +1872,24 @@ TYPE
 		ReferencePulse : McAHModBlkRefPType; (*Use reference pulse of encoder*)
 		TorqueLimit : REAL; (*Torque limit for homing on block [Nm]*)
 		PositionErrorStopLimit : LREAL; (*Lag error for stop of the homing movement [Measurement units]*)
+		AdditionalTorqueLimit : McAHModBlkTorqAddTorqLimType; (*Activate an additional torque limit for a defined movement direction*)
+	END_STRUCT;
+	McAHModBlkLagErrAddTorqLimEnum :
+		( (*Additional torque limit selector setting*)
+		mcAHMBLEATL_NOT_USE := 0, (*Not used - Additional torque limit is not used*)
+		mcAHMBLEATL_POS_DIR := 1, (*Positive direction - Additional torque limit is active in positive movement direction*)
+		mcAHMBLEATL_NEG_DIR := 2 (*Negative direction - Additional torque limit is active in negative movement direction*)
+		);
+	McAHModBlkLErrAddTqLimPosDirType : STRUCT (*Type mcAHMBLEATL_POS_DIR settings*)
+		TorqueLimit : REAL; (*Additional torque limit in positive movement direction for homing on block [Nm]*)
+	END_STRUCT;
+	McAHModBlkLErrAddTqLimNegDirType : STRUCT (*Type mcAHMBLEATL_NEG_DIR settings*)
+		TorqueLimit : REAL; (*Additional torque limit in negative movement direction for homing on block [Nm]*)
+	END_STRUCT;
+	McAHModBlkLagErrAddTorqLimType : STRUCT (*Activate an additional torque limit for a defined movement direction*)
+		Type : McAHModBlkLagErrAddTorqLimEnum; (*Additional torque limit selector setting*)
+		PositiveDirection : McAHModBlkLErrAddTqLimPosDirType; (*Type mcAHMBLEATL_POS_DIR settings*)
+		NegativeDirection : McAHModBlkLErrAddTqLimNegDirType; (*Type mcAHMBLEATL_NEG_DIR settings*)
 	END_STRUCT;
 	McAHModBlkLagErrType : STRUCT (*Type mcAHM_BLK_LAG_ERR settings*)
 		Position : LREAL; (*Home position [Measurement units]*)
@@ -1815,6 +1902,7 @@ TYPE
 		TorqueLimit : REAL; (*Torque limit for homing on block [Nm]*)
 		PositionErrorStopLimit : LREAL; (*Lag error for stop of the homing movement [Measurement units]*)
 		BlockDetectionPositionError : LREAL; (*Lag error for block detection [Measurement units]*)
+		AdditionalTorqueLimit : McAHModBlkLagErrAddTorqLimType; (*Activate an additional torque limit for a defined movement direction*)
 	END_STRUCT;
 	McAHModType : STRUCT (*Homing mode*)
 		Type : McAHModEnum; (*Mode selector setting*)
@@ -2271,10 +2359,16 @@ TYPE
 		DCPowerSupplyModuleReference : McAMPwrSupDCPwrSupModRefType; (*Type mcAMPS_DC_PWR_SUP_MOD_REF settings*)
 		DCBusVoltage : McAMPwrSupDCBusVType; (*Type mcAMPS_DC_BUS_V settings*)
 	END_STRUCT;
+	McAMSWRstAFwUpdEnum :
+		( (*If 'On' is selected, an ACOPOS reset is automatically carried out after the firmware update by sending ParID CMD_SW_RESET*)
+		mcAMSRAFU_ON := 0, (*On - Perform automatic ACOPOS reset after firmware download*)
+		mcAMSRAFU_OFF := 1 (*Off - ACOPOS reset is not performed automatically after firmware download*)
+		);
 	McCfgAcpModType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_ACP_MOD*)
 		ActivateACOPOSSimulationOnPLC : McAMActAcpSimOnPLCEnum; (*Activates or deactivates the ACOPOS simulation on the PLC*)
 		BusVoltage : UINT; (*Bus voltage [V]*)
 		PowerSupply : McAMPwrSupType; (*Selects the power supply or DC bus voltage*)
+		SWResetAfterFirmwareUpdate : McAMSWRstAFwUpdEnum; (*If 'On' is selected, an ACOPOS reset is automatically carried out after the firmware update by sending ParID CMD_SW_RESET*)
 	END_STRUCT;
 	McAEEncX6AIfTypEnum :
 		( (*Interface type selector setting*)
@@ -2448,7 +2542,9 @@ TYPE
 		mcAEX41IT_ENDAT := 3, (*EnDat -*)
 		mcAEX41IT_HIPERFACE_DSL := 4, (*HIPERFACE DSL -*)
 		mcAEX41IT_TFMT := 5, (*T-Format - Tamagawa digital interface*)
-		mcAEX41IT_MOT_DAT_IF := 6 (*Motion Data Interface - B&R bi-directional asynchronous serial interface*)
+		mcAEX41IT_MOT_DAT_IF := 6, (*Motion Data Interface - B&R bi-directional asynchronous serial interface*)
+		mcAEX41IT_ENDAT_SAFEMOTION := 7, (*EnDat SafeMOTION -*)
+		mcAEX41IT_ENDAT_3 := 8 (*EnDat 3 -*)
 		);
 	McAEX41BPwrSupEnum :
 		( (*Power supply of the encoder*)
@@ -2550,7 +2646,9 @@ TYPE
 		mcAEX42IT_ENDAT := 3, (*EnDat -*)
 		mcAEX42IT_HIPERFACE_DSL := 4, (*HIPERFACE DSL -*)
 		mcAEX42IT_TFMT := 5, (*T-Format - Tamagawa digital interface*)
-		mcAEX42IT_MOT_DAT_IF := 6 (*Motion Data Interface - B&R bi-directional asynchronous serial interface*)
+		mcAEX42IT_MOT_DAT_IF := 6, (*Motion Data Interface - B&R bi-directional asynchronous serial interface*)
+		mcAEX42IT_ENDAT_SAFEMOTION := 7, (*EnDat SafeMOTION -*)
+		mcAEX42IT_ENDAT_3 := 8 (*EnDat 3 -*)
 		);
 	McAEX42BPwrSupEnum :
 		( (*Power supply of the encoder*)
@@ -2652,7 +2750,9 @@ TYPE
 		mcAEX43IT_ENDAT := 3, (*EnDat -*)
 		mcAEX43IT_HIPERFACE_DSL := 4, (*HIPERFACE DSL -*)
 		mcAEX43IT_TFMT := 5, (*T-Format - Tamagawa digital interface*)
-		mcAEX43IT_MOT_DAT_IF := 6 (*Motion Data Interface - B&R bi-directional asynchronous serial interface*)
+		mcAEX43IT_MOT_DAT_IF := 6, (*Motion Data Interface - B&R bi-directional asynchronous serial interface*)
+		mcAEX43IT_ENDAT_SAFEMOTION := 7, (*EnDat SafeMOTION -*)
+		mcAEX43IT_ENDAT_3 := 8 (*EnDat 3 -*)
 		);
 	McAEX43BPwrSupEnum :
 		( (*Power supply of the encoder*)
@@ -3000,10 +3100,369 @@ TYPE
 		mcAEEAUELOEPE_ENC_SS1X11 := 6, (*Encoder SS1.X11 - Plug-in module in SS1*)
 		mcAEEAUELOEPE_ENC_SS2X11 := 7, (*Encoder SS2.X11 - Plug-in module in SS2*)
 		mcAEEAUELOEPE_ENC_SS3X11 := 8, (*Encoder SS3.X11 - Plug-in module in SS3*)
-		mcAEEAUELOEPE_ENC_SS4X11 := 9 (*Encoder SS4.X11 - Plug-in module in SS4*)
+		mcAEEAUELOEPE_ENC_SS4X11 := 9, (*Encoder SS4.X11 - Plug-in module in SS4*)
+		mcAEEAUELOEPE_ENC_ON_NETW := 10 (*Encoder on network - Encoder on Network*)
 		);
+	McAEEON0Enum :
+		( (*Position type selector setting*)
+		mcAEEON0_ABS := 0, (*Absolute - Position from an absolute encoder*)
+		mcAEEON0_INCR := 1 (*Incremental - Position from an incremental encoder*)
+		);
+	McAEEON00Enum :
+		( (*Position format selector setting*)
+		mcAEEON00_D64B := 0, (*d64b - Data from a 64 bit source*)
+		mcAEEON00_D32B := 1, (*d32b - Data from a 32 bit source*)
+		mcAEEON00_D16B := 2 (*d16b - Data from a 16 bit source*)
+		);
+	McAEEON00d64bPosLWEnum :
+		( (*Position LW selector setting*)
+		mcAEEON00DPL_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON00DPL_IO_CH_UDINT := 1 (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		);
+	McAEEON00d64bPosLWIOChDINTType : STRUCT (*Type mcAEEON00DPL_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position low word*)
+	END_STRUCT;
+	McAEEON00d64bPosLWIOChUDINTType : STRUCT (*Type mcAEEON00DPL_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position low word*)
+	END_STRUCT;
+	McAEEON00d64bPosLWType : STRUCT (*Position low word source*)
+		Type : McAEEON00d64bPosLWEnum; (*Position LW selector setting*)
+		IOChannelDINT : McAEEON00d64bPosLWIOChDINTType; (*Type mcAEEON00DPL_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON00d64bPosLWIOChUDINTType; (*Type mcAEEON00DPL_IO_CH_UDINT settings*)
+	END_STRUCT;
+	McAEEON00d64bPosHWEnum :
+		( (*Position HW selector setting*)
+		mcAEEON00DPH_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON00DPH_IO_CH_UDINT := 1 (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		);
+	McAEEON00d64bPosHWIOChDINTType : STRUCT (*Type mcAEEON00DPH_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position high word*)
+	END_STRUCT;
+	McAEEON00d64bPosHWIOChUDINTType : STRUCT (*Type mcAEEON00DPH_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position high word*)
+	END_STRUCT;
+	McAEEON00d64bPosHWType : STRUCT (*Position high word source*)
+		Type : McAEEON00d64bPosHWEnum; (*Position HW selector setting*)
+		IOChannelDINT : McAEEON00d64bPosHWIOChDINTType; (*Type mcAEEON00DPH_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON00d64bPosHWIOChUDINTType; (*Type mcAEEON00DPH_IO_CH_UDINT settings*)
+	END_STRUCT;
+	McAEEON00d64bType : STRUCT (*Type mcAEEON00_D64B settings*)
+		ValueRangeOfPositionLW : UDINT; (*Value range (span) of position low word [Increment]*)
+		ValueRangeOfPositionHW : UDINT; (*Value range (span) of position high word [Increment]*)
+		PositionLW : McAEEON00d64bPosLWType; (*Position low word source*)
+		PositionHW : McAEEON00d64bPosHWType; (*Position high word source*)
+	END_STRUCT;
+	McAEEON00d32bPosEnum :
+		( (*Position selector setting*)
+		mcAEEON00DP_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON00DP_IO_CH_UDINT := 1 (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		);
+	McAEEON00d32bPosIOChDINTType : STRUCT (*Type mcAEEON00DP_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON00d32bPosIOChUDINTType : STRUCT (*Type mcAEEON00DP_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON00d32bPosType : STRUCT (*Position source*)
+		Type : McAEEON00d32bPosEnum; (*Position selector setting*)
+		IOChannelDINT : McAEEON00d32bPosIOChDINTType; (*Type mcAEEON00DP_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON00d32bPosIOChUDINTType; (*Type mcAEEON00DP_IO_CH_UDINT settings*)
+	END_STRUCT;
+	McAEEON00d32bType : STRUCT (*Type mcAEEON00_D32B settings*)
+		ValueRangeOfPosition : UDINT; (*Value range (span) of position [Increment]*)
+		Position : McAEEON00d32bPosType; (*Position source*)
+	END_STRUCT;
+	McAEEON00d16bPosEnum :
+		( (*Position selector setting*)
+		mcAEEON00DP_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON00DP_IO_CH_UINT := 3 (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		);
+	McAEEON00d16bPosIOChINTType : STRUCT (*Type mcAEEON00DP_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON00d16bPosIOChUINTType : STRUCT (*Type mcAEEON00DP_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON00d16bPosType : STRUCT (*Position source*)
+		Type : McAEEON00d16bPosEnum; (*Position selector setting*)
+		IOChannelINT : McAEEON00d16bPosIOChINTType; (*Type mcAEEON00DP_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON00d16bPosIOChUINTType; (*Type mcAEEON00DP_IO_CH_UINT settings*)
+	END_STRUCT;
+	McAEEON00d16bType : STRUCT (*Type mcAEEON00_D16B settings*)
+		ValueRangeOfPosition : UDINT; (*Value range (span) of position [Increment]*)
+		Position : McAEEON00d16bPosType; (*Position source*)
+	END_STRUCT;
+	McAEEON00Type : STRUCT (*Position value format*)
+		Type : McAEEON00Enum; (*Position format selector setting*)
+		d64b : McAEEON00d64bType; (*Type mcAEEON00_D64B settings*)
+		d32b : McAEEON00d32bType; (*Type mcAEEON00_D32B settings*)
+		d16b : McAEEON00d16bType; (*Type mcAEEON00_D16B settings*)
+	END_STRUCT;
+	McAEEON01Enum :
+		( (*Position rollover selector setting*)
+		mcAEEON01_AT_ENC_MEAS_RNG := 0, (*At encoder measurement range - At encoder measurement range: for true absolute encoder*)
+		mcAEEON01_AT_DAT_TYP_RNG := 1 (*At data type range - At data type range: for incremental encoder with absolute information*)
+		);
+	McAEEON01Type : STRUCT (*Position value rollover mode*)
+		Type : McAEEON01Enum; (*Position rollover selector setting*)
+	END_STRUCT;
+	McAEEON02Enum :
+		( (*Position time selector setting*)
+		mcAEEON02_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON02_IO_CH_UDINT := 1, (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		mcAEEON02_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON02_IO_CH_UINT := 3, (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		mcAEEON02_NOT_USE := 4 (*Not used - Position time not used*)
+		);
+	McAEEON02IOChDINTType : STRUCT (*Type mcAEEON02_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON02IOChUDINTType : STRUCT (*Type mcAEEON02_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON02IOChINTType : STRUCT (*Type mcAEEON02_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON02IOChUINTType : STRUCT (*Type mcAEEON02_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON02Type : STRUCT (*Position time source*)
+		Type : McAEEON02Enum; (*Position time selector setting*)
+		IOChannelDINT : McAEEON02IOChDINTType; (*Type mcAEEON02_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON02IOChUDINTType; (*Type mcAEEON02_IO_CH_UDINT settings*)
+		IOChannelINT : McAEEON02IOChINTType; (*Type mcAEEON02_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON02IOChUINTType; (*Type mcAEEON02_IO_CH_UINT settings*)
+	END_STRUCT;
+	McAEEON03Enum :
+		( (*Encoder status selector setting*)
+		mcAEEON03_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON03_IO_CH_UDINT := 1, (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		mcAEEON03_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON03_IO_CH_UINT := 3, (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		mcAEEON03_IO_CH_SINT := 4, (*I/O channel SINT - Data from a signed 8 bit I/O channel*)
+		mcAEEON03_IO_CH_USINT := 5, (*I/O channel USINT - Data from an unsigned 8 bit I/O channel*)
+		mcAEEON03_NOT_USE := 6 (*Not used - Encoder status not used*)
+		);
+	McAEEON03IOChDINTType : STRUCT (*Type mcAEEON03_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON03IOChUDINTType : STRUCT (*Type mcAEEON03_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON03IOChINTType : STRUCT (*Type mcAEEON03_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON03IOChUINTType : STRUCT (*Type mcAEEON03_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON03IOChSINTType : STRUCT (*Type mcAEEON03_IO_CH_SINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON03IOChUSINTType : STRUCT (*Type mcAEEON03_IO_CH_USINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON03Type : STRUCT (*Encoder status source*)
+		Type : McAEEON03Enum; (*Encoder status selector setting*)
+		IOChannelDINT : McAEEON03IOChDINTType; (*Type mcAEEON03_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON03IOChUDINTType; (*Type mcAEEON03_IO_CH_UDINT settings*)
+		IOChannelINT : McAEEON03IOChINTType; (*Type mcAEEON03_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON03IOChUINTType; (*Type mcAEEON03_IO_CH_UINT settings*)
+		IOChannelSINT : McAEEON03IOChSINTType; (*Type mcAEEON03_IO_CH_SINT settings*)
+		IOChannelUSINT : McAEEON03IOChUSINTType; (*Type mcAEEON03_IO_CH_USINT settings*)
+	END_STRUCT;
+	McAEEON0AbsType : STRUCT (*Type mcAEEON0_ABS settings*)
+		PositionFormat : McAEEON00Type; (*Position value format*)
+		PositionRollover : McAEEON01Type; (*Position value rollover mode*)
+		PositionTime : McAEEON02Type; (*Position time source*)
+		EncoderStatus : McAEEON03Type; (*Encoder status source*)
+	END_STRUCT;
+	McAEEON04Enum :
+		( (*Position selector setting*)
+		mcAEEON04_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON04_IO_CH_UDINT := 1, (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		mcAEEON04_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON04_IO_CH_UINT := 3 (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		);
+	McAEEON04IOChDINTType : STRUCT (*Type mcAEEON04_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON04IOChUDINTType : STRUCT (*Type mcAEEON04_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON04IOChINTType : STRUCT (*Type mcAEEON04_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON04IOChUINTType : STRUCT (*Type mcAEEON04_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position*)
+	END_STRUCT;
+	McAEEON04Type : STRUCT (*Position source*)
+		Type : McAEEON04Enum; (*Position selector setting*)
+		IOChannelDINT : McAEEON04IOChDINTType; (*Type mcAEEON04_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON04IOChUDINTType; (*Type mcAEEON04_IO_CH_UDINT settings*)
+		IOChannelINT : McAEEON04IOChINTType; (*Type mcAEEON04_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON04IOChUINTType; (*Type mcAEEON04_IO_CH_UINT settings*)
+	END_STRUCT;
+	McAEEON05Enum :
+		( (*Position time selector setting*)
+		mcAEEON05_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON05_IO_CH_UDINT := 1, (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		mcAEEON05_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON05_IO_CH_UINT := 3, (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		mcAEEON05_NOT_USE := 4 (*Not used - Position time not used*)
+		);
+	McAEEON05IOChDINTType : STRUCT (*Type mcAEEON05_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON05IOChUDINTType : STRUCT (*Type mcAEEON05_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON05IOChINTType : STRUCT (*Type mcAEEON05_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON05IOChUINTType : STRUCT (*Type mcAEEON05_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the position time*)
+	END_STRUCT;
+	McAEEON05Type : STRUCT (*Position time source*)
+		Type : McAEEON05Enum; (*Position time selector setting*)
+		IOChannelDINT : McAEEON05IOChDINTType; (*Type mcAEEON05_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON05IOChUDINTType; (*Type mcAEEON05_IO_CH_UDINT settings*)
+		IOChannelINT : McAEEON05IOChINTType; (*Type mcAEEON05_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON05IOChUINTType; (*Type mcAEEON05_IO_CH_UINT settings*)
+	END_STRUCT;
+	McAEEON06Enum :
+		( (*Encoder status selector setting*)
+		mcAEEON06_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON06_IO_CH_UDINT := 1, (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		mcAEEON06_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON06_IO_CH_UINT := 3, (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		mcAEEON06_IO_CH_SINT := 4, (*I/O channel SINT - Data from a signed 8 bit I/O channel*)
+		mcAEEON06_IO_CH_USINT := 5, (*I/O channel USINT - Data from an unsigned 8 bit I/O channel*)
+		mcAEEON06_NOT_USE := 6 (*Not used - Encoder status not used*)
+		);
+	McAEEON06IOChDINTType : STRUCT (*Type mcAEEON06_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON06IOChUDINTType : STRUCT (*Type mcAEEON06_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON06IOChINTType : STRUCT (*Type mcAEEON06_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON06IOChUINTType : STRUCT (*Type mcAEEON06_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON06IOChSINTType : STRUCT (*Type mcAEEON06_IO_CH_SINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON06IOChUSINTType : STRUCT (*Type mcAEEON06_IO_CH_USINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the encoder status*)
+	END_STRUCT;
+	McAEEON06Type : STRUCT (*Encoder status source*)
+		Type : McAEEON06Enum; (*Encoder status selector setting*)
+		IOChannelDINT : McAEEON06IOChDINTType; (*Type mcAEEON06_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON06IOChUDINTType; (*Type mcAEEON06_IO_CH_UDINT settings*)
+		IOChannelINT : McAEEON06IOChINTType; (*Type mcAEEON06_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON06IOChUINTType; (*Type mcAEEON06_IO_CH_UINT settings*)
+		IOChannelSINT : McAEEON06IOChSINTType; (*Type mcAEEON06_IO_CH_SINT settings*)
+		IOChannelUSINT : McAEEON06IOChUSINTType; (*Type mcAEEON06_IO_CH_USINT settings*)
+	END_STRUCT;
+	McAEEON07Enum :
+		( (*Reference pulse selector setting*)
+		mcAEEON07_NOT_USE := 0, (*Not used - Reference pulse not used*)
+		mcAEEON07_USE := 1 (*Used - Reference pulse used*)
+		);
+	McAEEON07UsePosEnum :
+		( (*Position selector setting*)
+		mcAEEON07UP_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON07UP_IO_CH_UDINT := 1, (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		mcAEEON07UP_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON07UP_IO_CH_UINT := 3 (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		);
+	McAEEON07UsePosIOChDINTType : STRUCT (*Type mcAEEON07UP_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse position*)
+	END_STRUCT;
+	McAEEON07UsePosIOChUDINTType : STRUCT (*Type mcAEEON07UP_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse position*)
+	END_STRUCT;
+	McAEEON07UsePosIOChINTType : STRUCT (*Type mcAEEON07UP_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse position*)
+	END_STRUCT;
+	McAEEON07UsePosIOChUINTType : STRUCT (*Type mcAEEON07UP_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse position*)
+	END_STRUCT;
+	McAEEON07UsePosType : STRUCT (*Reference pulse position source*)
+		Type : McAEEON07UsePosEnum; (*Position selector setting*)
+		IOChannelDINT : McAEEON07UsePosIOChDINTType; (*Type mcAEEON07UP_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON07UsePosIOChUDINTType; (*Type mcAEEON07UP_IO_CH_UDINT settings*)
+		IOChannelINT : McAEEON07UsePosIOChINTType; (*Type mcAEEON07UP_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON07UsePosIOChUINTType; (*Type mcAEEON07UP_IO_CH_UINT settings*)
+	END_STRUCT;
+	McAEEON07UseCntEnum :
+		( (*Count selector setting*)
+		mcAEEON07UC_IO_CH_DINT := 0, (*I/O channel DINT - Data from a signed 32 bit I/O channel*)
+		mcAEEON07UC_IO_CH_UDINT := 1, (*I/O channel UDINT - Data from an unsigned 32 bit I/O channel*)
+		mcAEEON07UC_IO_CH_INT := 2, (*I/O channel INT - Data from a signed 16 bit I/O channel*)
+		mcAEEON07UC_IO_CH_UINT := 3 (*I/O channel UINT - Data from an unsigned 16 bit I/O channel*)
+		);
+	McAEEON07UseCntIOChDINTType : STRUCT (*Type mcAEEON07UC_IO_CH_DINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse count*)
+	END_STRUCT;
+	McAEEON07UseCntIOChUDINTType : STRUCT (*Type mcAEEON07UC_IO_CH_UDINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse count*)
+	END_STRUCT;
+	McAEEON07UseCntIOChINTType : STRUCT (*Type mcAEEON07UC_IO_CH_INT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse count*)
+	END_STRUCT;
+	McAEEON07UseCntIOChUINTType : STRUCT (*Type mcAEEON07UC_IO_CH_UINT settings*)
+		ChannelMapping : STRING[250]; (*Input source for the reference pulse count*)
+	END_STRUCT;
+	McAEEON07UseCntType : STRUCT (*Reference pulse count source*)
+		Type : McAEEON07UseCntEnum; (*Count selector setting*)
+		IOChannelDINT : McAEEON07UseCntIOChDINTType; (*Type mcAEEON07UC_IO_CH_DINT settings*)
+		IOChannelUDINT : McAEEON07UseCntIOChUDINTType; (*Type mcAEEON07UC_IO_CH_UDINT settings*)
+		IOChannelINT : McAEEON07UseCntIOChINTType; (*Type mcAEEON07UC_IO_CH_INT settings*)
+		IOChannelUINT : McAEEON07UseCntIOChUINTType; (*Type mcAEEON07UC_IO_CH_UINT settings*)
+	END_STRUCT;
+	McAEEON07UseType : STRUCT (*Type mcAEEON07_USE settings*)
+		Position : McAEEON07UsePosType; (*Reference pulse position source*)
+		Count : McAEEON07UseCntType; (*Reference pulse count source*)
+	END_STRUCT;
+	McAEEON07Type : STRUCT (*Use reference pulse*)
+		Type : McAEEON07Enum; (*Reference pulse selector setting*)
+		Used : McAEEON07UseType; (*Type mcAEEON07_USE settings*)
+	END_STRUCT;
+	McAEEON0IncrType : STRUCT (*Type mcAEEON0_INCR settings*)
+		Position : McAEEON04Type; (*Position source*)
+		PositionTime : McAEEON05Type; (*Position time source*)
+		EncoderStatus : McAEEON06Type; (*Encoder status source*)
+		ReferencePulse : McAEEON07Type; (*Use reference pulse*)
+	END_STRUCT;
+	McAEEON0Type : STRUCT (*Type of the encoder*)
+		Type : McAEEON0Enum; (*Position type selector setting*)
+		Absolute : McAEEON0AbsType; (*Type mcAEEON0_ABS settings*)
+		Incremental : McAEEON0IncrType; (*Type mcAEEON0_INCR settings*)
+	END_STRUCT;
+	McAEEON10Enum :
+		( (*Position interpolation selector setting*)
+		mcAEEON10_NOT_USE := 0, (*Not used - Encoder position interpolation is not used*)
+		mcAEEON10_USE := 1 (*Used - Encoder position inerpolation is used*)
+		);
+	McAEEON10Type : STRUCT (*Encoder position interpolation*)
+		Type : McAEEON10Enum; (*Position interpolation selector setting*)
+	END_STRUCT;
+	McAEEON1Type : STRUCT (*Position information processing parameters*)
+		TimeoutValue : REAL; (*Encoder position information refresh timeout time [s]*)
+		PositionInterpolation : McAEEON10Type; (*Encoder position interpolation*)
+		NetworkCompensationTime : REAL; (*The encoder position is pre-calculated by this amount of time [s]*)
+	END_STRUCT;
+	McAEEAUseEncLinkOEPEEONType : STRUCT (*Type mcAEEAUELOEPE_ENC_ON_NETW settings*)
+		IncrementsPerEncoderRevolution : UDINT; (*Absolute number of increments of an encoder revolution [Increment/Rev]*)
+		PositionType : McAEEON0Type; (*Type of the encoder*)
+		PositionProcessing : McAEEON1Type; (*Position information processing parameters*)
+	END_STRUCT;
 	McAEEAUseEncLinkOneEncPosEncType : STRUCT
 		Type : McAEEAUseEncLinkOneEncPosEncEnum; (*Position encoder selector setting*)
+		EncoderOnNetwork : McAEEAUseEncLinkOEPEEONType; (*Type mcAEEAUELOEPE_ENC_ON_NETW settings*)
 	END_STRUCT;
 	McAEEAUELOneEncPosFltrEnum :
 		( (*Position filter selector setting*)
@@ -3081,6 +3540,88 @@ TYPE
 	END_STRUCT;
 	McCfgAcpExtEncAxHomeType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_ACP_EXT_ENC_AX_HOME*)
 		Homing : McAEEAHType; (*Homing mode and parameters which can be used within the application program as preconfigured setting*)
+	END_STRUCT;
+	McAFAIProdFamEnum :
+		( (*ACOPOS product family selector setting*)
+		mcAFAIPF_ACP := 0, (*ACOPOS -*)
+		mcAFAIPF_ACPM := 1, (*ACOPOSmulti -*)
+		mcAFAIPF_ACP_P3 := 2 (*ACOPOS P3 -*)
+		);
+	McAFAIACPAnInEnum :
+		( (*Analog input 1-4 selector setting*)
+		mcAFAIACPAI_SS2X111 := 0, (*SS2.X11.1 -*)
+		mcAFAIACPAI_SS2X112 := 1, (*SS2.X11.2 -*)
+		mcAFAIACPAI_SS3X111 := 2, (*SS3.X11.1 -*)
+		mcAFAIACPAI_SS3X112 := 3, (*SS3.X11.2 -*)
+		mcAFAIACPAI_SS4X111 := 4, (*SS4.X11.1 -*)
+		mcAFAIACPAI_SS4X112 := 5 (*SS4.X11.2 -*)
+		);
+	McAFAIAnInScEnum :
+		( (*Scaling selector setting*)
+		mcAFAIAIS_NOT_USE := 0, (*Not used -*)
+		mcAFAIAIS_USE := 1 (*Used -*)
+		);
+	McAFAIAnInScUseType : STRUCT (*Type mcAFAIAIS_USE settings*)
+		MinimumVoltage : REAL; (*Minimum voltage of the analog input [V]*)
+		MaximumVoltage : REAL; (*Maximum voltage of the analog input [V]*)
+		MinimumScaledValue : REAL; (*Minimum scaled value of the analog input [Signal units]*)
+		MaximumScaledValue : REAL; (*Maximum scaled value of the analog input [Signal units]*)
+	END_STRUCT;
+	McAFAIAnInScType : STRUCT
+		Type : McAFAIAnInScEnum; (*Scaling selector setting*)
+		Used : McAFAIAnInScUseType; (*Type mcAFAIAIS_USE settings*)
+	END_STRUCT;
+	McAFAIACPAnInCmnType : STRUCT (*Common settings for all Type values*)
+		Scaling : McAFAIAnInScType;
+	END_STRUCT;
+	McAFAIACPAnInType : STRUCT
+		Type : McAFAIACPAnInEnum; (*Analog input 1-4 selector setting*)
+		Common : McAFAIACPAnInCmnType; (*Common settings for all Type values*)
+	END_STRUCT;
+	McAFAIACPType : STRUCT (*Type mcAFAIPF_ACP settings*)
+		AnalogInput : McCfgUnboundedArrayType;
+	END_STRUCT;
+	McAFAIACPmultiAnInEnum :
+		( (*Analog input 1-4 selector setting*)
+		mcAFAIACPMULTIAI_SS2X111 := 0, (*SS2.X11.1 -*)
+		mcAFAIACPMULTIAI_SS2X112 := 1, (*SS2.X11.2 -*)
+		mcAFAIACPMULTIAI_SS2X113 := 2, (*SS2.X11.3 -*)
+		mcAFAIACPMULTIAI_SS2X114 := 3 (*SS2.X11.4 -*)
+		);
+	McAFAIACPmultiAnInCmnType : STRUCT (*Common settings for all Type values*)
+		Scaling : McAFAIAnInScType;
+	END_STRUCT;
+	McAFAIACPmultiAnInType : STRUCT
+		Type : McAFAIACPmultiAnInEnum; (*Analog input 1-4 selector setting*)
+		Common : McAFAIACPmultiAnInCmnType; (*Common settings for all Type values*)
+	END_STRUCT;
+	McAFAIACPmultiType : STRUCT (*Type mcAFAIPF_ACPM settings*)
+		AnalogInput : McCfgUnboundedArrayType;
+	END_STRUCT;
+	McAFAIACPP3AnInEnum :
+		( (*Analog input 1-3 selector setting*)
+		mcAFAIACPP3AI_SS1X41E1 := 0, (*SS1.X41E.1 -*)
+		mcAFAIACPP3AI_SS1X41E2 := 1, (*SS1.X41E.2 -*)
+		mcAFAIACPP3AI_SS1X41E3 := 2 (*SS1.X41E.3 -*)
+		);
+	McAFAIACPP3AnInCmnType : STRUCT (*Common settings for all Type values*)
+		Scaling : McAFAIAnInScType;
+	END_STRUCT;
+	McAFAIACPP3AnInType : STRUCT
+		Type : McAFAIACPP3AnInEnum; (*Analog input 1-3 selector setting*)
+		Common : McAFAIACPP3AnInCmnType; (*Common settings for all Type values*)
+	END_STRUCT;
+	McAFAIACPP3Type : STRUCT (*Type mcAFAIPF_ACP_P3 settings*)
+		AnalogInput : McCfgUnboundedArrayType;
+	END_STRUCT;
+	McAFAIProdFamType : STRUCT
+		Type : McAFAIProdFamEnum; (*ACOPOS product family selector setting*)
+		ACOPOS : McAFAIACPType; (*Type mcAFAIPF_ACP settings*)
+		ACOPOSmulti : McAFAIACPmultiType; (*Type mcAFAIPF_ACPM settings*)
+		ACOPOSP3 : McAFAIACPP3Type; (*Type mcAFAIPF_ACP_P3 settings*)
+	END_STRUCT;
+	McCfgAxFeatAInType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_AX_FEAT_A_IN*)
+		ProductFamily : McAFAIProdFamType;
 	END_STRUCT;
 	McCfgAxFeatAcpParTblType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_AX_FEAT_ACP_PAR_TBL*)
 		ACOPOSParameterTableReference : STRING[250]; (*Name of the ACOPOS parameter table*)

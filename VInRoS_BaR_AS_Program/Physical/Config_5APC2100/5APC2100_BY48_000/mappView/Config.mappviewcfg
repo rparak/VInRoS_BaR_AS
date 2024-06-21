@@ -7,7 +7,7 @@
         <Property ID="WebServerPort" Value="81" />
       </Selector>
       <Property ID="MaxClientConnections" Value="10" />
-      <Property ID="MaxBRClientConnections" Value="0" />
+      <Property ID="MaxBRClientConnections" Value="10" />
       <Selector ID="AuthenticationMode" Value="AuthenticationModeRbac" />
       <Group ID="TcpProxyConf">
         <Selector ID="InsecureMode" Value="1" />

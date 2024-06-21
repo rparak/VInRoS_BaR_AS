@@ -71,7 +71,8 @@ TYPE
 	McStopModeEnum :
 	(
 		mcSTOPMODE_JERK_LIMIT,			 (*Takes into account the jerk limit value while stopping*)
-		mcSTOPMODE_NO_JERK_LIMIT		 (*Ignores the jerk limit value while stopping*)
+		mcSTOPMODE_NO_JERK_LIMIT,		 (*Ignores the jerk limit value while stopping*)
+		mcSTOPMODE_QUICKSTOP			 (*Considers only velocity and acceleration axis limits, motor and gearbox torques limits and cross section loads limits*)
 	);
 
 	McIplModeEnum :
@@ -131,6 +132,7 @@ TYPE
 		mcSCS3 := 5,	 (*System coordinate system 3*)
 		mcSCS4 := 6,	 (*System coordinate system 4*)
 		mcSCS5 := 7,	 (*System coordinate system 5*)
+		mcBCS := 8,	 (*Base coordinate system*)
 		mcTCS := 9,	 (*Tool coordinate system*)
 		mcGCS := 10,	 (*Global coordinate system*)
 		mcJACS := 100,	 (*Joint axes coordinate system*)
@@ -186,7 +188,8 @@ TYPE
 		mcPCM_LOAD 	:= 0,	 	(*Load from Config*)
 		mcPCM_SAVE	:= 1,	 	(*Save to Config*)
 		mcPCM_CREATE:= 2,	 	(*Create Config*)
-		mcPCM_DELETE:= 3		(*Delete Config*)
+		mcPCM_DELETE:= 3,		(*Delete Config*)
+		mcPCM_DEFAULT_VALUES:= 4(*Default Config Values*)
 	);
 
 	McCommunicationStateEnum :
@@ -314,13 +317,17 @@ TYPE
 		controlif : REFERENCE TO McInternalTrackingPathIfType; (**)
 	END_STRUCT;
 
+	McComponentType : UDINT;
+
 	McGetCoordSystemIdentParType : STRUCT
 		AxesGroup : REFERENCE TO McAxesGroupType; (*The axis group reference establishes the connection between the function block and the axis group.*)
 	END_STRUCT;
 
-	McComponentType : UDINT;
+	McTransformPositionParType : STRUCT
+		Component : McComponentType; (*Reference to the component (optional)*)
+	END_STRUCT;
 
-	 McProcessParamAdvParType : STRUCT
+	McProcessParamAdvParType : STRUCT
 		Name : STRING[250]; (*Name of the reference within the component which should be manipulated.*)
 	END_STRUCT;
 

@@ -7,7 +7,7 @@ TYPE
 	McAddGroupReadInfoType : 	STRUCT
 		InMotion : BOOL; (*Axis of group is moving*)
 		GroupInterrupted : BOOL; (*Group movement interrupted*)
-		WaitForContinue : BOOL; (*Command "Continue" is expected (currently not implemented)*)
+		WaitForContinue : BOOL; (*Command "Continue" is expected*)
 		PLCopenState :  McGroupPLCopenStateEnum; (*Extended PLCopen state*)
 		Quickstop : McGroupQuickstopInfoType;  (*Quickstop information*)
 	END_STRUCT;
@@ -73,8 +73,8 @@ TYPE
 	McPathInfoType : 	STRUCT
 		CurrentPathVelocity : REAL; (*Current speed of path*)
 		CurrentPathPosition : LREAL; (*Current path position*)
-		CurrentLength : LREAL; (*Length of the path of the current movement (not currently available)*)
-		RemainingDistance : LREAL; (*Distance remaining until the end of the current movement (not currently available)*)
+		CurrentLength : LREAL; (*Length of the path of the current movement*)
+		RemainingDistance : LREAL; (*Distance remaining until the end of the current movement*)
 		ProgrammedPathVelocity : REAL; (*Programmed speed of path*)
 	END_STRUCT;
 	McPrgAdvParType : 	STRUCT
@@ -117,7 +117,7 @@ TYPE
 		InitProgram : STRING[260]; (*Name of the current initialization subroutine*)
 		CurrentProgram : STRING[260]; (*Name of the currently running subroutine*)
 		ProgramMonitor : McPrgInfoPrgMonitorType; (*Program monitor information*)
-		ProgramPhase : McPrgPhaseEnum; (*Program phase (not currently implemented)*)
+		ProgramPhase : McPrgPhaseEnum; (*Program phase*)
 		InterruptStatus : McPrgInfoInterruptEnum; (*Interrupt status*)
 	END_STRUCT;
 	McToolParType : 	STRUCT
@@ -210,10 +210,20 @@ TYPE
 		mcUNLOADPRG_PROGRAM, (*Unload program of given name*)
 		mcUNLOADPRG_ALL      (*Unload all programs*)
 		);
-		McToolDynamicsType : 	STRUCT  (*Tool dynamic parameters*)
+	McToolDynamicsType : 	STRUCT  (*Tool dynamic parameters*)
 		Mass : LREAL; (*Tool mass [kg]*)
 		CenterOfGravity : McToolTranslationType; (*Tool center of gravity [m]*)
 		MomentOfInertiaAbout : McToolTranslationType; (*Tool moment of interia about XYZ [kgm2]*)
+	END_STRUCT;
+	McRestartDataModeEnum :
+		(
+		mcRESTARTDATA_LOAD,  (*Load restart data from a file*)
+		mcRESTARTDATA_SAVE  (*Save restart data to a file*)
+		);
+	McProductLoadType : 	STRUCT  (*Product load parameters*)
+		Mass : LREAL; (*Product mass [kg]*)
+		CenterOfGravity : McToolTranslationType; (*Product center of gravity [m]*)
+		MomentOfInertiaAbout : McToolTranslationType; (*Product moment of interia about XYZ [kgm2]*)
 	END_STRUCT;
 	McToolWireFrameType : 	STRUCT  (*Tool wire frame description*)
 		Point : ARRAY[0..15]OF McToolWireFramePointType; (*Tool wire frame points*)
@@ -243,5 +253,25 @@ TYPE
 	McExclusionParType : 	STRUCT
 		Axis : REFERENCE TO McAxisType; (*Defines the axis used for the command by using the axis reference. Ignored when '0'*)
 		AxisName : STRING[250]; (*Defines the axis used for the command by using the axis name within path control. Ignored when empty.*)
+	END_STRUCT;
+	McInterruptModeEnum :
+		(
+		mcINTMODE_JERK_LIMIT (*Takes into account the jerk limit value while interrupting.*)
+		);
+	McInterruptTypeEnum:
+		(
+		mcINTTYPE_STANDARD,		(*The axes stay in state SynchronizedMotion after interruption of the movement.*)
+		mcINTTYPE_RELEASE_AXES	(*The axes are released after interruption of the movement, they get into the state Standstill.*)
+		);
+	McInterruptPhaseEnum:
+		(
+		mcINTPH_INACTIVE,		(*The interrupt is not active.*)
+		mcINTPH_INTERRUPTING, 	(*The interruption of the movement is active.*)
+		mcINTPH_WAIT_FOR_TRACK_PATH_STOP,	(*Wait for the user stops the tracking path (only for tracking).*)
+		mcINTPH_INTERRUPTED		(*The movement is interrupted and the axes are released if requested.*)
+		);
+	McInterruptParType : STRUCT
+		Mode : McInterruptModeEnum;	(*Mode of the interruption of the movement.*)
+		Type : McInterruptTypeEnum;	(*Defines the state of axes after the interruption of the movement.*)
 	END_STRUCT;
 END_TYPE
