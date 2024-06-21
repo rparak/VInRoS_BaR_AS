@@ -27,7 +27,7 @@ void _INIT ProgramInit(void)
 	Trajectory_Str.Targets.Position[2] = 600.0;
 	Trajectory_Str.Targets.Position[3] = 200.0;
 	Trajectory_Str.Targets.Position[4] = 750.0;
-	Trajectory_Str.Targets.Position[5] = 400.0;
+	Trajectory_Str.Targets.Position[5] = 100.0;
 	
 	Trajectory_Str.Targets.Velocity[0] = 300.0;
 	Trajectory_Str.Targets.Velocity[1] = 200.0;

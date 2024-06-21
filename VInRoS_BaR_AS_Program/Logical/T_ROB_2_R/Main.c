@@ -35,211 +35,216 @@ void _INIT ProgramInit(void)
 
 void _CYCLIC ProgramCyclic(void)
 {
-	switch(state_id){
-		case ROB_STATE_ACTIVE:
-			{
-				if(Global_VInRoS_Str.Rob_Id_2_R.Info.Active == TRUE){
-					state_id = ROB_STATE_POWER;
+	if(SIMULATION_ENABLE == FALSE){
+		switch(state_id){
+			case ROB_STATE_ACTIVE:
+				{
+					if(Global_VInRoS_Str.Rob_Id_2_R.Info.Active == TRUE){
+						state_id = ROB_STATE_POWER;
+					}
 				}
-			}
-			break;
+				break;
 			
-		case ROB_STATE_POWER:
-			{
-				if(Global_VInRoS_Str.Rob_Id_2_R.Command.Power == TRUE){
-					ABB_Library_Rob_1.Power_ON = TRUE;
-					Global_VInRoS_Str.Rob_Id_2_R.Command.Power = FALSE;
-				}
+			case ROB_STATE_POWER:
+				{
+					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Power == TRUE){
+						ABB_Library_Rob_1.Power_ON = TRUE;
+						Global_VInRoS_Str.Rob_Id_2_R.Command.Power = FALSE;
+					}
 				
-				if(Global_VInRoS_Str.Rob_Id_2_R.Info.Power == TRUE && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
-					state_id = ROB_STATE_WAIT;
+					if(Global_VInRoS_Str.Rob_Id_2_R.Info.Power == TRUE && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
+						state_id = ROB_STATE_WAIT;
+					}
 				}
-			}
-			break;
+				break;
 			
-		case ROB_STATE_WAIT:
-			{
-				ABB_Library_Rob_1.Command.STOP  = FALSE;
-				ABB_Library_Rob_1.Command.START = FALSE;
+			case ROB_STATE_WAIT:
+				{
+					ABB_Library_Rob_1.Command.STOP  = FALSE;
+					ABB_Library_Rob_1.Command.START = FALSE;
 				
-				if(Global_VInRoS_Str.Rob_Id_2_R.Command.Home == TRUE){
-					state_id = ROB_STATE_HOME_UPD_PARAMETERS_1;
-				}
+					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Home == TRUE){
+						state_id = ROB_STATE_HOME_UPD_PARAMETERS_1;
+					}
 				
-				if(Global_VInRoS_Str.Rob_Id_2_R.Command.Start == TRUE){
-					state_id = ROB_STATE_UPD_PARAMETERS_1;
+					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Start == TRUE){
+						state_id = ROB_STATE_UPD_PARAMETERS_1;
+					}
 				}
-			}
-			break;
+				break;
 			
-		case ROB_STATE_UPD_PARAMETERS_1:
-			{
-				Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = FALSE;
+			case ROB_STATE_UPD_PARAMETERS_1:
+				{
+					Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = FALSE;
 
-				memcpy(ABB_Library_Rob_1.Parameter.Joint, Trajectory_Str.Targets.Joint, 
-					(sizeof(Trajectory_Str.Targets.Joint) / sizeof(Trajectory_Str.Targets.Joint[0])) * sizeof(REAL));
-				int i;
-				for(i = 0; i < Trajectory_Str.Length; i++){
-					ABB_Library_Rob_1.Parameter.Speed[i] = Trajectory_Str.Targets.Speed[i];
-					ABB_Library_Rob_1.Parameter.Zone[i] = Trajectory_Str.Targets.Zone[i];
+					memcpy(ABB_Library_Rob_1.Parameter.Joint, Trajectory_Str.Targets.Joint, 
+						(sizeof(Trajectory_Str.Targets.Joint) / sizeof(Trajectory_Str.Targets.Joint[0])) * sizeof(REAL));
+					int i;
+					for(i = 0; i < Trajectory_Str.Length; i++){
+						ABB_Library_Rob_1.Parameter.Speed[i] = Trajectory_Str.Targets.Speed[i];
+						ABB_Library_Rob_1.Parameter.Zone[i] = Trajectory_Str.Targets.Zone[i];
+					}
+				
+					ABB_Library_Rob_1.Parameter.Trajectory_Size = Trajectory_Str.Length;
+				
+					ABB_Library_Rob_1.Command.ID.Update = UPT_ID_TRAJECTORY_JOINT;
+					ABB_Library_Rob_1.Command.UPDATE    = TRUE;
+				
+					if(ABB_Library_Rob_1.Internal.Update.actual_state != UPT_STATE_WAIT){
+						state_id = ROB_STATE_UPD_PARAMETERS_2;
+					}
 				}
-				
-				ABB_Library_Rob_1.Parameter.Trajectory_Size = Trajectory_Str.Length;
-				
-				ABB_Library_Rob_1.Command.ID.Update = UPT_ID_TRAJECTORY_JOINT;
-				ABB_Library_Rob_1.Command.UPDATE    = TRUE;
-				
-				if(ABB_Library_Rob_1.Internal.Update.actual_state != UPT_STATE_WAIT){
-					state_id = ROB_STATE_UPD_PARAMETERS_2;
-				}
-			}
-			break;
+				break;
 			
-		case ROB_STATE_UPD_PARAMETERS_2:
-			{
-				if(ABB_Library_Rob_1.Status.Robot.Update_Done == TRUE && ABB_Library_Rob_1.Internal.Update.actual_state == UPT_STATE_WAIT){
-					Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = TRUE;
-					state_id = ROB_STATE_MOTION_1;
+			case ROB_STATE_UPD_PARAMETERS_2:
+				{
+					if(ABB_Library_Rob_1.Status.Robot.Update_Done == TRUE && ABB_Library_Rob_1.Internal.Update.actual_state == UPT_STATE_WAIT){
+						Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = TRUE;
+						state_id = ROB_STATE_MOTION_1;
+					}
 				}
-			}
-			break;
+				break;
 		
-		case ROB_STATE_MOTION_1:
-			{
-				ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
-				ABB_Library_Rob_1.Command.START = TRUE;
+			case ROB_STATE_MOTION_1:
+				{
+					ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
+					ABB_Library_Rob_1.Command.START = TRUE;
 				
-				if(Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == TRUE){
-					state_id = ROB_STATE_MOTION_2;
-				}
-			}
-			break;
-			
-		case ROB_STATE_MOTION_2:
-			{
-				ABB_Library_Rob_1.Command.START = FALSE;
-				
-				Trajectory_Str.Iteration = ABB_Library_Rob_1.Status.Robot.Trajectory_ID;
-				
-				if(Global_VInRoS_Str.Rob_Id_2_R.Command.Stop == TRUE){
-					state_id = ROB_STATE_STOP;
-				}else{
-					if(Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position == TRUE){
-						state_id = ROB_STATE_WAIT;
+					if(Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == TRUE){
+						state_id = ROB_STATE_MOTION_2;
 					}
 				}
-			}
-			break;
+				break;
 			
-		case ROB_STATE_HOME_UPD_PARAMETERS_1:
-			{
-				Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = FALSE;
-				Global_VInRoS_Str.Rob_Id_2_R.Command.Home = FALSE;
+			case ROB_STATE_MOTION_2:
+				{
+					ABB_Library_Rob_1.Command.START = FALSE;
 				
-				ABB_Library_Rob_1.Parameter.Joint[0].Q[0] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[1] = -130.0;
-				ABB_Library_Rob_1.Parameter.Joint[0].Q[2] = 30.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[3] = 0.0;
-				ABB_Library_Rob_1.Parameter.Joint[0].Q[4] = 40.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[5] = 0.0;
-				ABB_Library_Rob_1.Parameter.Joint[0].Q[6] = -135.0;
-				ABB_Library_Rob_1.Parameter.Speed[0] = vSPEED_100;
-				ABB_Library_Rob_1.Parameter.Zone[0]  = zZone_fine;
+					Trajectory_Str.Iteration = ABB_Library_Rob_1.Status.Robot.Trajectory_ID;
 				
-				ABB_Library_Rob_1.Parameter.Trajectory_Size = 1;
-				
-				ABB_Library_Rob_1.Command.ID.Update = UPT_ID_TRAJECTORY_JOINT;
-				ABB_Library_Rob_1.Command.UPDATE    = TRUE;
-				
-				if(ABB_Library_Rob_1.Internal.Update.actual_state != UPT_STATE_WAIT){
-					state_id = ROB_STATE_HOME_UPD_PARAMETERS_2;
-				}
-			}
-			break;
-			
-		case ROB_STATE_HOME_UPD_PARAMETERS_2:
-			{
-				if(ABB_Library_Rob_1.Status.Robot.Update_Done == TRUE && ABB_Library_Rob_1.Internal.Update.actual_state == UPT_STATE_WAIT){
-					Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = TRUE;
-					state_id = ROB_STATE_HOME_MOTION_1;
-				}
-			}
-			break;
-			
-		case ROB_STATE_HOME_MOTION_1:
-			{
-				Global_VInRoS_Str.Rob_Id_2_R.Info.Home = FALSE;
-				
-				ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
-				ABB_Library_Rob_1.Command.START = TRUE;
-				
-				if(Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == TRUE){
-					state_id = ROB_STATE_HOME_MOTION_2;
-				}
-			}
-			break;
-			
-		case ROB_STATE_HOME_MOTION_2:
-			{
-				ABB_Library_Rob_1.Command.START = FALSE;
-				
-				if(Global_VInRoS_Str.Rob_Id_2_R.Command.Stop == TRUE){
-					state_id = ROB_STATE_STOP;
-				}else{
-					if(Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position == TRUE){
-						Global_VInRoS_Str.Rob_Id_2_R.Info.Home = TRUE;
-						state_id = ROB_STATE_WAIT;
+					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Stop == TRUE){
+						state_id = ROB_STATE_STOP;
+					}else{
+						if(Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position == TRUE){
+							state_id = ROB_STATE_WAIT;
+						}
 					}
 				}
-			}
-			break;
+				break;
 			
-		case ROB_STATE_STOP:
-			{
-				Global_VInRoS_Str.Rob_Id_2_R.Command.Home  = FALSE;
-				Global_VInRoS_Str.Rob_Id_2_R.Command.Start = FALSE;
-				Global_VInRoS_Str.Rob_Id_2_R.Command.Stop  = FALSE;
+			case ROB_STATE_HOME_UPD_PARAMETERS_1:
+				{
+					Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = FALSE;
+					Global_VInRoS_Str.Rob_Id_2_R.Command.Home = FALSE;
 				
-				if(ABB_Library_Rob_1.Internal.actual_state == ABBt_STATE_WAIT && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
-					state_id = ROB_STATE_WAIT;
-				}else{
-					ABB_Library_Rob_1.Command.STOP = TRUE;
+					ABB_Library_Rob_1.Parameter.Joint[0].Q[0] = 0.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[1] = -130.0;
+					ABB_Library_Rob_1.Parameter.Joint[0].Q[2] = 30.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[3] = 0.0;
+					ABB_Library_Rob_1.Parameter.Joint[0].Q[4] = 40.0; ABB_Library_Rob_1.Parameter.Joint[0].Q[5] = 0.0;
+					ABB_Library_Rob_1.Parameter.Joint[0].Q[6] = -135.0;
+					ABB_Library_Rob_1.Parameter.Speed[0] = vSPEED_100;
+					ABB_Library_Rob_1.Parameter.Zone[0]  = zZone_fine;
+				
+					ABB_Library_Rob_1.Parameter.Trajectory_Size = 1;
+				
+					ABB_Library_Rob_1.Command.ID.Update = UPT_ID_TRAJECTORY_JOINT;
+					ABB_Library_Rob_1.Command.UPDATE    = TRUE;
+				
+					if(ABB_Library_Rob_1.Internal.Update.actual_state != UPT_STATE_WAIT){
+						state_id = ROB_STATE_HOME_UPD_PARAMETERS_2;
+					}
 				}
-			}
-			break;
+				break;
 			
-		case ROB_STATE_SAFETY:
-			{
-			}
-			break;
+			case ROB_STATE_HOME_UPD_PARAMETERS_2:
+				{
+					if(ABB_Library_Rob_1.Status.Robot.Update_Done == TRUE && ABB_Library_Rob_1.Internal.Update.actual_state == UPT_STATE_WAIT){
+						Global_VInRoS_Str.Rob_Id_2_R.Info.Update_Done = TRUE;
+						state_id = ROB_STATE_HOME_MOTION_1;
+					}
+				}
+				break;
 			
-		case ROB_STATE_ERROR:
-			{	
-			}
-			break;
-	}
-	
-	ABB_Library(&ABB_Library_Rob_1);
-	
-	Global_VInRoS_Str.Rob_Id_2_R.Info.Active = ABB_Library_Rob_1.Status.Robot.Active;
-	Global_VInRoS_Str.Rob_Id_2_R.Info.Power = ABB_Library_Rob_1.Status.Robot.System.MOTOR_ON;
-	if(ABB_Library_Rob_1.Status.Robot.In_Position == TRUE && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
-		Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position = TRUE;
-	}else{
-		Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position = FALSE;
-	}
-	Global_VInRoS_Str.Rob_Id_2_R.Info.Error  = FALSE;
-	Global_VInRoS_Str.Rob_Id_2_R.Info.Safety = FALSE;
-	
-	if(Global_VInRoS_Str.Rob_Id_2_R.Info.Power == TRUE){
-		if(Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position == FALSE){
-			Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active = TRUE;
-		}else{
-			Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active = FALSE;
+			case ROB_STATE_HOME_MOTION_1:
+				{
+					Global_VInRoS_Str.Rob_Id_2_R.Info.Home = FALSE;
+				
+					ABB_Library_Rob_1.Command.ID.Motion = MAIN_ID_JOINT_ABSOLUTE;
+					ABB_Library_Rob_1.Command.START = TRUE;
+				
+					if(Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == TRUE){
+						state_id = ROB_STATE_HOME_MOTION_2;
+					}
+				}
+				break;
+			
+			case ROB_STATE_HOME_MOTION_2:
+				{
+					ABB_Library_Rob_1.Command.START = FALSE;
+				
+					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Stop == TRUE){
+						state_id = ROB_STATE_STOP;
+					}else{
+						if(Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position == TRUE){
+							Global_VInRoS_Str.Rob_Id_2_R.Info.Home = TRUE;
+							state_id = ROB_STATE_WAIT;
+						}
+					}
+				}
+				break;
+			
+			case ROB_STATE_STOP:
+				{
+					Global_VInRoS_Str.Rob_Id_2_R.Command.Home  = FALSE;
+					Global_VInRoS_Str.Rob_Id_2_R.Command.Start = FALSE;
+					Global_VInRoS_Str.Rob_Id_2_R.Command.Stop  = FALSE;
+				
+					if(ABB_Library_Rob_1.Internal.actual_state == ABBt_STATE_WAIT && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
+						state_id = ROB_STATE_WAIT;
+					}else{
+						ABB_Library_Rob_1.Command.STOP = TRUE;
+					}
+				}
+				break;
+			
+			case ROB_STATE_SAFETY:
+				{
+				}
+				break;
+			
+			case ROB_STATE_ERROR:
+				{	
+				}
+				break;
 		}
-	}
 	
-	memcpy(Global_VInRoS_Str.Rob_Id_2_R.Position.Q, ABB_Library_Rob_1.RT_Data.Q, 
-		(sizeof(ABB_Library_Rob_1.RT_Data.Q) / sizeof(ABB_Library_Rob_1.RT_Data.Q[0])) * sizeof(REAL));
+		ABB_Library(&ABB_Library_Rob_1);
 	
-	if(Global_VInRoS_Str.Rob_Id_2_R.Info.Error == TRUE){
-		state_id = ROB_STATE_ERROR;	
+		Global_VInRoS_Str.Rob_Id_2_R.Info.Active = ABB_Library_Rob_1.Status.Robot.Active;
+		Global_VInRoS_Str.Rob_Id_2_R.Info.Power = ABB_Library_Rob_1.Status.Robot.System.MOTOR_ON;
+		if(ABB_Library_Rob_1.Status.Robot.In_Position == TRUE && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
+			Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position = TRUE;
+		}else{
+			Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position = FALSE;
+		}
+		Global_VInRoS_Str.Rob_Id_2_R.Info.Error  = FALSE;
+		Global_VInRoS_Str.Rob_Id_2_R.Info.Safety = FALSE;
+	
+		if(Global_VInRoS_Str.Rob_Id_2_R.Info.Power == TRUE){
+			if(Global_VInRoS_Str.Rob_Id_2_R.Info.In_Position == FALSE){
+				Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active = TRUE;
+			}else{
+				Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active = FALSE;
+			}
+		}
+	
+		memcpy(Global_VInRoS_Str.Rob_Id_2_R.Position.Q, ABB_Library_Rob_1.RT_Data.Q, 
+			(sizeof(ABB_Library_Rob_1.RT_Data.Q) / sizeof(ABB_Library_Rob_1.RT_Data.Q[0])) * sizeof(REAL));
+	
+		if(Global_VInRoS_Str.Rob_Id_2_R.Info.Error == TRUE){
+			state_id = ROB_STATE_ERROR;	
+		}
+	}else{
+		Global_VInRoS_Str.Rob_Id_2_R.Info.Power = TRUE;
+		Global_VInRoS_Str.Rob_Id_2_R.Info.Home  = TRUE;
 	}
 }
