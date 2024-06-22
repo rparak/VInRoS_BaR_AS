@@ -243,6 +243,60 @@ void _CYCLIC ProgramCyclic(void)
 			state_id = ROB_STATE_ERROR;	
 		}
 	}else{
+		switch(state_id){
+			case ROB_STATE_ACTIVE:
+				{
+					if(Global_VInRoS_Str.Rob_Id_1.Info.Active == TRUE){
+						state_id = ROB_STATE_WAIT;
+					}
+				}
+				break;
+		
+			case ROB_STATE_WAIT:
+				{
+					if(Global_VInRoS_Str.Rob_Id_1.Command.Home == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == FALSE){
+						state_id = ROB_STATE_HOME_MOTION_1;
+					}
+				
+					if(Global_VInRoS_Str.Rob_Id_1.Command.Start == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == FALSE){
+						state_id = ROB_STATE_MOTION_1;
+					}
+					
+					if(Global_VInRoS_Str.Rob_Id_1.Command.Stop == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE){
+						state_id = ROB_STATE_STOP;
+					}
+					
+				}
+				break;
+		
+			case ROB_STATE_MOTION_1:
+				{
+					if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE){
+						Global_VInRoS_Str.Rob_Id_1.Command.Start = FALSE;
+						state_id = ROB_STATE_WAIT;
+					}
+				}
+				break;
+		
+			case ROB_STATE_HOME_MOTION_1:
+				{		
+					if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE){
+						Global_VInRoS_Str.Rob_Id_1.Command.Home = FALSE;
+						state_id = ROB_STATE_WAIT;
+					}	
+				}
+				break;
+		
+			case ROB_STATE_STOP:
+				{
+					if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == FALSE){
+						Global_VInRoS_Str.Rob_Id_1.Command.Stop = FALSE;
+						state_id = ROB_STATE_WAIT;
+					}
+				}
+				break;
+		}
+		
 		Global_VInRoS_Str.Rob_Id_1.Info.Power = TRUE;
 		Global_VInRoS_Str.Rob_Id_1.Info.Home  = TRUE;
 	}

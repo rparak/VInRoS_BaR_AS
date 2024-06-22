@@ -113,5 +113,61 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_1.Command.Stop" attribute="value" />
 <Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="PushButton15" attribute="value" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Command.Stop" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="PushButton23" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Command.Start" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="PushButton24" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Command.Stop" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="PushButton25" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Command.Start" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="PushButton26" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Info.Active" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList26" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Info.Power" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList27" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Info.Home" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList28" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Info.Error" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList29" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_L.Info.Safety" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList30" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Info.Active" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList36" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Info.Power" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList37" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Info.Home" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList38" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Info.Error" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList39" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Global_VInRoS_Str.Rob_Id_2_R.Info.Safety" attribute="value" />
+<Target xsi:type="brease" contentRefId="ControlPageContent" widgetRefId="ImageList40" attribute="selectedIndex" />
+</Binding>
 </Bindings>
 </BindingsSet>
