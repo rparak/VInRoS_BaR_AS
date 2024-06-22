@@ -234,18 +234,19 @@ void _CYCLIC ProgramCyclic(void)
 		
 			case MECH_STATE_WAIT:
 				{
-					if(Global_VInRoS_Str.Mech_Id_2.Command.Home == TRUE && Global_VInRoS_Str.Mech_Id_2.Info.Move_Active == FALSE){
-						state_id = MECH_STATE_HOME_MOTION_1;
-					}
+					if(Global_VInRoS_Str.Mech_Id_2.Info.Move_Active == FALSE){
+						if(Global_VInRoS_Str.Mech_Id_2.Command.Home == TRUE){
+							state_id = MECH_STATE_HOME_MOTION_1;
+						}
 				
-					if(Global_VInRoS_Str.Mech_Id_2.Command.Start == TRUE && Global_VInRoS_Str.Mech_Id_2.Info.Move_Active == FALSE){
-						state_id = MECH_STATE_MOTION_1;
+						if(Global_VInRoS_Str.Mech_Id_2.Command.Start == TRUE){
+							state_id = MECH_STATE_MOTION_1;
+						}
+					}else{
+						if(Global_VInRoS_Str.Mech_Id_2.Command.Stop == TRUE){
+							state_id = MECH_STATE_STOP;
+						}
 					}
-					
-					if(Global_VInRoS_Str.Mech_Id_2.Command.Stop == TRUE && Global_VInRoS_Str.Mech_Id_2.Info.Move_Active == TRUE){
-						state_id = MECH_STATE_STOP;
-					}
-					
 				}
 				break;
 		

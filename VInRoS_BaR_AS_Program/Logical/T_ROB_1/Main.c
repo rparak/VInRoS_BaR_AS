@@ -254,18 +254,19 @@ void _CYCLIC ProgramCyclic(void)
 		
 			case ROB_STATE_WAIT:
 				{
-					if(Global_VInRoS_Str.Rob_Id_1.Command.Home == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == FALSE){
-						state_id = ROB_STATE_HOME_MOTION_1;
-					}
-				
-					if(Global_VInRoS_Str.Rob_Id_1.Command.Start == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == FALSE){
-						state_id = ROB_STATE_MOTION_1;
-					}
+					if(Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == FALSE){
+						if(Global_VInRoS_Str.Rob_Id_1.Command.Home == TRUE){
+							state_id = ROB_STATE_HOME_MOTION_1;
+						}
 					
-					if(Global_VInRoS_Str.Rob_Id_1.Command.Stop == TRUE && Global_VInRoS_Str.Rob_Id_1.Info.Move_Active == TRUE){
-						state_id = ROB_STATE_STOP;
-					}
-					
+						if(Global_VInRoS_Str.Rob_Id_1.Command.Start == TRUE){
+							state_id = ROB_STATE_MOTION_1;
+						}
+					}else{
+						if(Global_VInRoS_Str.Rob_Id_1.Command.Stop == TRUE){
+							state_id = ROB_STATE_STOP;
+						}
+					}		
 				}
 				break;
 		

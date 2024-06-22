@@ -40,6 +40,7 @@ void _CYCLIC ProgramCyclic(void)
 			case ROB_STATE_ACTIVE:
 				{
 					if(Global_VInRoS_Str.Rob_Id_2_L.Info.Active == TRUE){
+						Global_VInRoS_Str.Rob_Id_2_R.Info.Active = TRUE;
 						state_id = ROB_STATE_POWER;
 					}
 				}
@@ -255,18 +256,19 @@ void _CYCLIC ProgramCyclic(void)
 		
 			case ROB_STATE_WAIT:
 				{
-					if(Global_VInRoS_Str.Rob_Id_2_L.Command.Home == TRUE && Global_VInRoS_Str.Rob_Id_2_L.Info.Move_Active == FALSE){
-						state_id = ROB_STATE_HOME_MOTION_1;
-					}
+					if(Global_VInRoS_Str.Rob_Id_2_L.Info.Move_Active == FALSE){
+						if(Global_VInRoS_Str.Rob_Id_2_L.Command.Home == TRUE){
+							state_id = ROB_STATE_HOME_MOTION_1;
+						}
 				
-					if(Global_VInRoS_Str.Rob_Id_2_L.Command.Start == TRUE && Global_VInRoS_Str.Rob_Id_2_L.Info.Move_Active == FALSE){
-						state_id = ROB_STATE_MOTION_1;
+						if(Global_VInRoS_Str.Rob_Id_2_L.Command.Start == TRUE){
+							state_id = ROB_STATE_MOTION_1;
+						}
+					}else{
+						if(Global_VInRoS_Str.Rob_Id_2_L.Command.Stop == TRUE){
+							state_id = ROB_STATE_STOP;
+						}	
 					}
-					
-					if(Global_VInRoS_Str.Rob_Id_2_L.Command.Stop == TRUE && Global_VInRoS_Str.Rob_Id_2_L.Info.Move_Active == TRUE){
-						state_id = ROB_STATE_STOP;
-					}
-					
 				}
 				break;
 		

@@ -217,6 +217,7 @@ void _CYCLIC ProgramCyclic(void)
 				break;
 		}
 	
+		ABB_Library_Rob_1.Status.PLC.Module_OK = TRUE;
 		ABB_Library(&ABB_Library_Rob_1);
 	
 		Global_VInRoS_Str.Rob_Id_2_R.Info.Active = ABB_Library_Rob_1.Status.Robot.Active;
@@ -255,16 +256,18 @@ void _CYCLIC ProgramCyclic(void)
 		
 			case ROB_STATE_WAIT:
 				{
-					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Home == TRUE && Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == FALSE){
-						state_id = ROB_STATE_HOME_MOTION_1;
-					}
+					if(Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == FALSE){
+						if(Global_VInRoS_Str.Rob_Id_2_R.Command.Home == TRUE){
+							state_id = ROB_STATE_HOME_MOTION_1;
+						}
 				
-					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Start == TRUE && Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == FALSE){
-						state_id = ROB_STATE_MOTION_1;
-					}
-					
-					if(Global_VInRoS_Str.Rob_Id_2_R.Command.Stop == TRUE && Global_VInRoS_Str.Rob_Id_2_R.Info.Move_Active == TRUE){
-						state_id = ROB_STATE_STOP;
+						if(Global_VInRoS_Str.Rob_Id_2_R.Command.Start == TRUE){
+							state_id = ROB_STATE_MOTION_1;
+						}
+					}else{
+						if(Global_VInRoS_Str.Rob_Id_2_R.Command.Stop == TRUE){
+							state_id = ROB_STATE_STOP;
+						}	
 					}
 					
 				}

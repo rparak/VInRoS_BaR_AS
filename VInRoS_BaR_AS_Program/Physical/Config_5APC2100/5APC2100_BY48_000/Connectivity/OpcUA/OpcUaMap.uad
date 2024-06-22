@@ -193,7 +193,11 @@
       <Task Name="T_ROB_1">
         <Variable Name="Trajectory_Str">
           <Variable Name="Targets">
-            <Variable Name="Joint" />
+            <Variable Name="Joint" RecursiveEnable="2">
+              <Variable Name="Joint[0]">
+                <Variable Name="Q" ChangedCommonProperties="1" />
+              </Variable>
+            </Variable>
           </Variable>
           <Variable Name="Length" />
         </Variable>
@@ -217,7 +221,7 @@
       <Task Name="T_ROB_2_L">
         <Variable Name="Trajectory_Str">
           <Variable Name="Targets">
-            <Variable Name="Joint" />
+            <Variable Name="Joint" RecursiveEnable="2" />
           </Variable>
           <Variable Name="Length" />
         </Variable>
@@ -225,7 +229,7 @@
       <Task Name="T_ROB_2_R">
         <Variable Name="Trajectory_Str">
           <Variable Name="Targets">
-            <Variable Name="Joint" />
+            <Variable Name="Joint" RecursiveEnable="2" />
           </Variable>
           <Variable Name="Length" />
         </Variable>
