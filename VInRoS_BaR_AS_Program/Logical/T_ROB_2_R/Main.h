@@ -33,10 +33,10 @@ _LOCAL struct ABB_Library ABB_Library_Rob_1;
 
 void Set_Trajectory_Parameters(struct Traj_Str* inst, REAL offset){
 	// 
-	inst->Targets.Joint[0].Q[0] = 0.0; inst->Targets.Joint[0].Q[1] = -130.0;
-	inst->Targets.Joint[0].Q[2] = 30.0; inst->Targets.Joint[0].Q[3] = 0.0;
-	inst->Targets.Joint[0].Q[4] = 40.0; inst->Targets.Joint[0].Q[5] = 0.0;
-	inst->Targets.Joint[0].Q[6] = -135;
+	inst->Targets.Joint[0].Q[0] = 45.0; inst->Targets.Joint[0].Q[1] = -110.0;
+	inst->Targets.Joint[0].Q[2] = 45.0; inst->Targets.Joint[0].Q[3] = 90.0;
+	inst->Targets.Joint[0].Q[4] = 0.0; inst->Targets.Joint[0].Q[5] = 0.0;
+	inst->Targets.Joint[0].Q[6] = -70;
 	inst->Targets.Speed[0] = vSPEED_100;
 	inst->Targets.Zone[0]  = zZone_fine;
 
