@@ -1,22 +1,19 @@
-from re import findall
-from subprocess import Popen, PIPE
+import re
+import subprocess
 
-def ping (host,ping_count):
-    for ip in host:
-        data = ""
-        output= Popen(f"ping {ip} -n {ping_count}", stdout=PIPE, encoding="utf-8")
+ip_addresses = []
+for i in range(1, 100):
+    ip_addresses.append(f'192.168.0.{i}')
 
-        for line in output.stdout:
-            data = data + line
-            ping_test = findall("TTL", data)
+for ip_adr_i in ip_addresses:
+    output = subprocess.Popen(f'ping {ip_adr_i} -n 2', stdout=subprocess.PIPE, 
+                              encoding='utf-8')
+    data = ''
+    for line in output.stdout:
+        data += line
+        ping_result = re.findall('TTL', data)
 
-        if ping_test:
-            print(f"{ip} : Successful Ping")
-        else:
-            print(f"{ip} : Failed Ping")
-
-nodes = []
-for i in range(100):
-    nodes.append(f'192.168.0.{i+2}')
-
-ping(nodes,3)
+    if ping_result:
+        print(f"{ip_adr_i} : Successfully found.")
+    else:
+        print(f"{ip_adr_i} : Destination host unreachable.")
