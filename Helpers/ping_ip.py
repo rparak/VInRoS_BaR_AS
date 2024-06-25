@@ -9,8 +9,8 @@ for ip_adr_i in ip_addresses:
     output = subprocess.Popen(f'ping {ip_adr_i} -n 2', stdout=subprocess.PIPE, 
                               encoding='utf-8')
     data = ''
-    for line in output.stdout:
-        data += line
+    for x in output.stdout:
+        data += x
         ping_result = re.findall('TTL', data)
 
     if ping_result:
