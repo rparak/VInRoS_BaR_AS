@@ -921,14 +921,13 @@ void Read_Data_ROB_to_PLC(struct ABB_Library* inst){
 	unsigned char i_tcp;
 	for(i_tcp = 0; i_tcp < (unsigned char)(sizeof(inst->RT_Data.TCP.Position)/sizeof(inst->RT_Data.TCP.Position[0])); i_tcp++){
 		Convert_USINT_Array_To_UDINT(&inst->PROFINET_Mapping_IN.TCP_POS[i_tcp]);
-		Convert_USINT_Array_To_UINT(&inst->PROFINET_Mapping_IN.TCP_ROT[i_tcp]);
-		
 		if(inst->PROFINET_Mapping_IN.TCP_SIGN.OUTPUT[i_tcp] == TRUE){
 			inst->RT_Data.TCP.Position[i_tcp] = (REAL)(inst->PROFINET_Mapping_IN.TCP_POS[i_tcp].OUTPUT) / inst->Internal.ACCURACY_FACTOR;
 		}else{
 			inst->RT_Data.TCP.Position[i_tcp] = (-1) * ((REAL)(inst->PROFINET_Mapping_IN.TCP_POS[i_tcp].OUTPUT) / inst->Internal.ACCURACY_FACTOR);
 		}
 		
+		Convert_USINT_Array_To_UINT(&inst->PROFINET_Mapping_IN.TCP_ROT[i_tcp]);
 		if(inst->PROFINET_Mapping_IN.TCP_SIGN.OUTPUT[i_tcp + 3] == TRUE){
 			inst->RT_Data.TCP.Rotation[i_tcp] = (REAL)(inst->PROFINET_Mapping_IN.TCP_ROT[i_tcp].OUTPUT) / inst->Internal.ACCURACY_FACTOR;
 		}else{
@@ -936,6 +935,7 @@ void Read_Data_ROB_to_PLC(struct ABB_Library* inst){
 		}
 	}
 	
+	Convert_USINT_Array_To_UINT(&inst->PROFINET_Mapping_IN.TCP_EX_POS);
 	if(inst->PROFINET_Mapping_IN.TCP_SIGN.OUTPUT[6] == TRUE){
 		inst->RT_Data.TCP.External_Position = (REAL)(inst->PROFINET_Mapping_IN.TCP_EX_POS.OUTPUT) / inst->Internal.ACCURACY_FACTOR;
 	}else{

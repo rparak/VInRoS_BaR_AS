@@ -1,5 +1,8 @@
 
 TYPE
+	T_ROB_2_PROFINET_Str : 	STRUCT 
+		Module_OK : BOOL;
+	END_STRUCT;
 	VInRoS_Str : 	STRUCT 
 		Mech_Id_1 : Mechanism_Str;
 		Mech_Id_2 : Mechanism_Str;

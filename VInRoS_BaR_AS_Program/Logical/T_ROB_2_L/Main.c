@@ -30,17 +30,18 @@ void _INIT ProgramInit(void)
 	ABB_Library_Rob_1.Rob_Tool.tLoad.moment_of_inertia[2] = 0.0;
 	
 	//
-	Set_Trajectory_Parameters(&Trajectory_Str, 30.0);
+	Set_Trajectory_Parameters(&Trajectory_Str, 20.0);
 }
 
 void _CYCLIC ProgramCyclic(void)
 {
-	if(SIMULATION_ENABLE == FALSE){
+	if(SIMULATION_ENABLE == FALSE){		
 		switch(state_id){
 			case ROB_STATE_ACTIVE:
 				{
+					ABB_Library_Rob_1.Status.PLC.Module_OK = Global_T_ROB_2_PROFINET.Module_OK;
+					
 					if(Global_VInRoS_Str.Rob_Id_2_L.Info.Active == TRUE){
-						Global_VInRoS_Str.Rob_Id_2_R.Info.Active = TRUE;
 						state_id = ROB_STATE_POWER;
 					}
 				}
@@ -221,7 +222,7 @@ void _CYCLIC ProgramCyclic(void)
 		ABB_Library(&ABB_Library_Rob_1);
 	
 		Global_VInRoS_Str.Rob_Id_2_L.Info.Active = ABB_Library_Rob_1.Status.Robot.Active;
-		Global_VInRoS_Str.Rob_Id_2_L.Info.Power = ABB_Library_Rob_1.Status.Robot.System.MOTOR_ON;
+		Global_VInRoS_Str.Rob_Id_2_L.Info.Power  = ABB_Library_Rob_1.Status.Robot.System.MOTOR_ON;
 		if(ABB_Library_Rob_1.Status.Robot.In_Position == TRUE && ABB_Library_Rob_1.Status.Robot.ID.Motion == ABBr_STATE_WAIT){
 			Global_VInRoS_Str.Rob_Id_2_L.Info.In_Position = TRUE;
 		}else{

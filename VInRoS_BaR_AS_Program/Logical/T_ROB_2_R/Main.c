@@ -39,6 +39,8 @@ void _CYCLIC ProgramCyclic(void)
 		switch(state_id){
 			case ROB_STATE_ACTIVE:
 				{
+					ABB_Library_Rob_1.Status.PLC.Module_OK = Global_T_ROB_2_PROFINET.Module_OK;
+					
 					if(Global_VInRoS_Str.Rob_Id_2_R.Info.Active == TRUE){
 						state_id = ROB_STATE_POWER;
 					}
