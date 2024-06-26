@@ -1,5 +1,9 @@
 # Versatile Intelligent Robotic Workstation (VInRoS): B&R Automation Studio
 
+## Project Description
+
+In progress ...
+
 ## Contact Info
 Roman.Parak@outlook.com
 
