@@ -59,5 +59,5 @@ void Set_Trajectory_Parameters(struct Traj_Str* inst, REAL offset){
 	}
 	
 	//
-	inst->Length = 22;
+	inst->Length = (i*3 + 2) - 1;
 }

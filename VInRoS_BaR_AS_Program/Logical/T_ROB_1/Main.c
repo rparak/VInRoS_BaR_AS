@@ -77,10 +77,10 @@ void _CYCLIC ProgramCyclic(void)
 				{
 					Global_VInRoS_Str.Rob_Id_1.Info.Update_Done = FALSE;
 
-					memcpy(ABB_Library_Rob_1.Parameter.Joint, Trajectory_Str.Targets.Joint, 
-						(sizeof(Trajectory_Str.Targets.Joint) / sizeof(Trajectory_Str.Targets.Joint[0])) * sizeof(REAL));
 					int i;
 					for(i = 0; i < Trajectory_Str.Length; i++){
+						memcpy(ABB_Library_Rob_1.Parameter.Joint[i].Q, Trajectory_Str.Targets.Joint[i].Q, 
+							(sizeof(Trajectory_Str.Targets.Joint[0].Q)/sizeof(Trajectory_Str.Targets.Joint[0].Q[0])) * sizeof(REAL));
 						ABB_Library_Rob_1.Parameter.Speed[i] = Trajectory_Str.Targets.Speed[i];
 						ABB_Library_Rob_1.Parameter.Zone[i] = Trajectory_Str.Targets.Zone[i];
 					}
@@ -126,7 +126,7 @@ void _CYCLIC ProgramCyclic(void)
 						state_id = ROB_STATE_STOP;
 					}else{
 						if(Global_VInRoS_Str.Rob_Id_1.Info.In_Position == TRUE){
-							state_id = ROB_STATE_WAIT;
+							state_id = ROB_STATE_MOTION_1;
 						}
 					}
 				}
