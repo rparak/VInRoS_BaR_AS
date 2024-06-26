@@ -39,6 +39,10 @@ void _INIT ProgramInit(void)
 	Trajectory_Str.Length = 6;
 	
 	state_id = MECH_STATE_ACTIVE;
+	
+	SAFETY_ACTIVE = FALSE;
+	SAFETY_STATUS = FALSE;
+	RESET_SAFETY = FALSE;
 }
 
 void _CYCLIC ProgramCyclic(void)
