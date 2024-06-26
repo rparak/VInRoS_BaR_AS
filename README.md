@@ -1,5 +1,9 @@
 # Versatile Intelligent Robotic Workstation (VInRoS): B&R Automation Studio
 
+<p align="center">
+<img src="https://github.com/rparak/VInRoS_BaR_AS/blob/main/images/VInRoS_MappView.png" width="800" height="450">
+</p>
+
 ## Requirements:
 
 **Software:**
@@ -18,7 +22,11 @@ Windows
 
 ## Project Description
 
-In progress ...
+Text ...
+
+<p align="center">
+<img src="https://github.com/rparak/VInRoS_BaR_AS/blob/main/images/VInRoS_System_Integration.png" width="800" height="450">
+</p>
 
 ## Contact Info
 Roman.Parak@outlook.com
