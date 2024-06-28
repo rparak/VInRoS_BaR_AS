@@ -8,7 +8,7 @@
 
 **Software**
 ```bash
-B&R Automation Studio
+B&R Automation Studio V 4.12.5.95 SP
 ```
 
 **Supported on the following operating systems**
